@@ -13,3 +13,5 @@ addons/ziva_agent/
 # Sistema
 Thumbs.db
 .DS_Store
+# Exportación web local
+web/

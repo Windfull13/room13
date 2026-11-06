@@ -35,6 +35,10 @@ func show_pages(pages: PackedStringArray, hint_text: String) -> void:
 	column.add_child(_label)
 	_hint = LearningUi.hint(hint_text)
 	column.add_child(_hint)
+	if _pages.is_empty():
+		push_warning("PageView: no hay páginas que mostrar; se continúa sin ellas.")
+		_finish_without_pages.call_deferred()
+		return
 	_show_page(0)
 
 
@@ -86,6 +90,11 @@ func _show_page(index: int) -> void:
 	into.tween_property(_label, "modulate:a", 1.0, FADE_IN_TIME)
 	await into.finished
 	_changing = false
+
+
+func _finish_without_pages() -> void:
+	_done = true
+	finished.emit()
 
 
 func _finish() -> void:

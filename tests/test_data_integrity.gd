@@ -17,6 +17,7 @@ func run(report: Reporter, tree: SceneTree) -> void:
 	rooms.assign(CatalogLoader.load_all("res://resources/rooms/", RoomData))
 	var catalog: Array[AnomalyData] = []
 	catalog.assign(CatalogLoader.load_all("res://resources/anomalies/", AnomalyData))
+	_check_export_listing(report)
 	_check_rooms(report, rooms)
 	_check_catalog(report, catalog)
 	await _check_targets(report, tree, catalog)
@@ -110,3 +111,9 @@ func _unique(values: Array[String]) -> Array[String]:
 		if not unique.has(value):
 			unique.append(value)
 	return unique
+
+## En un proyecto exportado DirAccess lista «x.tres.remap»: se deben cargar igual.
+func _check_export_listing(report: Reporter) -> void:
+	var listed := PackedStringArray(["b.tres.remap", "a.tres", "c.tres.import", "a.tres.remap", "readme.txt", "d.gd"])
+	var names := CatalogLoader.resource_names(listed)
+	report.check(names == ["a.tres", "b.tres", "c.tres"], "CatalogLoader entiende el listado de un proyecto exportado (.remap, duplicados): %s" % str(names))

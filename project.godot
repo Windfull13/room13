@@ -89,3 +89,7 @@ toggle_fullscreen={
 
 textures/canvas_textures/default_texture_filter=0.0
 environment/defaults/default_clear_color=Color(0.02, 0.02, 0.03, 1)
+
+[editor]
+
+export/convert_text_resources_to_binary=false
