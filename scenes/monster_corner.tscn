@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/monster.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_watcher_corner.png" id="2_tex"]
+
+[node name="Monster" instance=ExtResource("1_base")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -57.2)
+texture = ExtResource("2_tex")
+
+[node name="OjoIzq" parent="Sprite2D" index="0"]
+visible = false
+
+[node name="OjoDer" parent="Sprite2D" index="1"]
+visible = false

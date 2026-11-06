@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_2w3jt"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dxnyo"]
+
+[sub_resource type="Resource" id="Resource_vb4u1"]
+script = ExtResource("1_2w3jt")
+mode = 0
+target_node = "Rug"
+rotation_degrees = 14.0
+
+[resource]
+script = ExtResource("2_dxnyo")
+id = "alfombra_movida"
+display_name = "La alfombra está girada"
+description = "La alfombra ha girado sobre el suelo, como si alguien la hubiese arrastrado."
+meaning = "Algo se ha movido en el fondo de tu casa."
+modifications = [SubResource("Resource_vb4u1")]
+focus_object = "alfombra"
+difficulty = 0
+theme = 12
+tell = "la alfombra aparece girada"

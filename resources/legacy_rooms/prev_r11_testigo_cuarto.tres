@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/testigo_cuarto.tres" id="1_ai4u5"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_vhswf"]
+
+[resource]
+script = ExtResource("2_vhswf")
+id = "room_testigo_cuarto"
+display_name = "El Testigo"
+order = 11
+is_dangerous = true
+anomaly = ExtResource("1_ai4u5")
+narrative_clue = "No estás tan solo como creías."

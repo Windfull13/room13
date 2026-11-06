@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_r"]
+
+[resource]
+script = ExtResource("1_r")
+id = "room_clock"
+display_name = "Habitación con el reloj detenido"
+order = 3
+is_reference = false
+is_dangerous = false
+narrative_clue = "El reloj marca una hora que no existe."

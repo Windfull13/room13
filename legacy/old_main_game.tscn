@@ -1,0 +1,312 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gm"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/scene_transition.gd" id="5_tr"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gm")
+
+[node name="Room" parent="." type="Node2D"]
+
+[node name="Player" parent="Room/World" instance=ExtResource("3_player")]
+position = Vector2(760, 940)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud")
+
+[node name="Root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="RoundLabel" type="Label" parent="HUD/Root"]
+offset_left = 28.0
+offset_top = 18.0
+offset_right = 620.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.9, 0.9, 0.93, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 22
+text = ""
+
+[node name="DangerLabel" type="Label" parent="HUD/Root"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 18.0
+offset_right = 340.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.95, 0.28, 0.28, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "¡NO TE ACERQUES!"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="HUD/Root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -214.0
+offset_right = 340.0
+offset_bottom = -174.0
+theme_override_colors/font_color = Color(0.93, 0.93, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 1
+
+[node name="MessageAnchor" type="CenterContainer" parent="HUD/Root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MessagePanel" type="PanelContainer" parent="HUD/Root/MessageAnchor"]
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/MessageAnchor/MessagePanel"]
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 30
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/MessageAnchor/MessagePanel/Margin"]
+theme_override_constants/separation = 16
+
+[node name="MessageName" type="Label" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box"]
+theme_override_font_sizes/font_size = 30
+text = "Objeto"
+horizontal_alignment = 1
+
+[node name="MessageText" type="Label" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box"]
+custom_minimum_size = Vector2(640, 0)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MessageButtons" type="HBoxContainer" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box"]
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ActionButton" type="Button" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box/MessageButtons"]
+custom_minimum_size = Vector2(250, 58)
+theme_override_font_sizes/font_size = 22
+text = "Continuar"
+
+[node name="CloseButton" type="Button" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box/MessageButtons"]
+custom_minimum_size = Vector2(250, 58)
+theme_override_font_sizes/font_size = 22
+text = "Continuar"
+
+[node name="DecisionAnchor" type="CenterContainer" parent="HUD/Root"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -16.0
+mouse_filter = 2
+
+[node name="DecisionBar" type="PanelContainer" parent="HUD/Root/DecisionAnchor"]
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/DecisionAnchor/DecisionBar"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 12
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin"]
+theme_override_constants/separation = 10
+
+[node name="Hint" type="Label" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box"]
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Explora con calma. Decide cuando estés preparado."
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box"]
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="AnomalyButton" type="Button" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box/Buttons"]
+custom_minimum_size = Vector2(300, 64)
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "HAY ANOMALÍA"
+
+[node name="NoAnomalyButton" type="Button" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box/Buttons"]
+custom_minimum_size = Vector2(300, 64)
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "NO HAY ANOMALÍA"
+
+[node name="ResultContainer" type="CenterContainer" parent="HUD/Root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD/Root/ResultContainer"]
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/ResultContainer/ResultPanel"]
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 32
+
+[node name="ResultBox" type="VBoxContainer" parent="HUD/Root/ResultContainer/ResultPanel/Margin"]
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="ResultTitle" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox"]
+theme_override_font_sizes/font_size = 46
+text = "CORRECTO"
+horizontal_alignment = 1
+
+[node name="ResultDetail" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox"]
+theme_override_font_sizes/font_size = 24
+text = ""
+horizontal_alignment = 1
+
+[node name="DeathPanel" type="Control" parent="HUD/Root"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/DeathPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.9)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/DeathPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/DeathPanel/Center"]
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/DeathPanel/Center/Box"]
+theme_override_colors/font_color = Color(0.85, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 52
+text = "TE ALCANZÓ"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="HUD/Root/DeathPanel/Center/Box"]
+custom_minimum_size = Vector2(820, 0)
+theme_override_font_sizes/font_size = 24
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="HUD/Root/DeathPanel/Center/Box"]
+custom_minimum_size = Vector2(420, 72)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REINICIAR PARTIDA"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/DeathPanel/Center/Box"]
+custom_minimum_size = Vector2(420, 72)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="EndPanel" type="Control" parent="HUD/Root"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/EndPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.9)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/EndPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/EndPanel/Center"]
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/EndPanel/Center/Box"]
+theme_override_font_sizes/font_size = 56
+text = "FIN DE LA PARTIDA"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="HUD/Root/EndPanel/Center/Box"]
+custom_minimum_size = Vector2(820, 0)
+theme_override_font_sizes/font_size = 24
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="HUD/Root/EndPanel/Center/Box"]
+custom_minimum_size = Vector2(420, 72)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REINICIAR PARTIDA"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/EndPanel/Center/Box"]
+custom_minimum_size = Vector2(420, 72)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="PausePanel" type="Control" parent="HUD/Root"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/PausePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.78)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/PausePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/PausePanel/Center"]
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/PausePanel/Center/Box"]
+theme_override_font_sizes/font_size = 56
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="HUD/Root/PausePanel/Center/Box"]
+custom_minimum_size = Vector2(380, 68)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REANUDAR"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/PausePanel/Center/Box"]
+custom_minimum_size = Vector2(380, 68)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="Transition" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource("5_tr")
+
+[node name="FadeRect" type="ColorRect" parent="Transition"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_0mpd4"]
+
+[resource]
+script = ExtResource("2_0mpd4")
+id = "room_espejo_tenue"
+display_name = "El espejo se ha vuelto tenue"
+order = 7
+narrative_clue = "En el espejo no te ves del todo."

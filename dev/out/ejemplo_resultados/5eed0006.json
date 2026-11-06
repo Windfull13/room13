@@ -1,0 +1,67 @@
+{
+	"simulated": true,
+	"participant_id": "5eed0006",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:05:00",
+	"finished_at": "2026-01-01T10:25:30",
+	"completed": true,
+	"attempts": 2,
+	"play_seconds": 725.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 3,
+			"q05_apoyo": -1,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 0
+		},
+		"score": 6
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 0
+		},
+		"score": 8
+	},
+	"gain": 2,
+	"normalized_gain": 1.0,
+	"survey": {
+		"u1": 5,
+		"u2": 4,
+		"u3": 3,
+		"u4": 5,
+		"l1": 4,
+		"l2": 3,
+		"r1": 5,
+		"comment": "Me gustó la ambientación."
+	},
+	"memories_found": [
+		"dibujo_en_la_pared",
+		"peluche_girado",
+		"muneca_en_el_suelo",
+		"caja_de_musica",
+		"carta_abierta",
+		"llaves_en_el_suelo",
+		"reloj_detenido",
+		"lampara_apagada",
+		"silla_ausente",
+		"luz_en_la_ventana",
+		"planta_con_flor",
+		"comida_sin_tocar"
+	],
+	"cinematic_skipped": null,
+	"finish_type": "anticipado",
+	"max_round_reached": 7,
+	"ended_early": true
+}

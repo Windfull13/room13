@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_3o1w4"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_iex5a"]
+
+[sub_resource type="Resource" id="Resource_1xh4h"]
+script = ExtResource("1_3o1w4")
+mode = 5
+target_node = "Mirror"
+color = Color(1, 1, 1, 0.22)
+
+[resource]
+script = ExtResource("2_iex5a")
+id = "espejo_tenue"
+display_name = "El espejo se ha vuelto tenue"
+description = "Tu reflejo se ha desdibujado casi por completo."
+meaning = "Dejar de reconocerte."
+modifications = [SubResource("Resource_1xh4h")]

@@ -1,0 +1,66 @@
+extends RefCounted
+
+## Genera la HABITACIÓN BASE reutilizable (herramienta interna de desarrollo).
+##
+## Ejecutar desde execute_script:
+##     load("res://legacy/generate_room_base.gd").new().run(self)
+##
+## Las diez rondas de resources/rooms/ apuntan todas a la escena que genera
+## este script. Las anomalías no crean escenas: modifican esta habitación.
+
+func run(tree: SceneTree) -> void:
+	var factory = load("res://scripts/room_factory.gd").new()
+	var room: Node2D = factory.build(spec())
+	tree.root.add_child(room)
+	factory.set_owners(room, room)
+	var packed := PackedScene.new()
+	packed.pack(room)
+	print("room_base.tscn -> ", ResourceSaver.save(packed, "res://scenes/rooms/room_base.tscn"))
+	report(room)
+	room.free()
+
+func spec() -> Dictionary:
+	return {
+		"name": "RoomBase", "cols": 20, "rows": 12, "wall_thickness": 2,
+		"objects": [
+			{"type": "Door", "pos": Vector2(640, 200)},
+			{"type": "Window", "pos": Vector2(900, 190)},
+			{"type": "Clock", "pos": Vector2(170, 250)},
+			{"type": "Bed", "pos": Vector2(275, 470)},
+			{"type": "Wardrobe", "pos": Vector2(555, 460)},
+			{"type": "Desk", "pos": Vector2(960, 470)},
+			{"type": "Chair", "pos": Vector2(860, 570)},
+			{"type": "Photograph", "pos": Vector2(1045, 355)},
+			{"type": "Lamp", "pos": Vector2(890, 380)},
+			{"type": "Phone", "pos": Vector2(1035, 430)},
+			{"type": "Book", "pos": Vector2(940, 340)},
+			{"type": "Rug", "pos": Vector2(700, 530)},
+			{"type": "Toy", "pos": Vector2(205, 570)},
+			{"type": "Mirror", "pos": Vector2(155, 470)},
+			{"type": "Plant", "pos": Vector2(1105, 560)},
+		],
+		"anchors": {
+			"WindowFigure": Vector2(900, 265), "WardrobeFigure": Vector2(555, 430),
+			"UnderBedFigure": Vector2(275, 330), "Figure2": Vector2(770, 330),
+			"Handprint": Vector2(770, 215), "Letter": Vector2(620, 520),
+			"Keys": Vector2(700, 600), "Pills": Vector2(960, 520),
+			"Spider": Vector2(520, 610), "Doll": Vector2(330, 610),
+			"Drawing": Vector2(400, 60), "Crow": Vector2(840, 170),
+			"WifePhoto": Vector2(1065, 325),
+		},
+		"player_spawn": Vector2(640, 360),
+		"monster_spawns": [Vector2(980, 620), Vector2(330, 620)],
+	}
+
+func report(room: Node2D) -> void:
+	var world := room.get_node("World")
+	for name in ["Bed", "Wardrobe", "Desk", "Chair", "Window", "Door", "Clock", "Mirror", "Plant", "Toy", "Rug", "Photograph", "Phone", "Lamp", "Book"]:
+		var node := world.get_node_or_null(name)
+		if node == null:
+			print("  FALTA ", name)
+			continue
+		var sprite := node as Sprite2D
+		if sprite == null:
+			sprite = node.get_node_or_null("Sprite") as Sprite2D
+		var size: Vector2 = sprite.texture.get_size() * sprite.scale if sprite != null else Vector2.ZERO
+		print("  %-11s tam=%-16s" % [name, size])

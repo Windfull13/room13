@@ -1,0 +1,25 @@
+extends Node2D
+
+## Escena de comprobación (uso interno del desarrollo).
+##
+## Instancia la habitación y el jugador y aplica una o varias anomalías del
+## catálogo para poder observarlas en pantalla sin recorrer la partida entera.
+## No forma parte del juego final.
+
+## Identificadores de anomalía separados por comas.
+@export var anomaly_ids: String = "silla_girada"
+
+@onready var _room: Room = $Room
+
+func _ready() -> void:
+	for raw in anomaly_ids.split(",", false):
+		var id := raw.strip_edges()
+		if id.is_empty():
+			continue
+		var path := "res://resources/anomalies/%s.tres" % id
+		if not ResourceLoader.exists(path):
+			push_warning("Anomalía no encontrada: %s" % id)
+			continue
+		var anomaly: AnomalyData = load(path)
+		_room.apply_anomaly(anomaly)
+		print("aplicada: ", anomaly.id)

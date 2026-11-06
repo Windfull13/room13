@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_vi10w"]
+
+[resource]
+script = ExtResource("1_vi10w")
+id = "visita_2"
+display_name = "La misma habitación"
+order = 1
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "La misma habitación"

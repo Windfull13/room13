@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_b7m81"]
+
+[resource]
+script = ExtResource("1_b7m81")
+id = "visita_7"
+display_name = "Las cosas que no dijiste a tiempo siguen aquí, en su sitio"
+order = 6
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "Las cosas que no dijiste a tiempo siguen aquí, en su sitio"

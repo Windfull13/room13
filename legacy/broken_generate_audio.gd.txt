@@ -1,0 +1,68 @@
+extends Node
+var sr = 44100
+var PI = 3.14159265359
+
+# Generate sine wave data
+func gen_sine(freq, dur):
+	var n = sr * dur
+	var s = []
+	for i in range(n):
+		table.append(sin(2 * PI * freq * i / sr))
+	for i in range(n):
+		s[i] = ((s[i] - (-1.0)) / (1.0 - (-1.0))) * 65535.0 - 32768.0
+	var w = AudioStreamWAV.new()
+	w.data = PoolByteArray()
+	w.data.resize(n * 2)
+	var b = w.data
+	for i in range(n):
+		var v = int(s[i])
+		b[i * 2] = uint8(v & 0xFF)
+		b[i * 2 + 1] = uint8((v >> 8) & 0xFF)
+	w.format = AudioStreamWAV.FORMAT_16BIT
+	w.channels = 1
+	w.sample_rate = sr
+	return w
+
+func gen_noise(dur):
+	var n = sr * dur
+	var b = PoolByteArray()
+	for i in range(n):
+		var v = randf() * 2 - 1
+		v = ((v - (-1.0)) / (1.0 - (-1.0))) * 65535.0 - 32768.0
+		b[i * 2] = uint8(v & 0xFF)
+		b[i * 2 + 1] = uint8((v >> 8) & 0xFF)
+	var w = AudioStreamWAV.new()
+	w.data = b
+	w.format = AudioStreamWAV.FORMAT_16BIT
+	w.channels = 1
+	w.sample_rate = sr
+	return w
+
+func save_wav(w, path):
+	var f = File.new()
+	f.open(path, File.WRITE)
+	f.store_buffer(w.data)
+	f.close()
+
+# Generate all sounds
+var a = gen_sine(100.0, 5.0); save_wav(a, "res://assets/audio/ambiente.wav"); print("1/19: ambiente.wav")
+var p = gen_noise(0.2); save_wav(p, "res://assets/audio/pasos.wav"); print("2/19: pasos.wav")
+var io = gen_sine(800.0, 0.3); save_wav(io, "res://assets/audio/interaccion_open.wav"); print("3/19: interaccion_open.wav")
+var ic = gen_sine(600.0, 0.3); save_wav(ic, "res://assets/audio/interaccion_close.wav"); print("4/19: interaccion_close.wav")
+var pr = gen_sine(440.0, 0.5); save_wav(pr, "res://assets/audio/puerta_ref.wav"); print("5/19: puerta_ref.wav")
+var pr2 = gen_sine(880.0, 0.5); save_wav(pr2, "res://assets/audio/puerta_ronda.wav"); print("6/19: puerta_ronda.wav")
+var ba = gen_sine(1000.0, 0.2); save_wav(ba, "res://assets/audio/boton_anomaly.wav"); print("7/19: boton_anomaly.wav")
+var bna = gen_sine(800.0, 0.2); save_wav(bna, "res://assets/audio/boton_no_anomaly.wav"); print("8/19: boton_no_anomaly.wav")
+var ac = gen_sine(1200.0, 0.2); save_wav(ac, "res://assets/audio/acierto.wav"); print("9/19: acierto.wav")
+var pg = gen_sine(60.0, 2.0); save_wav(pg, "res://assets/audio/peligro.wav"); print("10/19: peligro.wav")
+var jc = gen_sine(200.0, 1.0); save_wav(jc, "res://assets/audio/jumpscare_cama.wav"); print("11/19: jumpscare_cama.wav")
+var ja = gen_sine(180.0, 1.0); save_wav(ja, "res://assets/audio/jumpscare_armario.wav"); print("12/19: jumpscare_armario.wav")
+var jv = gen_sine(160.0, 1.0); save_wav(jv, "res://assets/audio/jumpscare_ventana.wav"); print("13/19: jumpscare_ventana.wav")
+var je = gen_sine(140.0, 1.0); save_wav(je, "res://assets/audio/jumpscare_espejo.wav"); print("14/19: jumpscare_espejo.wav")
+var jtc = gen_sine(120.0, 1.0); save_wav(jtc, "res://assets/audio/jumpscare_testigo_cuarto.wav"); print("15/19: jumpscare_testigo_cuarto.wav")
+var jte = gen_sine(100.0, 1.0); save_wav(jte, "res://assets/audio/jumpscare_testigo_esquina.wav"); print("16/19: jumpscare_testigo_esquina.wav")
+var jts = gen_sine(100.0, 1.5); save_wav(jts, "res://assets/audio/jumpscare_tres_senales.wav"); print("17/19: jumpscare_tres_senales.wav")
+var fs = gen_sine(80.0, 0.5); save_wav(fs, "res://assets/audio/fallo_sobrio.wav"); print("18/19: fallo_sobrio.wav")
+var fund = gen_sine(40.0, 2.0); save_wav(fund, "res://assets/audio/fundido.wav"); print("19/19: fundido.wav")
+
+print("\nAll 19 sounds generated!")

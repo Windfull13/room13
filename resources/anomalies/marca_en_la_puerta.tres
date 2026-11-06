@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_m7gk1"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_4ffuw"]
+
+[sub_resource type="Resource" id="Resource_pjein"]
+script = ExtResource("1_m7gk1")
+target_node = "Handprint"
+
+[sub_resource type="Resource" id="Resource_2xkv3"]
+script = ExtResource("1_m7gk1")
+mode = 0
+target_node = "Door/Sprite"
+rotation_degrees = -7.0
+
+[resource]
+script = ExtResource("2_4ffuw")
+id = "marca_en_la_puerta"
+display_name = "Una marca en la puerta"
+description = "Una mano oscura ha dejado su huella sobre la puerta, y esta se ha torcido."
+meaning = "La última vez que alguien salió de aquí."
+modifications = [SubResource("Resource_pjein"), SubResource("Resource_2xkv3")]
+focus_object = "puerta"
+difficulty = 1
+theme = 5
+tell = "huella oscura y puerta torcida"

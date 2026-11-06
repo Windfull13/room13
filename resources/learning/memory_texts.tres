@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="MemoryTexts" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/memories/memory_texts.gd" id="1_t"]
+[ext_resource type="Script" path="res://scripts/memories/corridor_memory.gd" id="2_c"]
+[ext_resource type="PackedScene" path="res://scenes/memories/vignette_childhood.tscn" id="v0"]
+[ext_resource type="PackedScene" path="res://scenes/memories/vignette_family.tscn" id="v1"]
+[ext_resource type="PackedScene" path="res://scenes/memories/vignette_night.tscn" id="v2"]
+[ext_resource type="PackedScene" path="res://scenes/memories/vignette_after.tscn" id="v3"]
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("2_c")
+round_number = 3
+title = "Infancia"
+vignette_scene = ExtResource("v0")
+caption_lines = PackedStringArray("Aprendiste pronto a no hacer ruido, a que no te vieran.", "Algunos miraban. Nadie dijo nada.")
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("2_c")
+round_number = 5
+title = "Familia"
+vignette_scene = ExtResource("v1")
+caption_lines = PackedStringArray("Entonces llegaron ellas. La casa olía a pan y a lápices de colores.", "Por primera vez, no hacía falta esconderse.")
+
+[sub_resource type="Resource" id="c2"]
+script = ExtResource("2_c")
+round_number = 7
+title = "La noche"
+vignette_scene = ExtResource("v2")
+caption_lines = PackedStringArray("Esa noche llovía y esperabas en casa.", "Hubo un silencio largo, y después, el teléfono.")
+
+[sub_resource type="Resource" id="c3"]
+script = ExtResource("2_c")
+round_number = 9
+title = "El después"
+vignette_scene = ExtResource("v3")
+caption_lines = PackedStringArray("La casa siguió igual. Tú no.", "Dejaste de cuidarte, de contestar, de salir.")
+
+[resource]
+script = ExtResource("1_t")
+corridor_memories = Array[Resource]([SubResource("c0"), SubResource("c1"), SubResource("c2"), SubResource("c3")])
+cinematic_warning = "La siguiente escena es emotiva. Mantén E para saltarla."
+cinematic_skip_hint = "Mantén E para saltar"
+cinematic_fragment_lines = PackedStringArray("Aprendiste a hacerte pequeño.", "Hubo una casa llena de color.", "Una noche, la lluvia.", "Y después, el silencio.")
+cinematic_final_lines = PackedStringArray("Sentir culpa no significa haber tenido la culpa.", "Recordar duele. También es una forma de quedarse con ellas.")
+cinematic_wife_voice = "voice_cinematic_wife"
+cinematic_wife_line = "Cuídate, ¿sí?"
+cinematic_girl_voice = "voice_cinematic_girl"
+cinematic_girl_line = "Hasta mañana."

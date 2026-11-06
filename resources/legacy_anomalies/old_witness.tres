@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AnomalyData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_a"]
+[ext_resource type="PackedScene" path="res://scenes/monster.tscn" id="2_mon"]
+
+[resource]
+script = ExtResource("1_a")
+id = "witness"
+display_name = "El Testigo"
+description = "Una figura alta y oscura, sin rostro, permanece de pie en medio de la habitación."
+meaning = "El miedo al juicio ajeno y a la humillación."
+is_dangerous = true
+modifications = []
+monster_scene = ExtResource("2_mon")
+monster_position = Vector2(700, 400)

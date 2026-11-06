@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_6ejcg"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_biwlp"]
+
+[sub_resource type="Resource" id="Resource_id3bi"]
+script = ExtResource("1_6ejcg")
+target_node = "WifePhoto"
+
+[resource]
+script = ExtResource("2_biwlp")
+id = "retrato_ajeno"
+display_name = "Un rostro desconocido"
+description = "Hay un retrato que no recuerdas haber colgado: un rostro que no reconoces."
+meaning = "Lo que has olvidado de quienes te rodean."
+modifications = [SubResource("Resource_id3bi")]
+focus_object = "retrato"
+difficulty = 2
+theme = 8
+tell = "un rostro desconocido en el retrato"

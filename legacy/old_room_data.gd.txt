@@ -1,0 +1,26 @@
+extends Resource
+# Archivado: versión antigua. Sin class_name para no chocar con
+# res://scripts/room_data.gd
+
+## Datos de una ronda: puede ser la habitación de referencia o una habitación
+## de decisión. Centraliza la información que define la ronda para que la lógica
+## no quede dispersa por varios scripts.
+
+## Identificador único y estable.
+@export var id: String = ""
+## Nombre legible (interno o para el indicador de ronda).
+@export var display_name: String = ""
+## Orden dentro de la secuencia de la partida (menor primero).
+@export var order: int = 0
+## Si es la habitación de referencia: normal, sin botones de decisión.
+@export var is_reference: bool = false
+## Si la anomalía de esta habitación es peligrosa.
+@export var is_dangerous: bool = false
+## Anomalía contenida, o null si la habitación está en su estado normal.
+@export var anomaly: AnomalyData = null
+## Pista narrativa disponible en la ronda (reservado para etapas posteriores).
+@export_multiline var narrative_clue: String = ""
+
+## ¿Esta habitación contiene una anomalía?
+func has_anomaly() -> bool:
+	return anomaly != null

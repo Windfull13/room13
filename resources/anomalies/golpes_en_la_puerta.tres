@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[resource]
+script = ExtResource("2_dat")
+id = "golpes_en_la_puerta"
+display_name = "Golpes en la puerta"
+description = "Tres golpes suaves, y la puerta vibra. Nadie dice nada al otro lado."
+meaning = "Los recuerdos que siguen llamando a la puerta."
+is_dangerous = false
+focus_object = "puerta"
+difficulty = 1
+theme = 1
+tell = "tres golpes suaves, la puerta vibra y parpadea una línea de luz bajo ella"
+ambience = "puerta_golpes"

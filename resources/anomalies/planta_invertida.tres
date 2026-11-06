@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_65ktv"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_6j2ib"]
+
+[sub_resource type="Resource" id="Resource_pbvuu"]
+script = ExtResource("1_65ktv")
+mode = 0
+target_node = "Plant"
+rotation_degrees = 180.0
+
+[resource]
+script = ExtResource("2_6j2ib")
+id = "planta_invertida"
+display_name = "La planta está al revés"
+description = "La planta crece hacia abajo, en contra de todo sentido."
+meaning = "Una vida que se abandonó a sí misma."
+modifications = [SubResource("Resource_pbvuu")]
+focus_object = "planta"
+difficulty = 1
+theme = 9
+tell = "la planta crece hacia abajo"

@@ -1,0 +1,31 @@
+extends SceneTree
+
+const GameDriver := preload("res://tests/game_driver.gd")
+
+
+func _init() -> void:
+	var driver := GameDriver.new(self)
+	await driver.boot()
+	var base: int = Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT)
+	print("inicio huérfanos ", base)
+	for run in 40:
+		var t0 := Time.get_ticks_msec()
+		await driver.restart()
+		await driver.enter_decision_room()
+		var fail_at := 1 + (run % 10) if run % 2 == 1 else -1
+		for guard in 40:
+			if driver.manager.state == GameManager.State.FINAL or driver.manager._run.index == 0:
+				break
+			if driver.manager._run.index == fail_at:
+				driver.answer(driver.wrong_answer())
+			else:
+				driver.answer(driver.correct_answer())
+				driver.cross_door()
+			await driver.await_idle()
+			await process_frame
+		var now: int = Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT)
+		print("partida %d fallo_en=%d estado=%d %d ms huérfanos=%d" % [run, fail_at, driver.manager.state, Time.get_ticks_msec() - t0, now])
+		if now != base:
+			Node.print_orphan_nodes()
+			base = now
+	quit()

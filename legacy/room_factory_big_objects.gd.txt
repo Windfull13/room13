@@ -1,0 +1,322 @@
+extends RefCounted
+# Archivo archivado: versión antigua de la fábrica (muebles a escala 2.0).
+# Su class_name se retiró para no chocar con res://scripts/room_factory.gd.
+
+## Generador de habitaciones (herramienta interna de desarrollo).
+##
+## Construye escenas de habitación COMPACTAS (una sola pantalla) a partir de una
+## descripción de datos, reutilizando un catálogo de muebles y un conjunto de
+## anclajes de anomalía. Todas las habitaciones comparten los mismos nombres de
+## nodo para cada tipo de objeto (Bed/Sprite, Clock/Sprite, Mirror...), de modo
+## que una misma anomalía puede aplicarse en cualquier habitación que tenga ese
+## objeto. Esto es lo que permite reutilizar anomalías entre habitaciones.
+
+const G := "res://assets/generated/"
+const TILE_PX := 32
+const TILE_SCALE := 2
+
+## Catálogo de muebles y objetos. "kind":
+##   body   -> StaticBody2D con hijo Sprite (colisiona)
+##   node   -> Node2D con hijo Sprite (no colisiona; p. ej. alfombra)
+##   sprite -> Sprite2D directo (el propio nodo es el sprite)
+const TYPES := {
+	"Bed": {
+		"kind": "body", "tex": "px_bed.png", "soff": Vector2(0, -112),
+		"csize": Vector2(300, 200), "coff": Vector2(0, -105),
+		"irad": 95.0, "ioff": Vector2(0, -20),
+		"name": "Cama", "msg": "La cama está sin hacer. Recuerdas a alguien durmiendo a tu lado, pero ya no hay nadie.",
+	},
+	"Wardrobe": {
+		"kind": "body", "tex": "px_wardrobe_c.png", "soff": Vector2(0, -112),
+		"csize": Vector2(160, 200), "coff": Vector2(0, -105),
+		"irad": 95.0, "ioff": Vector2(0, -20),
+		"name": "Armario", "msg": "Un armario de madera oscura. Las puertas están cerradas. Huele a polvo y a ropa guardada demasiado tiempo.",
+	},
+	"Desk": {
+		"kind": "body", "tex": "px_desk.png", "soff": Vector2(0, -112),
+		"csize": Vector2(300, 190), "coff": Vector2(0, -100),
+		"irad": 150.0, "ioff": Vector2(30, -90),
+		"name": "Escritorio", "msg": "Sobre el escritorio hay libros y una lámpara apagada. Es el rincón donde solías escribir.",
+	},
+	"Chair": {
+		"kind": "body", "tex": "px_chair_c.png", "soff": Vector2(0, -80),
+		"csize": Vector2(120, 120), "coff": Vector2(0, -60),
+		"irad": 80.0, "ioff": Vector2(0, -20),
+		"name": "Silla", "msg": "Una silla de madera. Normalmente está junto al escritorio, mirando hacia él.",
+	},
+	"Window": {
+		"kind": "body", "tex": "px_window_c.png", "soff": Vector2(0, -64), "no_clamp": true,
+		"csize": Vector2(230, 110), "coff": Vector2(0, -55),
+		"irad": 90.0, "ioff": Vector2(0, 40),
+		"name": "Ventana", "msg": "Fuera está oscuro. La luna apenas ilumina el patio. Las cortinas están medio descorridas.",
+	},
+	"Door": {
+		"kind": "body", "tex": "px_door.png", "soff": Vector2(0, -80), "no_clamp": true,
+		"csize": Vector2(130, 140), "coff": Vector2(0, -70),
+		"irad": 135.0, "ioff": Vector2(0, 20),
+		"name": "Puerta", "verb": "Cruzar",
+		"msg": "La puerta está entreabierta.",
+		"action": "door_continue", "action_text": "CRUZAR LA PUERTA",
+	},
+	"Sofa": {
+		"kind": "body", "tex": "px_sofa.png", "soff": Vector2(0, -64),
+		"csize": Vector2(300, 120), "coff": Vector2(0, -60),
+		"irad": 120.0, "ioff": Vector2(0, -10),
+		"name": "Sofá", "msg": "El sofá del salón. En el hueco de los cojines aún queda un poco de calor que no es tuyo.",
+	},
+	"Table": {
+		"kind": "body", "tex": "px_table_c.png", "soff": Vector2(0, -56),
+		"csize": Vector2(300, 140), "coff": Vector2(0, -50),
+		"irad": 120.0, "ioff": Vector2(0, -10),
+		"name": "Mesa", "msg": "Una mesa de madera gastada. Tiene marcas de tazas que nadie ha limpiado.",
+	},
+	"Shelf": {
+		"kind": "body", "tex": "px_shelf_c.png", "soff": Vector2(0, -112),
+		"csize": Vector2(170, 210), "coff": Vector2(0, -105),
+		"irad": 95.0, "ioff": Vector2(0, -20),
+		"name": "Estantería", "msg": "Una estantería con libros y cajas. Algunos lomos no se han abierto en años.",
+	},
+	"Counter": {
+		"kind": "body", "tex": "px_counter.png", "soff": Vector2(0, -64),
+		"csize": Vector2(370, 140), "coff": Vector2(0, -60),
+		"irad": 130.0, "ioff": Vector2(0, -10),
+		"name": "Encimera", "msg": "La encimera de la cocina. Hay un plato sucio esperando a alguien que no va a volver a comer aquí.",
+	},
+	"TV": {
+		"kind": "body", "tex": "px_tv.png", "soff": Vector2(0, -70),
+		"csize": Vector2(210, 170), "coff": Vector2(0, -80),
+		"irad": 100.0, "ioff": Vector2(0, -10),
+		"name": "Televisor", "msg": "Un televisor viejo. La pantalla está muerta, pero a veces crees oír un zumbido.",
+	},
+	"Crate": {
+		"kind": "body", "tex": "px_crate_c.png", "soff": Vector2(0, -48),
+		"csize": Vector2(120, 105), "coff": Vector2(0, -50),
+		"irad": 70.0, "ioff": Vector2(0, -10),
+		"name": "Caja", "msg": "Una caja de mudanza cerrada. La cinta está puesta dos veces, como si no quisieras abrirla.",
+	},
+	"Rug": {
+		"kind": "node", "tex": "px_rug.png", "soff": Vector2(0, 0),
+	},
+	"Clock": {
+		"kind": "node", "tex": "px_clock_normal.png", "soff": Vector2(0, 0),
+		"irad": 70.0, "ioff": Vector2(0, 0),
+		"name": "Reloj", "msg": "El viejo reloj de pared. Sus agujas se mueven con un tic-tac lento y constante.",
+	},
+	"Photograph": {
+		"kind": "node", "tex": "px_photo_normal.png", "soff": Vector2(0, 0),
+		"irad": 70.0, "ioff": Vector2(0, 0),
+		"name": "Fotografía familiar", "msg": "Una fotografía enmarcada con tu familia. Sonríen. Es una de las pocas cosas que conservas intacta.",
+	},
+	"Toy": {
+		"kind": "node", "tex": "px_toy.png", "soff": Vector2(0, 0), "sscale": Vector2(1.4, 1.4),
+		"irad": 70.0, "ioff": Vector2(0, 0),
+		"name": "Peluche", "msg": "Un peluche viejo y gastado, de cuando eras niño. Le falta un ojo. Nunca quisiste deshacerte de él.",
+	},
+	"Mirror": {
+		"kind": "sprite", "tex": "px_mirror.png", "soff": Vector2(0, 0),
+		"irad": 70.0, "ioff": Vector2(0, 0),
+		"name": "Espejo", "msg": "Un espejo de cuerpo entero. A veces tardas un segundo en reconocerte en él.",
+	},
+	"Phone": {
+		"kind": "sprite", "tex": "px_phone.png", "soff": Vector2(0, 0),
+		"irad": 70.0, "ioff": Vector2(0, 0),
+		"name": "Teléfono", "msg": "El teléfono de casa. Nadie ha llamado en mucho tiempo.",
+	},
+	"Lamp": {
+		"kind": "sprite", "tex": "px_lamp.png", "soff": Vector2(0, 0),
+	},
+	"Plant": {
+		"kind": "sprite", "tex": "px_plant_c.png", "soff": Vector2(0, 0),
+	},
+}
+
+## Anclajes de anomalía (objetos ocultos que las anomalías muestran).
+const ANCHORS := {
+	"WindowFigure": {"tex": "px_monster_witness.png", "scale": Vector2(1.7, 1.7)},
+	"WardrobeFigure": {"tex": "px_monster_witness.png", "scale": Vector2(1.6, 1.6)},
+	"UnderBedFigure": {"tex": "px_monster_witness.png", "scale": Vector2(1.4, 1.4)},
+	"Figure2": {"tex": "px_monster_witness.png", "scale": Vector2(2, 2)},
+	"Handprint": {"tex": "px_handprint.png", "scale": Vector2(2, 2)},
+	"Letter": {"tex": "px_letter_c.png", "scale": Vector2(2, 2)},
+	"Keys": {"tex": "px_keys.png", "scale": Vector2(2, 2)},
+	"Pills": {"tex": "px_pills_c.png", "scale": Vector2(2, 2)},
+	"Spider": {"tex": "px_spider.png", "scale": Vector2(2, 2)},
+	"Doll": {"tex": "px_doll.png", "scale": Vector2(2, 2)},
+	"Drawing": {"tex": "px_drawing.png", "scale": Vector2(2, 2)},
+	"Crow": {"tex": "px_crow_c.png", "scale": Vector2(2, 2)},
+	"WifePhoto": {"tex": "px_wife_photo.png", "scale": Vector2(2, 2)},
+}
+
+## Construye la habitación completa (sin añadirla al árbol).
+func build(spec: Dictionary) -> Node2D:
+	var cols: int = spec.get("cols", 20)
+	var rows: int = spec.get("rows", 12)
+
+	var room := Node2D.new()
+	room.name = spec.get("name", "Room")
+	room.set_script(load("res://scripts/room.gd"))
+
+	var world := Node2D.new()
+	world.name = "World"
+	world.y_sort_enabled = true
+	room.add_child(world)
+
+	var thickness: int = spec.get("wall_thickness", 1)
+	var interior := Rect2(
+		thickness * TILE_PX * TILE_SCALE, thickness * TILE_PX * TILE_SCALE,
+		cols * TILE_PX * TILE_SCALE - 2 * thickness * TILE_PX * TILE_SCALE,
+		rows * TILE_PX * TILE_SCALE - 2 * thickness * TILE_PX * TILE_SCALE)
+
+	world.add_child(_make_tiles("Floor", "res://resources/floor_tileset.tres", cols, rows, false, thickness))
+	world.add_child(_make_tiles("Walls", "res://resources/wall_tileset.tres", cols, rows, true, thickness))
+
+	for object in spec.get("objects", []):
+		var node := _make_object(object["type"], object.get("pos", Vector2.ZERO), interior)
+		if node != null:
+			world.add_child(node)
+
+	for anchor_name in spec.get("anchors", {}):
+		world.add_child(_make_anchor(anchor_name, spec["anchors"][anchor_name], interior))
+
+	world.add_child(_make_darkness(cols, rows))
+	world.add_child(_make_marker("PlayerSpawn", spec.get("player_spawn", Vector2(640, 380))))
+	var monster_spawns: Array = spec.get("monster_spawns", [])
+	for i in monster_spawns.size():
+		world.add_child(_make_marker("MonsterSpawn%d" % (i + 1), monster_spawns[i]))
+
+	return room
+
+# ---------------------------------------------------------------------------
+# Piezas
+# ---------------------------------------------------------------------------
+
+func _make_tiles(layer_name: String, tileset_path: String, cols: int, rows: int, border_only: bool, thickness: int) -> TileMapLayer:
+	var layer := TileMapLayer.new()
+	layer.name = layer_name
+	layer.z_index = -20
+	layer.scale = Vector2(TILE_SCALE, TILE_SCALE)
+	layer.tile_set = load(tileset_path)
+	for y in rows:
+		for x in cols:
+			var edge := x < thickness or y < thickness or x >= cols - thickness or y >= rows - thickness
+			if border_only != edge:
+				continue
+			layer.set_cell(Vector2i(x, y), 0, Vector2i(0, 0))
+	return layer
+
+## Coloca un objeto dentro del interior, sin que su sprite invada las paredes.
+func _fit(pos: Vector2, size: Vector2, soff: Vector2, interior: Rect2, no_clamp: bool) -> Vector2:
+	if no_clamp:
+		return pos
+	var half := size * 0.5
+	var lo := interior.position + half - soff
+	var hi := interior.position + interior.size - half - soff
+	var out := pos
+	var cx := interior.get_center().x - soff.x
+	var cy := interior.get_center().y - soff.y
+	out.x = cx if lo.x > hi.x else clampf(pos.x, lo.x, hi.x)
+	out.y = cy if lo.y > hi.y else clampf(pos.y, lo.y, hi.y)
+	return out
+
+func _make_object(type: String, pos: Vector2, interior: Rect2) -> Node2D:
+	if not TYPES.has(type):
+		return null
+	var data: Dictionary = TYPES[type]
+	var kind: String = data.get("kind", "node")
+	var soff: Vector2 = data.get("soff", Vector2.ZERO)
+	var sscale: Vector2 = data.get("sscale", Vector2(TILE_SCALE, TILE_SCALE))
+	var texture: Texture2D = load(G + data["tex"])
+
+	var root: Node2D = null
+	match kind:
+		"body":
+			var body := StaticBody2D.new()
+			body.collision_layer = 1
+			body.collision_mask = 0
+			root = body
+		"node":
+			root = Node2D.new()
+		"sprite":
+			root = Sprite2D.new()
+	root.name = type
+	root.position = _fit(pos, texture.get_size() * sscale, soff, interior, data.get("no_clamp", false))
+
+	if kind != "sprite":
+		var sprite := Sprite2D.new()
+		sprite.name = "Sprite"
+		sprite.texture = texture
+		sprite.position = soff
+		sprite.scale = sscale
+		root.add_child(sprite)
+	else:
+		var self_sprite := root as Sprite2D
+		self_sprite.texture = texture
+		self_sprite.scale = sscale
+
+	if data.has("csize"):
+		var shape := CollisionShape2D.new()
+		shape.name = "CollisionShape2D"
+		shape.position = data.get("coff", Vector2.ZERO)
+		var rect := RectangleShape2D.new()
+		rect.size = data["csize"]
+		shape.shape = rect
+		root.add_child(shape)
+
+	if data.has("name"):
+		_add_interactable(root, data, data.get("ioff", Vector2.ZERO), data.get("irad", 80.0))
+	return root
+
+func _add_interactable(parent: Node, data: Dictionary, offset: Vector2, radius: float) -> void:
+	var area := Area2D.new()
+	area.name = "Interactable"
+	area.collision_layer = 4
+	area.collision_mask = 0
+	area.position = offset
+	area.set_script(load("res://scripts/interactable.gd"))
+	area.set("display_name", data.get("name", "Objeto"))
+	area.set("prompt_verb", data.get("verb", "Examinar"))
+	area.set("message", data.get("msg", ""))
+	area.set("action_id", data.get("action", ""))
+	area.set("action_button_text", data.get("action_text", ""))
+	var shape := CollisionShape2D.new()
+	shape.name = "CollisionShape2D"
+	var circle := CircleShape2D.new()
+	circle.radius = radius
+	shape.shape = circle
+	area.add_child(shape)
+	parent.add_child(area)
+
+func _make_anchor(anchor_name: String, pos: Vector2, interior: Rect2) -> Sprite2D:
+	var data: Dictionary = ANCHORS.get(anchor_name, {"tex": "px_handprint.png", "scale": Vector2(2, 2)})
+	var sprite := Sprite2D.new()
+	sprite.name = anchor_name
+	sprite.texture = load(G + data["tex"])
+	sprite.scale = data["scale"]
+	# La pintada va sobre la pared: no se mete dentro del interior.
+	var on_wall: bool = anchor_name == "Drawing"
+	sprite.position = _fit(pos, sprite.texture.get_size() * sprite.scale, Vector2.ZERO, interior, on_wall)
+	sprite.visible = false
+	return sprite
+
+func _make_darkness(cols: int, rows: int) -> Sprite2D:
+	var sprite := Sprite2D.new()
+	sprite.name = "Darkness"
+	sprite.texture = load(G + "px_white.png")
+	sprite.position = Vector2(cols * TILE_PX * TILE_SCALE, rows * TILE_PX * TILE_SCALE) * 0.5
+	sprite.scale = Vector2(cols * TILE_PX * TILE_SCALE / 8.0, rows * TILE_PX * TILE_SCALE / 8.0)
+	sprite.modulate = Color(0, 0, 0, 0.82)
+	sprite.z_index = 50
+	sprite.visible = false
+	return sprite
+
+func _make_marker(marker_name: String, pos: Vector2) -> Node2D:
+	var marker := Node2D.new()
+	marker.name = marker_name
+	marker.position = pos
+	return marker
+
+## Asigna el dueño a todos los nodos para que se guarden en la escena.
+func set_owners(node: Node, owner: Node) -> void:
+	for child in node.get_children():
+		child.owner = owner
+		set_owners(child, owner)

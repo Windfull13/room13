@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+[ext_resource type="PackedScene" path="res://scenes/monster.tscn" id="4_monster"]
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_testigo_cuarto.tscn" id="3_js"]
+
+[resource]
+script = ExtResource("2_dat")
+id = "testigo_cuarto"
+display_name = "El Testigo"
+description = "Una presencia alta y quieta está de pie en la habitación. No se mueve, pero está."
+meaning = "La mirada que juzga; la voz interior que repasa cada decisión."
+is_dangerous = true
+monster_scene = ExtResource("4_monster")
+jumpscare_scene = ExtResource("3_js")
+focus_object = "testigo"
+difficulty = 2
+theme = 4
+tell = "presencia alta y quieta tras el escritorio"
+ambience = "lampara_parpadea"

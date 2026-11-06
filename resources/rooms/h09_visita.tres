@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_kptn4"]
+
+[resource]
+script = ExtResource("1_kptn4")
+id = "visita_9"
+display_name = "Ya no sabes si la habitación cambia o eres tú el que cambió"
+order = 8
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "Ya no sabes si la habitación cambia o eres tú el que cambió"

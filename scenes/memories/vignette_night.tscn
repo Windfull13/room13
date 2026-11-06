@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/memories/vignettes/vignette_night.gd" id="1_v"]
+
+[node name="Vignette_night" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_v")
+sound_name = "memory_rain"
+sound_cut_at = 0.53

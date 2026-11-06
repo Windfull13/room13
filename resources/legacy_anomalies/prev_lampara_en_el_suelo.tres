@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_bubrp"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_0j53t"]
+
+[sub_resource type="Resource" id="Resource_h4xnq"]
+script = ExtResource("1_bubrp")
+mode = 4
+target_node = "Lamp"
+position = Vector2(420, 880)
+
+[resource]
+script = ExtResource("2_0j53t")
+id = "lampara_en_el_suelo"
+display_name = "La lámpara está en el suelo"
+description = "La lámpara del escritorio ha aparecido en el suelo, encendida."
+meaning = "Una luz puesta donde nadie va a usarla."
+modifications = [SubResource("Resource_h4xnq")]

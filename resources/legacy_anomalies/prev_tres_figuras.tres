@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_ewm46"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_nalca"]
+
+[sub_resource type="Resource" id="Resource_yax8w"]
+script = ExtResource("1_ewm46")
+target_node = "WindowFigure"
+
+[sub_resource type="Resource" id="Resource_ca12n"]
+script = ExtResource("1_ewm46")
+target_node = "WardrobeFigure"
+
+[sub_resource type="Resource" id="Resource_jnl8g"]
+script = ExtResource("1_ewm46")
+target_node = "Figure2"
+
+[resource]
+script = ExtResource("2_nalca")
+id = "tres_figuras"
+display_name = "Tres figuras"
+description = "Hay figuras oscuras en la ventana, en la pared y en el armario. Todas miran hacia ti."
+meaning = "Cuando la casa entera parece estar mirándote."
+is_dangerous = true
+modifications = [SubResource("Resource_yax8w"), SubResource("Resource_ca12n"), SubResource("Resource_jnl8g")]

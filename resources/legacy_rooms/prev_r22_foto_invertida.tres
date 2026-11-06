@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/foto_invertida.tres" id="1_s1pqj"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_jha3m"]
+
+[resource]
+script = ExtResource("2_jha3m")
+id = "room_foto_invertida"
+display_name = "La fotografía boca abajo"
+order = 22
+anomaly = ExtResource("1_s1pqj")
+narrative_clue = "Un objeto de la pared mira hacia otro lado."

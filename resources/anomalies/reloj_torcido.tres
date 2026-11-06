@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_0derp"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_oln8a"]
+
+[sub_resource type="Resource" id="Resource_mm76i"]
+script = ExtResource("1_0derp")
+mode = 0
+target_node = "Clock/Sprite"
+rotation_degrees = 14.0
+
+[resource]
+script = ExtResource("2_oln8a")
+id = "reloj_torcido"
+display_name = "El reloj está torcido"
+description = "El reloj de pared cuelga inclinado, como si alguien lo hubiese golpeado."
+meaning = "Lo que ya no se sostiene recto."
+modifications = [SubResource("Resource_mm76i")]
+focus_object = "reloj"
+difficulty = 0
+theme = 10
+tell = "el reloj cuelga inclinado"

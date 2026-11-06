@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_vmooo"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_iuhu5"]
+
+[sub_resource type="Resource" id="Resource_i2aa4"]
+script = ExtResource("1_vmooo")
+target_node = "Spider"
+
+[resource]
+script = ExtResource("2_iuhu5")
+id = "aranna_en_el_suelo"
+display_name = "Una araña en el suelo"
+description = "Una araña negra cruza el suelo muy despacio."
+meaning = "Lo pequeño que también habita esta casa."
+modifications = [SubResource("Resource_i2aa4")]
+focus_object = "arana"
+difficulty = 1
+theme = 14
+tell = "una araña cruza el suelo"

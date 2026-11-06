@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_espejo.tscn" id="3_js"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "Mirror/Reflection"
+
+[resource]
+script = ExtResource("2_dat")
+id = "figura_en_el_espejo"
+display_name = "El reflejo que no eres tú"
+description = "En el espejo hay alguien de pie. Se parece a ti, pero no se mueve cuando te mueves."
+meaning = "Lo que ves de ti cuando el duelo y la culpa te deforman."
+is_dangerous = true
+modifications = [SubResource("Resource_m0")]
+jumpscare_scene = ExtResource("3_js")
+focus_object = "espejo"
+difficulty = 2
+theme = 13
+tell = "reflejo que no te imita"
+ambience = "espejo_parpadea"

@@ -1,0 +1,58 @@
+{
+	"animation_name": "walking_away_from_the_viewer",
+	"animation_style": "",
+	"animation_type": "walking away from the viewer",
+	"columns": 6,
+	"directions": [],
+	"frame_count": 6,
+	"frame_height": 64,
+	"frame_paths": [],
+	"frame_regions": [
+		{
+			"h": 64,
+			"w": 48,
+			"x": 0,
+			"y": 0
+		},
+		{
+			"h": 64,
+			"w": 48,
+			"x": 48,
+			"y": 0
+		},
+		{
+			"h": 64,
+			"w": 48,
+			"x": 96,
+			"y": 0
+		},
+		{
+			"h": 64,
+			"w": 48,
+			"x": 144,
+			"y": 0
+		},
+		{
+			"h": 64,
+			"w": 48,
+			"x": 192,
+			"y": 0
+		},
+		{
+			"h": 64,
+			"w": 48,
+			"x": 240,
+			"y": 0
+		}
+	],
+	"frame_width": 48,
+	"name": "px_player_up_walk",
+	"prompt": "walking away from the viewer",
+	"rows": 1,
+	"source_image": "res://assets/generated/px_player_up.png",
+	"source_tool": "animate_sprite",
+	"spritesheet_height": 64,
+	"spritesheet_path": "res://assets/generated/px_player_up_walk.png",
+	"spritesheet_width": 288,
+	"type": "animation"
+}

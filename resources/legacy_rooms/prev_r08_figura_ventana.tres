@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/figura_ventana.tres" id="1_oy3cx"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_lfap2"]
+
+[resource]
+script = ExtResource("2_lfap2")
+id = "room_figura_ventana"
+display_name = "Alguien en la ventana"
+order = 8
+is_dangerous = true
+anomaly = ExtResource("1_oy3cx")
+narrative_clue = "Al otro lado del cristal hay compañía."

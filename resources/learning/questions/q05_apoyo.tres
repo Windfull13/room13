@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TriviaQuestion" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/learning/trivia_question.gd" id="1_q"]
+
+[resource]
+script = ExtResource("1_q")
+id = "q05_apoyo"
+topic = "salud mental"
+text = "Cuando alguien se siente muy mal durante mucho tiempo, ¿qué le conviene?"
+options = PackedStringArray("Contárselo a alguien de confianza y buscar apoyo profesional", "Aislarse hasta que pase", "Guardárselo para no preocupar a nadie", "Esperar a que los demás lo noten solos")
+correct_index = 0
+explanation = "Aislarse suele empeorar el dolor. Pedir ayuda no es debilidad."

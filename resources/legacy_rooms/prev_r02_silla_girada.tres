@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/silla_girada.tres" id="1_2rlxf"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_qxc6j"]
+
+[resource]
+script = ExtResource("2_qxc6j")
+id = "room_silla_girada"
+display_name = "La silla girada"
+order = 2
+anomaly = ExtResource("1_2rlxf")
+narrative_clue = "La silla no mira hacia la mesa."

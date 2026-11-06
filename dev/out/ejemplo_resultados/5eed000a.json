@@ -1,0 +1,61 @@
+{
+	"simulated": true,
+	"participant_id": "5eed000a",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:09:00",
+	"finished_at": "2026-01-01T10:29:30",
+	"completed": true,
+	"attempts": 2,
+	"play_seconds": 825.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": -1,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": -1,
+			"q06_autocuidado": 3,
+			"q07_accidente": 1,
+			"q08_infancia": 2
+		},
+		"score": 3
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 1,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 1,
+			"q08_infancia": 2
+		},
+		"score": 5
+	},
+	"gain": 2,
+	"normalized_gain": 0.4,
+	"survey": {
+		"u1": 3,
+		"u2": 3,
+		"u3": 3,
+		"u4": 3,
+		"l1": 3,
+		"l2": 3,
+		"r1": 3,
+		"comment": "Un poco difícil al final."
+	},
+	"memories_found": [
+		"carta_abierta",
+		"llaves_en_el_suelo",
+		"reloj_detenido",
+		"lampara_apagada",
+		"silla_ausente",
+		"luz_en_la_ventana"
+	],
+	"cinematic_skipped": null,
+	"finish_type": "anticipado",
+	"max_round_reached": 9,
+	"ended_early": true
+}

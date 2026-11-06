@@ -1,0 +1,625 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1_4t2lc"]
+[ext_resource type="TileSet" path="res://resources/floor_tileset.tres" id="2_206ic"]
+[ext_resource type="TileSet" path="res://resources/wall_tileset.tres" id="3_wurfe"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_door_wall.png" id="4_4t2lc"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="5_ublnw"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_window_c.png" id="6_5dj85"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_clock_normal.png" id="7_ucjq1"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_face_window.png" id="8_8tk8g"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_bed.png" id="8_rlyat"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_wardrobe_c.png" id="9_kprkh"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_desk_clear.png" id="11_206ic"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_photo_normal.png" id="12_524ki"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_wardrobe_crack.png" id="12_ublnw"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_chair_back.png" id="12_wurfe"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_lamp.png" id="13_17oim"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_phone.png" id="14_fjuua"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_note.png" id="15_yevr2"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_rug.png" id="16_7k5br"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_toy.png" id="17_ss56c"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_mirror.png" id="18_g7wtr"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_plant_c.png" id="19_hfhre"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_handprint.png" id="21_gelv6"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_mirror_reflection.png" id="22_5dj85"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_letter_c.png" id="22_bil6j"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_keys.png" id="23_r421j"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_flower.png" id="24_ucjq1"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_spider.png" id="25_ph40t"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_doll.png" id="26_y1eke"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_drawing.png" id="27_pewkr"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_crow_c.png" id="28_pwswk"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_wife_photo.png" id="29_a4gj3"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_white.png" id="30_fgqcf"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_glass_c.png" id="33_rlyat"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_hand_under_bed.png" id="33_ucjq1"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_plate.png" id="34_kprkh"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_musicbox.png" id="35_thdke"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knswc"]
+size = Vector2(80, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxx6b"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xy02b"]
+radius = 56.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5eony"]
+radius = 46.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uly7w"]
+size = Vector2(112, 92)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttgac"]
+radius = 62.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e3dd"]
+size = Vector2(58, 46)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onhow"]
+radius = 56.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b185s"]
+size = Vector2(132, 90)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7omha"]
+radius = 34.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8434a"]
+size = Vector2(36, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grgqp"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wop24"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlo3t"]
+radius = 43.333332
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_blbw7"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_32n1g"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8r6g6"]
+radius = 43.333332
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjnq4"]
+size = Vector2(29.999998, 8.333333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_524ki"]
+size = Vector2(21.666666, 8.333333)
+
+[node name="RoomBase" type="Node2D" unique_id=111234143]
+script = ExtResource("1_4t2lc")
+
+[node name="World" type="Node2D" parent="." unique_id=2047158586]
+y_sort_enabled = true
+
+[node name="Floor" type="TileMapLayer" parent="World" unique_id=1231167316]
+z_index = -20
+position = Vector2(288, 216)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAA=")
+tile_set = ExtResource("2_206ic")
+
+[node name="Walls" type="TileMapLayer" parent="World" unique_id=1769929039]
+z_index = -20
+position = Vector2(224, 24)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAACAAIAAAAAAAAAAAACAAkAAAAAAAAAAAADAAIAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAIAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAA=")
+tile_set = ExtResource("3_wurfe")
+
+[node name="Door" type="StaticBody2D" parent="World" unique_id=2041090948]
+position = Vector2(605, 224)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Door" unique_id=213863626]
+position = Vector2(0, -67.6)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("4_4t2lc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Door" unique_id=1032491505]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_knswc")
+
+[node name="Interactable" type="Area2D" parent="World/Door" unique_id=1100656915]
+position = Vector2(0, 13)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Puerta"
+prompt_verb = "Cruzar"
+message = "La puerta está entreabierta."
+action_id = "door_continue"
+action_button_text = "CRUZAR LA PUERTA"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Door/Interactable" unique_id=1642315630]
+shape = SubResource("CircleShape2D_yxx6b")
+
+[node name="LightSlit" type="Sprite2D" parent="World/Door" unique_id=1642315701]
+visible = false
+modulate = Color(1, 0.86, 0.55, 0.95)
+position = Vector2(24, -66)
+scale = Vector2(0.5, 14.5)
+texture = ExtResource("30_fgqcf")
+
+[node name="LightSpill" type="Sprite2D" parent="World/Door" unique_id=1642315702]
+visible = false
+modulate = Color(1, 0.86, 0.55, 0.2)
+position = Vector2(0, 12)
+scale = Vector2(10, 2.2)
+texture = ExtResource("30_fgqcf")
+
+[node name="Window" type="StaticBody2D" parent="World" unique_id=1717052680]
+position = Vector2(931, 152)
+collision_mask = 0
+
+[node name="Frame" type="Sprite2D" parent="World/Window" unique_id=362801887]
+modulate = Color(0.1, 0.07, 0.06, 1)
+position = Vector2(0, -55.5)
+scale = Vector2(16, 14.875)
+texture = ExtResource("30_fgqcf")
+
+[node name="Sprite" type="Sprite2D" parent="World/Window" unique_id=1809524225]
+position = Vector2(0, -54.4)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("6_5dj85")
+
+[node name="Interactable" type="Area2D" parent="World/Window" unique_id=1939290161]
+position = Vector2(0, 46)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Ventana"
+message = "Fuera llueve sin ruido. A lo lejos, los faros de la carretera dibujan líneas en el cristal."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Window/Interactable" unique_id=1304298993]
+shape = SubResource("CircleShape2D_xy02b")
+
+[node name="Sill" type="Sprite2D" parent="World/Window" unique_id=717229957]
+modulate = Color(0.32, 0.25, 0.2, 1)
+position = Vector2(0, 3.5)
+scale = Vector2(18, 1.125)
+texture = ExtResource("30_fgqcf")
+
+[node name="Face" type="Sprite2D" parent="World/Window" unique_id=20069001 groups=["entidades"]]
+visible = false
+modulate = Color(0.82, 0.9, 1, 0.9)
+position = Vector2(0, -62)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("8_8tk8g")
+
+[node name="Glass" type="Sprite2D" parent="World/Window/Face" unique_id=537918919]
+modulate = Color(0.7, 0.8, 1, 0.16)
+scale = Vector2(6.5, 7.5)
+texture = ExtResource("30_fgqcf")
+
+[node name="Clock" type="Node2D" parent="World" unique_id=1242639944]
+position = Vector2(692, 138)
+
+[node name="Sprite" type="Sprite2D" parent="World/Clock" unique_id=318329189]
+position = Vector2(0, -26.4)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("7_ucjq1")
+
+[node name="Interactable" type="Area2D" parent="World/Clock" unique_id=660484722]
+position = Vector2(0, 70)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Reloj"
+message = "El viejo reloj de pared. Sus agujas se mueven con un tic-tac lento y constante."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Clock/Interactable" unique_id=2033631984]
+shape = SubResource("CircleShape2D_5eony")
+
+[node name="Bed" type="StaticBody2D" parent="World" unique_id=2008269173]
+position = Vector2(348, 322)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Bed" unique_id=383860495]
+position = Vector2(0, -72.8)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("8_rlyat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bed" unique_id=610995786]
+position = Vector2(0, -46)
+shape = SubResource("RectangleShape2D_uly7w")
+
+[node name="Interactable" type="Area2D" parent="World/Bed" unique_id=1024654940]
+position = Vector2(0, -13)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Cama"
+message = "La cama está sin hacer. Recuerdas a alguien durmiendo a tu lado, pero ya no hay nadie."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Bed/Interactable" unique_id=1967359085]
+shape = SubResource("CircleShape2D_ttgac")
+
+[node name="Wardrobe" type="StaticBody2D" parent="World" unique_id=235497492]
+position = Vector2(472, 262)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Wardrobe" unique_id=918790894]
+position = Vector2(0, -72.8)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("9_kprkh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Wardrobe" unique_id=850958474]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_1e3dd")
+
+[node name="Interactable" type="Area2D" parent="World/Wardrobe" unique_id=1584629642]
+position = Vector2(0, 22)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Armario"
+message = "Un armario de madera oscura. Las puertas están cerradas. Huele a polvo y a ropa guardada demasiado tiempo."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Wardrobe/Interactable" unique_id=1710001101]
+shape = SubResource("CircleShape2D_onhow")
+
+[node name="Crack" type="Sprite2D" parent="World/Wardrobe" unique_id=807390966 groups=["entidades"]]
+visible = false
+position = Vector2(0, -80)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("12_ublnw")
+
+[node name="Desk" type="StaticBody2D" parent="World" unique_id=1076603687]
+position = Vector2(805, 316)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Desk" unique_id=1948959420]
+position = Vector2(0, -72.8)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("11_206ic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Desk" unique_id=239159287]
+position = Vector2(0, -45)
+shape = SubResource("RectangleShape2D_b185s")
+
+[node name="Interactable" type="Area2D" parent="World/Desk" unique_id=1075602821]
+position = Vector2(-67, 24)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Escritorio"
+message = "El escritorio donde solías escribir. En un cajón siguen los dibujos de colores que te dejaban encima del teclado para que no trabajaras tanto."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Desk/Interactable" unique_id=2014468324]
+shape = SubResource("CircleShape2D_7omha")
+
+[node name="Chair" type="StaticBody2D" parent="World" unique_id=530648425]
+position = Vector2(805, 392)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Chair" unique_id=58373293]
+position = Vector2(0, -45)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("12_wurfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Chair" unique_id=1248774885]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_8434a")
+
+[node name="Interactable" type="Area2D" parent="World/Chair" unique_id=1342497655]
+position = Vector2(0, -13)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Silla"
+message = "Una silla de madera. Normalmente está junto al escritorio, mirando hacia él."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Chair/Interactable" unique_id=1610993738]
+shape = SubResource("CircleShape2D_grgqp")
+
+[node name="Photograph" type="Node2D" parent="World" unique_id=1012082699]
+z_index = 1
+position = Vector2(762, 218)
+
+[node name="Sprite" type="Sprite2D" parent="World/Photograph" unique_id=1073735486]
+position = Vector2(0, -13.2)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("12_524ki")
+
+[node name="Interactable" type="Area2D" parent="World/Photograph" unique_id=1865297388]
+position = Vector2(4, 122)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Fotografía familiar"
+message = "Una fotografía enmarcada: los tres sonreís bajo el sol, antes de uno de aquellos viajes largos. Ella te agarra del brazo; la niña le saca la lengua a la cámara."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Photograph/Interactable" unique_id=789674902]
+shape = SubResource("CircleShape2D_wop24")
+
+[node name="Lamp" type="Sprite2D" parent="World" unique_id=1917671367]
+z_index = 1
+position = Vector2(850, 187)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("13_17oim")
+
+[node name="Phone" type="Sprite2D" parent="World" unique_id=1140410043]
+z_index = 1
+position = Vector2(822, 214)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("14_fjuua")
+
+[node name="Interactable" type="Area2D" parent="World/Phone" unique_id=219006278]
+position = Vector2(0, 209.99997)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Teléfono"
+message = "El teléfono de casa. Hay mensajes guardados que no te atreves a escuchar, y uno que no borrarías por nada del mundo."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Phone/Interactable" unique_id=1033085610]
+shape = SubResource("CircleShape2D_mlo3t")
+
+[node name="Book" type="Node2D" parent="World" unique_id=1100170815]
+z_index = 1
+position = Vector2(790, 224)
+
+[node name="Sprite" type="Sprite2D" parent="World/Book" unique_id=1956745461]
+position = Vector2(0, -12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_yevr2")
+
+[node name="Interactable" type="Area2D" parent="World/Book" unique_id=1491866915]
+position = Vector2(4, 116)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Libro"
+message = "Un cuento infantil con la esquina doblada. Lo leías en voz alta cada noche; ella se dormía antes del final y tú lo terminabas igual."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Book/Interactable" unique_id=2083245474]
+shape = SubResource("CircleShape2D_blbw7")
+
+[node name="Rug" type="Node2D" parent="World" unique_id=779390956]
+z_index = -10
+position = Vector2(640, 455)
+
+[node name="Sprite" type="Sprite2D" parent="World/Rug" unique_id=831773716]
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("16_7k5br")
+
+[node name="Toy" type="Node2D" parent="World" unique_id=2105383742]
+position = Vector2(448, 440)
+
+[node name="Sprite" type="Sprite2D" parent="World/Toy" unique_id=863168166]
+position = Vector2(0, -24)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("17_ss56c")
+
+[node name="Interactable" type="Area2D" parent="World/Toy" unique_id=2064119989]
+position = Vector2(0, -12)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Peluche"
+message = "Un peluche viejo y gastado, de cuando eras niño. Le falta un ojo. Nunca quisiste deshacerte de él."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Toy/Interactable" unique_id=1853506122]
+shape = SubResource("CircleShape2D_32n1g")
+
+[node name="Mirror" type="Sprite2D" parent="World" unique_id=1717608743]
+position = Vector2(324, 490)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("18_g7wtr")
+
+[node name="Interactable" type="Area2D" parent="World/Mirror" unique_id=1747035108]
+position = Vector2(53.333313, 18.333344)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_ublnw")
+display_name = "Espejo"
+message = "Un espejo de cuerpo entero. A veces tardas un segundo en reconocerte en él."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Mirror/Interactable" unique_id=1984948027]
+shape = SubResource("CircleShape2D_8r6g6")
+
+[node name="Collider" type="StaticBody2D" parent="World/Mirror" unique_id=726363509]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Mirror/Collider" unique_id=736093682]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_jjnq4")
+
+[node name="Cover" type="Sprite2D" parent="World/Mirror" unique_id=1866796866]
+visible = false
+z_index = 1
+position = Vector2(4, -12)
+rotation = 0.10471976
+scale = Vector2(0.54, 0.54)
+texture = ExtResource("15_yevr2")
+
+[node name="Reflection" type="Sprite2D" parent="World/Mirror" unique_id=217999007 groups=["entidades"]]
+visible = false
+modulate = Color(0.75, 0.82, 1, 0.8)
+position = Vector2(0, 4)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("22_5dj85")
+
+[node name="Plant" type="Sprite2D" parent="World" unique_id=1741745928]
+position = Vector2(950, 552)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("19_hfhre")
+
+[node name="Collider" type="StaticBody2D" parent="World/Plant" unique_id=647619766]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Plant/Collider" unique_id=1954599444]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_524ki")
+
+[node name="Flower" type="Sprite2D" parent="World/Plant" unique_id=1271452808]
+visible = false
+z_index = 1
+position = Vector2(5, -22)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("24_ucjq1")
+
+[node name="Handprint" type="Sprite2D" parent="World" unique_id=1434772460]
+visible = false
+position = Vector2(620, 172)
+texture = ExtResource("21_gelv6")
+
+[node name="Letter" type="Sprite2D" parent="World" unique_id=1196771949]
+visible = false
+z_index = 1
+position = Vector2(800, 204)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("22_bil6j")
+
+[node name="Keys" type="Sprite2D" parent="World" unique_id=1683947970]
+visible = false
+position = Vector2(590, 505)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("23_r421j")
+
+[node name="Spider" type="Sprite2D" parent="World" unique_id=854796090]
+visible = false
+position = Vector2(540, 540)
+texture = ExtResource("25_ph40t")
+
+[node name="Doll" type="Sprite2D" parent="World" unique_id=1880430918]
+visible = false
+position = Vector2(540, 430)
+texture = ExtResource("26_y1eke")
+
+[node name="Drawing" type="Sprite2D" parent="World" unique_id=71169092]
+visible = false
+position = Vector2(472, 100)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("27_pewkr")
+
+[node name="Crow" type="Sprite2D" parent="World" unique_id=1512802263 groups=["entidades"]]
+visible = false
+z_index = 1
+position = Vector2(985, 146)
+texture = ExtResource("28_pwswk")
+
+[node name="WifePhoto" type="Sprite2D" parent="World" unique_id=1385480180]
+visible = false
+position = Vector2(348, 112)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("29_a4gj3")
+
+[node name="Darkness" type="Sprite2D" parent="World" unique_id=499789072]
+visible = false
+modulate = Color(0, 0, 0, 0.82)
+z_index = 50
+position = Vector2(640, 384)
+scale = Vector2(160, 96)
+texture = ExtResource("30_fgqcf")
+
+[node name="PlayerSpawn" type="Node2D" parent="World" unique_id=392331418]
+position = Vector2(640, 520)
+
+[node name="MonsterSpawn1" type="Node2D" parent="World" unique_id=1864679346]
+position = Vector2(870, 306)
+
+[node name="MonsterSpawn2" type="Node2D" parent="World" unique_id=1245011456]
+position = Vector2(406, 300)
+
+[node name="WallBase" type="Sprite2D" parent="World" unique_id=1188777322]
+modulate = Color(0.17, 0.11, 0.09, 1)
+z_index = -15
+position = Vector2(640, 207)
+scale = Vector2(88, 2.25)
+texture = ExtResource("30_fgqcf")
+
+[node name="WallBaseLight" type="Sprite2D" parent="World" unique_id=908175361]
+modulate = Color(0.3, 0.21, 0.16, 1)
+z_index = -15
+position = Vector2(640, 199.5)
+scale = Vector2(88, 0.375)
+texture = ExtResource("30_fgqcf")
+
+[node name="WallShadowNear" type="Sprite2D" parent="World" unique_id=1211312640]
+modulate = Color(0, 0, 0, 0.34)
+z_index = -14
+position = Vector2(640, 223)
+scale = Vector2(88, 1.75)
+texture = ExtResource("30_fgqcf")
+
+[node name="WallShadowFar" type="Sprite2D" parent="World" unique_id=1117602072]
+modulate = Color(0, 0, 0, 0.14)
+z_index = -14
+position = Vector2(640, 236)
+scale = Vector2(88, 1.5)
+texture = ExtResource("30_fgqcf")
+
+[node name="SideShadowLeft" type="Sprite2D" parent="World" unique_id=1579932645]
+modulate = Color(0, 0, 0, 0.22)
+z_index = -14
+position = Vector2(294, 408)
+scale = Vector2(1.5, 48)
+texture = ExtResource("30_fgqcf")
+
+[node name="SideShadowRight" type="Sprite2D" parent="World" unique_id=418991939]
+modulate = Color(0, 0, 0, 0.22)
+z_index = -14
+position = Vector2(986, 408)
+scale = Vector2(1.5, 48)
+texture = ExtResource("30_fgqcf")
+
+[node name="FrontShadow" type="Sprite2D" parent="World" unique_id=1719687811]
+modulate = Color(0, 0, 0, 0.26)
+z_index = -14
+position = Vector2(640, 592)
+scale = Vector2(88, 2)
+texture = ExtResource("30_fgqcf")
+
+[node name="DeskGlass" type="Sprite2D" parent="World" unique_id=719807062]
+visible = false
+z_index = 1
+position = Vector2(752, 230)
+texture = ExtResource("33_rlyat")
+
+[node name="DeskPlate" type="Sprite2D" parent="World" unique_id=1369829128]
+visible = false
+z_index = 1
+position = Vector2(777, 231)
+texture = ExtResource("34_kprkh")
+
+[node name="MusicBox" type="Sprite2D" parent="World" unique_id=631450945]
+visible = false
+z_index = 1
+position = Vector2(853, 221)
+texture = ExtResource("35_thdke")
+
+[node name="DoorNote1" type="Sprite2D" parent="World" unique_id=338246825]
+visible = false
+position = Vector2(545, 246)
+rotation = -0.20943952
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("15_yevr2")
+
+[node name="DoorNote2" type="Sprite2D" parent="World" unique_id=2086230064]
+visible = false
+position = Vector2(568, 258)
+rotation = 0.13962634
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("15_yevr2")
+
+[node name="DoorNote3" type="Sprite2D" parent="World" unique_id=2005724456]
+visible = false
+position = Vector2(648, 250)
+rotation = -0.10471976
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("15_yevr2")
+
+[node name="UnderBedHand" type="Sprite2D" parent="World" unique_id=1526529259 groups=["entidades"]]
+visible = false
+position = Vector2(348, 321)
+texture = ExtResource("33_ucjq1")
+offset = Vector2(0, 6)

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_exthn"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_xric0"]
+
+[sub_resource type="Resource" id="Resource_rdyb0"]
+script = ExtResource("1_exthn")
+mode = 0
+target_node = "Photograph/Sprite"
+rotation_degrees = 180.0
+
+[resource]
+script = ExtResource("2_xric0")
+id = "foto_invertida"
+display_name = "La fotografía boca abajo"
+description = "La fotografía de la familia está girada, mirando hacia la pared."
+meaning = "Apartar la vista de lo que duele mirar."
+modifications = [SubResource("Resource_rdyb0")]
+focus_object = "foto"
+difficulty = 0
+theme = 5
+tell = "la foto familiar mira a la pared"

@@ -1,0 +1,37 @@
+class_name RoomView
+extends Node2D
+
+## Vista de la habitación.
+##
+## Muestra el fondo de la habitación y, si la ronda define una anomalía,
+## instancia la superposición correspondiente. No conoce las reglas del juego:
+## solo representa visualmente los datos que recibe.
+
+@onready var _background: Sprite2D = $RoomRoot/Background
+@onready var _overlay_layer: Node2D = $RoomRoot/OverlayLayer
+
+## Muestra una habitación, usando el fondo por defecto si la ronda no define uno.
+func show_room(room: RoomData, fallback_background: Texture2D) -> void:
+	clear_overlay()
+	var texture: Texture2D = room.background_texture if room.background_texture != null else fallback_background
+	_background.texture = texture
+	if room.has_anomaly():
+		_spawn_overlay(room.anomaly)
+
+## Elimina cualquier overlay de la ronda anterior para no arrastrar anomalías.
+func clear_overlay() -> void:
+	for child in _overlay_layer.get_children():
+		child.queue_free()
+
+func _spawn_overlay(anomaly: AnomalyData) -> void:
+	if anomaly == null or anomaly.overlay_texture == null:
+		return
+	var sprite := Sprite2D.new()
+	sprite.name = "AnomalyOverlay"
+	sprite.texture = anomaly.overlay_texture
+	sprite.centered = true
+	sprite.position = anomaly.overlay_position
+	sprite.scale = anomaly.overlay_scale
+	sprite.modulate = anomaly.overlay_modulate
+	sprite.z_index = 10
+	_overlay_layer.add_child(sprite)

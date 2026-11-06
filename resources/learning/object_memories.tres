@@ -1,0 +1,163 @@
+[gd_resource type="Resource" script_class="ObjectMemoryCatalog" load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://scripts/memories/object_memory_catalog.gd" id="1_cat"]
+[ext_resource type="Script" path="res://scripts/memories/object_memory.gd" id="2_mem"]
+
+[sub_resource type="Resource" id="m00"]
+script = ExtResource("2_mem")
+anomaly_id = "telefono_sonando"
+object_node = "Phone"
+object_name = "Teléfono"
+text = "Contestas. Solo queda un mensaje guardado, el último: «Aquí llueve mucho. Vamos despacio, ¿sí? Guárdanos algo de cena. Te queremos.»"
+voice_id = "voice_phone_msg"
+
+[sub_resource type="Resource" id="m01"]
+script = ExtResource("2_mem")
+anomaly_id = "telefono_descolgado"
+object_node = "Phone"
+object_name = "Teléfono"
+text = "Lo dejaste descolgado para no oír el pésame de nadie. El silencio de la línea es lo único que soportas."
+
+[sub_resource type="Resource" id="m02"]
+script = ExtResource("2_mem")
+anomaly_id = "foto_cambiada"
+object_node = "Photograph"
+object_name = "Fotografía"
+text = "Miras la foto del viaje. Sonreís los tres. Con el tiempo la memoria cambia las caras, y te da miedo perder los detalles."
+
+[sub_resource type="Resource" id="m03"]
+script = ExtResource("2_mem")
+anomaly_id = "foto_invertida"
+object_node = "Photograph"
+object_name = "Fotografía"
+text = "Detrás de la foto hay una frase con letra infantil: «Para ti, de las dos que más te quieren.»"
+
+[sub_resource type="Resource" id="m04"]
+script = ExtResource("2_mem")
+anomaly_id = "retrato_ajeno"
+object_node = "WifePhoto"
+object_name = "Retrato"
+text = "Te cuesta recordar su rostro con claridad. No es olvido: es el miedo a perderla otra vez."
+interact_position = Vector2(348, 300)
+
+[sub_resource type="Resource" id="m05"]
+script = ExtResource("2_mem")
+anomaly_id = "dibujo_en_la_pared"
+object_node = "Drawing"
+object_name = "Dibujo"
+text = "Una casa, un sol y tres figuras de la mano. Debajo, con letra torcida: «mi familia»."
+interact_position = Vector2(472, 284)
+
+[sub_resource type="Resource" id="m06"]
+script = ExtResource("2_mem")
+anomaly_id = "peluche_girado"
+object_node = "Toy"
+object_name = "Peluche"
+text = "De niño, solo él te escuchaba cuando volvías de la escuela sin ganas de hablar."
+
+[sub_resource type="Resource" id="m07"]
+script = ExtResource("2_mem")
+anomaly_id = "muneca_en_el_suelo"
+object_node = "Doll"
+object_name = "Muñeca"
+text = "Todavía huele a ella. La abrazas un momento y, por primera vez, no duele del todo."
+interact_position = Vector2(540, 430)
+
+[sub_resource type="Resource" id="m08"]
+script = ExtResource("2_mem")
+anomaly_id = "caja_de_musica"
+object_node = "MusicBox"
+object_name = "Caja de música"
+text = "La melodía con la que se dormía. La dejas sonar hasta el final."
+interact_position = Vector2(853, 340)
+
+[sub_resource type="Resource" id="m09"]
+script = ExtResource("2_mem")
+anomaly_id = "carta_abierta"
+object_node = "Letter"
+object_name = "Carta"
+text = "Empiezas la misma carta una y otra vez, y siempre te detienes en la primera línea. Quizá hoy toca terminarla."
+interact_position = Vector2(800, 340)
+
+[sub_resource type="Resource" id="m10"]
+script = ExtResource("2_mem")
+anomaly_id = "llaves_en_el_suelo"
+object_node = "Keys"
+object_name = "Llaves"
+text = "Las llaves de casa. Desde esa noche te cuesta salir y también quedarte."
+interact_position = Vector2(590, 505)
+
+[sub_resource type="Resource" id="m11"]
+script = ExtResource("2_mem")
+anomaly_id = "reloj_detenido"
+object_node = "Clock"
+object_name = "Reloj"
+text = "Se detuvo a la hora de la llamada. Dejaste de mirarlo para no saber cuánto tiempo pasa."
+
+[sub_resource type="Resource" id="m12"]
+script = ExtResource("2_mem")
+anomaly_id = "lampara_apagada"
+object_node = "Lamp"
+object_name = "Lámpara"
+text = "Ella dejaba esa luz encendida para que supieras que alguien te esperaba."
+interact_position = Vector2(850, 340)
+
+[sub_resource type="Resource" id="m13"]
+script = ExtResource("2_mem")
+anomaly_id = "silla_ausente"
+object_node = "Chair"
+object_name = "Lugar de la silla"
+text = "Falta la silla donde la niña dibujaba mientras tú trabajabas."
+interact_position = Vector2(805, 379)
+
+[sub_resource type="Resource" id="m14"]
+script = ExtResource("2_mem")
+anomaly_id = "luz_en_la_ventana"
+object_node = "Window"
+object_name = "Ventana"
+text = "Ha dejado de llover. Por primera vez en mucho tiempo, dejas que la luz entre."
+
+[sub_resource type="Resource" id="m15"]
+script = ExtResource("2_mem")
+anomaly_id = "planta_con_flor"
+object_node = "Plant"
+object_name = "Planta"
+text = "Ella la regaba cada domingo. Sigue creciendo, aunque tú dejaras de mirarla."
+interact_position = Vector2(930, 540)
+
+[sub_resource type="Resource" id="m16"]
+script = ExtResource("2_mem")
+anomaly_id = "comida_sin_tocar"
+object_node = "DeskGlass"
+object_name = "Vaso"
+text = "Llevas días sin comer en serio. Hoy bebes un poco de agua: es un comienzo."
+interact_position = Vector2(752, 340)
+
+[sub_resource type="Resource" id="m17"]
+script = ExtResource("2_mem")
+anomaly_id = "espejo_cubierto"
+object_node = "Mirror"
+object_name = "Espejo"
+text = "Lo cubriste porque no soportabas mirarte. Hoy te tomas un segundo antes de apartar el papel."
+
+[sub_resource type="Resource" id="m18"]
+script = ExtResource("2_mem")
+anomaly_id = "notas_bajo_la_puerta"
+object_node = "DoorNote1"
+object_name = "Notas"
+text = "Frases que otros te dijeron de niño. Las sabes de memoria. Hoy las lees y ya no pesan igual: eran de ellos, no tuyas."
+interact_position = Vector2(560, 262)
+
+[sub_resource type="Resource" id="m19"]
+script = ExtResource("2_mem")
+anomaly_id = "golpes_en_la_puerta"
+object_node = "Door"
+object_name = "Puerta"
+text = "Abres. No hay nadie. Los golpes eran el eco de lo que te hicieron creer. Cierras con suavidad."
+
+[resource]
+script = ExtResource("1_cat")
+panel_title = "RECUERDO"
+notice_text = "Hay un recuerdo en este objeto."
+prompt_verb = "Recordar"
+entries = Array[Resource]([SubResource("m00"), SubResource("m01"), SubResource("m02"), SubResource("m03"), SubResource("m04"), SubResource("m05"), SubResource("m06"), SubResource("m07"), SubResource("m08"), SubResource("m09"), SubResource("m10"), SubResource("m11"), SubResource("m12"), SubResource("m13"), SubResource("m14"), SubResource("m15"), SubResource("m16"), SubResource("m17"), SubResource("m18"), SubResource("m19")])

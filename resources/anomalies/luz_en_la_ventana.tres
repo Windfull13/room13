@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_6tvfa"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_7q5ec"]
+
+[sub_resource type="Resource" id="Resource_pwpnh"]
+script = ExtResource("1_6tvfa")
+mode = 5
+target_node = "Window/Sprite"
+color = Color(1.7, 1.55, 1.35, 1)
+
+[resource]
+script = ExtResource("2_7q5ec")
+id = "luz_en_la_ventana"
+display_name = "Una luz cálida en la ventana"
+description = "Por la ventana entra una luz cálida que antes no estaba."
+meaning = "Un recuerdo amable que aún está a tiempo."
+modifications = [SubResource("Resource_pwpnh")]
+focus_object = "ventana"
+difficulty = 1
+theme = 11
+tell = "luz cálida en la ventana"

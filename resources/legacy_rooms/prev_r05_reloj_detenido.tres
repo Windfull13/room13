@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/reloj_detenido.tres" id="1_6hwr8"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_ib21b"]
+
+[resource]
+script = ExtResource("2_ib21b")
+id = "room_reloj_detenido"
+display_name = "El reloj se ha detenido"
+order = 5
+is_dangerous = true
+anomaly = ExtResource("1_6hwr8")
+narrative_clue = "El reloj ya no avanza."

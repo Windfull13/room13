@@ -1,0 +1,59 @@
+{
+	"simulated": true,
+	"participant_id": "5eed0003",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:02:00",
+	"finished_at": "2026-01-01T10:22:30",
+	"completed": true,
+	"attempts": 3,
+	"play_seconds": 650.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": -1,
+			"q02_espectadores": 1,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": -1,
+			"q06_autocuidado": 2,
+			"q07_accidente": 3,
+			"q08_infancia": 1
+		},
+		"score": 2
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 3,
+			"q02_espectadores": 1,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 1
+		},
+		"score": 5
+	},
+	"gain": 3,
+	"normalized_gain": 0.5,
+	"survey": {
+		"u1": 5,
+		"u2": 4,
+		"u3": 3,
+		"u4": 5,
+		"l1": 4,
+		"l2": 3,
+		"r1": 5,
+		"comment": "Las tarjetas del pasillo me hicieron pensar."
+	},
+	"memories_found": [
+		"foto_cambiada",
+		"foto_invertida",
+		"retrato_ajeno",
+		"dibujo_en_la_pared"
+	],
+	"cinematic_skipped": false,
+	"finish_type": "completo",
+	"max_round_reached": 10,
+	"ended_early": false
+}

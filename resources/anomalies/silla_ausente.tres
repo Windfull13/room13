@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_wu7df"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_1vgsu"]
+
+[sub_resource type="Resource" id="Resource_dsbha"]
+script = ExtResource("1_wu7df")
+mode = 3
+target_node = "Chair/Sprite"
+
+[sub_resource type="Resource" id="Resource_eou5u"]
+script = ExtResource("1_wu7df")
+mode = 3
+target_node = "Chair/Interactable"
+
+[sub_resource type="Resource" id="Resource_silla_col"]
+script = ExtResource("1_wu7df")
+mode = 8
+target_node = "Chair/CollisionShape2D"
+
+[resource]
+script = ExtResource("2_1vgsu")
+id = "silla_ausente"
+display_name = "La silla ha desaparecido"
+description = "Ya no hay silla junto a la mesa: solo queda el hueco que ocupaba."
+meaning = "El vacío que deja lo cotidiano cuando falta."
+modifications = [SubResource("Resource_dsbha"), SubResource("Resource_eou5u"), SubResource("Resource_silla_col")]
+focus_object = "silla"
+difficulty = 0
+theme = 2
+tell = "falta la silla junto a la mesa"

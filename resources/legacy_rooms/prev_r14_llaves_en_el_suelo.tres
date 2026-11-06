@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/llaves_en_el_suelo.tres" id="1_cunwe"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_fnfrk"]
+
+[resource]
+script = ExtResource("2_fnfrk")
+id = "room_llaves_en_el_suelo"
+display_name = "Unas llaves en el suelo"
+order = 14
+anomaly = ExtResource("1_cunwe")
+narrative_clue = "Junto a la puerta hay algo que brilla."

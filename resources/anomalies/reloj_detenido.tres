@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_0dy4i"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_clock_anomaly.png" id="2_eqbi2"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="3_yhvxr"]
+
+[sub_resource type="Resource" id="Resource_jbuqa"]
+script = ExtResource("1_0dy4i")
+mode = 1
+target_node = "Clock/Sprite"
+texture = ExtResource("2_eqbi2")
+
+[sub_resource type="Resource" id="Resource_e37xk"]
+script = ExtResource("1_0dy4i")
+mode = 0
+target_node = "Clock/Sprite"
+rotation_degrees = 25.0
+
+[resource]
+script = ExtResource("3_yhvxr")
+id = "reloj_detenido"
+display_name = "El reloj se ha detenido"
+description = "El reloj de pared marca una hora imposible y sus agujas están torcidas."
+meaning = "El tiempo que se paró aquel día."
+modifications = [SubResource("Resource_jbuqa"), SubResource("Resource_e37xk")]
+focus_object = "reloj"
+difficulty = 2
+theme = 5
+tell = "agujas detenidas en una hora imposible"

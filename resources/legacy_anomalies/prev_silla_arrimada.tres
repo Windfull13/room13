@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_vyuqu"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_jxwei"]
+
+[sub_resource type="Resource" id="Resource_f20h5"]
+script = ExtResource("1_vyuqu")
+mode = 4
+target_node = "Chair"
+position = Vector2(1240, 640)
+
+[resource]
+script = ExtResource("2_jxwei")
+id = "silla_arrimada"
+display_name = "La silla arrimada"
+description = "La silla ha sido arrimada al escritorio, como si alguien hubiera estado trabajando."
+meaning = "Un gesto cotidiano que ya no se repite."
+modifications = [SubResource("Resource_f20h5")]

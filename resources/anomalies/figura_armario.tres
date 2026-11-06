@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_figura_armario.tscn" id="3_js"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "Wardrobe/Crack"
+
+[resource]
+script = ExtResource("2_dat")
+id = "figura_armario"
+display_name = "Algo en el armario"
+description = "La puerta del armario no cierra del todo. En la rendija no hay ropa: solo oscuridad con dos puntos de luz."
+meaning = "Lo que guardas y no quieres volver a mirar."
+is_dangerous = true
+modifications = [SubResource("Resource_m0")]
+jumpscare_scene = ExtResource("3_js")
+focus_object = "armario"
+difficulty = 1
+theme = 0
+tell = "rendija con ojos en el armario"
+ambience = "armario_vibra"

@@ -1,0 +1,104 @@
+extends RefCounted
+
+## Generador de las 10 habitaciones (herramienta interna de desarrollo).
+## Ejecutar desde execute_script:
+##     load("res://legacy/room_generator.gd").new().run(self)
+
+func run(tree: SceneTree) -> void:
+	var factory := RoomFactory.new()
+	for spec in specs():
+		var room: Node2D = factory.build(spec)
+		tree.root.add_child(room)
+		factory.set_owners(room, room)
+		var packed := PackedScene.new()
+		packed.pack(room)
+		var err := ResourceSaver.save(packed, "res://scenes/rooms/%s.tscn" % spec["file"])
+		var mirror := room.get_node("World/Mirror") if room.has_node("World/Mirror") else null
+		print("%-30s guardado=%d" % [spec["file"], err])
+		room.free()
+
+func _base() -> Dictionary:
+	return {"Figure2": Vector2(640, 340), "Handprint": Vector2(770, 210), "Keys": Vector2(680, 600),
+		"Letter": Vector2(620, 520), "Pills": Vector2(950, 500), "Spider": Vector2(540, 610),
+		"Doll": Vector2(330, 590), "Drawing": Vector2(400, 40), "WifePhoto": Vector2(1080, 330)}
+
+func _win(wx: float, wy: float) -> Dictionary:
+	return {"WindowFigure": Vector2(wx, wy + 70), "Crow": Vector2(wx - 60, wy - 10)}
+
+func _merge(a: Dictionary, b: Dictionary) -> Dictionary:
+	var out := a.duplicate()
+	for key in b:
+		out[key] = b[key]
+	return out
+
+func _spec(file: String, name: String, objects: Array, spawn: Vector2, monsters: Array, extra: Dictionary) -> Dictionary:
+	var anchors := _base()
+	for key in extra:
+		anchors[key] = extra[key]
+	var obj_list: Array = []
+	for o in objects:
+		obj_list.append({"type": o[0], "pos": Vector2(o[1], o[2])})
+	return {"file": file, "name": name, "cols": 20, "rows": 12, "wall_thickness": 2,
+		"objects": obj_list, "anchors": anchors, "player_spawn": spawn, "monster_spawns": monsters}
+
+func specs() -> Array:
+	return [
+	_spec("habitacion_01_infancia", "Habitacion01", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 205, 245], ["Bed", 300, 460],
+		["Wardrobe", 600, 450], ["Desk", 980, 470], ["Chair", 870, 580],
+		["Photograph", 1050, 350], ["Lamp", 930, 380], ["Phone", 1090, 420],
+		["Rug", 760, 520], ["Toy", 250, 590], ["Mirror", 200, 510], ["Plant", 1090, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(400, 580)],
+		_merge(_win(900, 190), {"UnderBedFigure": Vector2(300, 330), "WardrobeFigure": Vector2(600, 430)})),
+	_spec("habitacion_02_dormitorio", "Habitacion02", [
+		["Door", 640, 210], ["Window", 400, 190], ["Clock", 1000, 250], ["Bed", 320, 470],
+		["Wardrobe", 1050, 450], ["Mirror", 700, 500], ["Lamp", 830, 380],
+		["Photograph", 600, 330], ["Rug", 760, 580], ["Plant", 200, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(340, 590)],
+		_merge(_win(400, 190), {"UnderBedFigure": Vector2(320, 340), "WardrobeFigure": Vector2(1050, 430), "Keys": Vector2(700, 610)})),
+	_spec("habitacion_03_salon", "Habitacion03", [
+		["Door", 640, 210], ["Window", 300, 190], ["Clock", 1050, 250], ["Sofa", 480, 460],
+		["TV", 480, 610], ["Table", 900, 470], ["Rug", 700, 590], ["Lamp", 1080, 370],
+		["Shelf", 200, 400], ["Plant", 1090, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(500, 600)],
+		_merge(_win(300, 190), {"Letter": Vector2(900, 450), "Pills": Vector2(950, 520)})),
+	_spec("habitacion_04_cocina", "Habitacion04", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 1150, 250], ["Counter", 320, 320],
+		["Counter", 900, 320], ["Table", 620, 540], ["Chair", 780, 590], ["Shelf", 200, 500],
+		["Plant", 1090, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(500, 600)],
+		_merge(_win(900, 190), {"Letter": Vector2(620, 500), "Pills": Vector2(780, 400)})),
+	_spec("habitacion_05_recuerdos", "Habitacion05", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 300, 250], ["Shelf", 250, 400],
+		["Photograph", 560, 280], ["Mirror", 760, 350], ["Table", 560, 570],
+		["Chair", 780, 590], ["Lamp", 950, 450], ["Rug", 950, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(480, 600)],
+		_merge(_win(900, 190), {"Letter": Vector2(560, 520), "Pills": Vector2(650, 560)})),
+	_spec("habitacion_06_juegos", "Habitacion06", [
+		["Door", 640, 210], ["Window", 300, 190], ["Clock", 1050, 250], ["Bed", 300, 460],
+		["Toy", 600, 500], ["Rug", 800, 600], ["Crate", 1050, 580], ["Shelf", 1050, 400],
+		["Chair", 700, 500], ["Lamp", 950, 450], ["Plant", 200, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(480, 600)],
+		_merge(_win(300, 190), {"UnderBedFigure": Vector2(300, 330), "Letter": Vector2(420, 450)})),
+	_spec("habitacion_07_accidente", "Habitacion07", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 300, 250], ["Crate", 320, 320],
+		["Desk", 360, 540], ["Chair", 560, 590], ["Table", 900, 540], ["Plant", 200, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(420, 600)],
+		_merge(_win(900, 190), {"Letter": Vector2(360, 500), "Keys": Vector2(700, 580)})),
+	_spec("habitacion_08_aislamiento", "Habitacion08", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 1050, 250], ["Bed", 300, 460],
+		["Phone", 900, 400], ["Mirror", 640, 500], ["Rug", 400, 590], ["Plant", 200, 580]],
+		Vector2(640, 340), [Vector2(560, 330), Vector2(340, 590)],
+		_merge(_win(900, 190), {"UnderBedFigure": Vector2(300, 330), "Keys": Vector2(680, 610)})),
+	_spec("habitacion_09_relaciones", "Habitacion09", [
+		["Door", 640, 210], ["Window", 300, 190], ["Clock", 1050, 250], ["Mirror", 480, 350],
+		["Phone", 780, 360], ["Desk", 700, 560], ["Chair", 900, 590], ["Photograph", 1050, 380],
+		["Shelf", 200, 450], ["Table", 420, 580], ["Lamp", 600, 470]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(480, 600)],
+		_merge(_win(300, 190), {"Letter": Vector2(760, 520), "WifePhoto": Vector2(1080, 480)})),
+	_spec("habitacion_10_final", "Habitacion10", [
+		["Door", 640, 210], ["Window", 900, 190], ["Clock", 1050, 250], ["Mirror", 420, 380],
+		["Rug", 700, 540], ["Crate", 980, 570], ["Table", 880, 430], ["Plant", 200, 580]],
+		Vector2(640, 340), [Vector2(640, 330), Vector2(420, 600)],
+		_win(900, 190)),
+	]

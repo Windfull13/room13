@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_u0rd7"]
+
+[resource]
+script = ExtResource("1_u0rd7")
+id = "salon"
+display_name = "Salón"
+order = 2
+scene_path = "res://scenes/rooms/habitacion_03_salon.tscn"
+narrative_clue = "El salón donde la familia veía la televisión."

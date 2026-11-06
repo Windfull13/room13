@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_nanup"]
+
+[resource]
+script = ExtResource("2_nanup")
+id = "room_lampara_en_el_suelo"
+display_name = "La lámpara está en el suelo"
+order = 18
+narrative_clue = "La lámpara no está sobre el escritorio."

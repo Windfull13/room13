@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/monster.tscn" id="1_oysta"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_aq7yb"]
+
+[resource]
+script = ExtResource("2_aq7yb")
+id = "testigo_escritorio"
+display_name = "El Testigo junto al escritorio"
+description = "La presencia está de pie junto al escritorio, como esperando a que termines de escribir."
+meaning = "Aquello que juzga todo lo que haces."
+is_dangerous = true
+monster_scene = ExtResource("1_oysta")
+monster_position = Vector2(1300, 640)

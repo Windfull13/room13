@@ -1,0 +1,328 @@
+extends Node2D
+# Archivado: versión antigua. Sin class_name para no chocar con
+# res://scripts/game_manager.gd
+
+## Gestor de partida del prototipo de exploración.
+##
+## Orquesta la máquina de estados, la secuencia de rondas, la interacción con el
+## escenario, la evaluación de decisiones, las consecuencias (incluida la muerte
+## por criatura) y las transiciones. Mantiene separadas las responsabilidades:
+## datos (RoomData/AnomalyData), mundo (Room), jugador (Player), interfaz (HUD)
+## y fundidos (SceneTransition).
+
+enum State {
+	INICIO,
+	REFERENCIA,
+	EXPLORACION,
+	MENSAJE,
+	PAUSA,
+	EVALUACION,
+	RESULTADO,
+	MUERTE,
+	FINAL,
+}
+
+const ROOMS_DIR := "res://resources/rooms/"
+const RESULT_DISPLAY_TIME := 1.8
+const PLAYER_SPAWN := Vector2(760.0, 940.0)
+const MONSTER_DEATH_REASON := "Algo te alcanzó. Te acercaste demasiado a una presencia que no debías tocar."
+const MISSED_DANGER_REASON := "Había una presencia peligrosa en la habitación y decidiste que no había nada. No sobreviviste a tu propia negación."
+
+@onready var _room: Room = $Room
+@onready var _player: Player = $Room/World/Player
+@onready var _hud: HUD = $HUD
+@onready var _transition: SceneTransition = $Transition
+
+var state: State = State.INICIO
+var _rooms: Array[RoomData] = []
+var _index: int = -1
+var _correct: int = 0
+var _incorrect: int = 0
+var _answered: bool = false
+var _busy: bool = false
+var _paused: bool = false
+
+func _ready() -> void:
+	_player.interactable_changed.connect(_on_interactable_changed)
+	_room.monster_entered_danger.connect(_on_monster_danger)
+	_room.monster_entered_warning.connect(func() -> void: _hud.set_danger_warning(true))
+	_room.monster_warning_cleared.connect(func() -> void: _hud.set_danger_warning(false))
+	_hud.decision_made.connect(_on_decision_made)
+	_hud.message_closed.connect(_on_message_closed)
+	_hud.message_action.connect(_on_message_action)
+	_hud.restart_pressed.connect(_on_restart_pressed)
+	_hud.menu_pressed.connect(_on_menu_pressed)
+	_hud.resume_pressed.connect(_toggle_pause)
+	_rooms = _load_rooms()
+	start_campaign()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if state in [State.REFERENCIA, State.EXPLORACION, State.MENSAJE, State.PAUSA]:
+			_toggle_pause()
+			get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("interact"):
+		if state == State.MENSAJE:
+			_hud.close_message()
+			get_viewport().set_input_as_handled()
+		elif state == State.REFERENCIA or state == State.EXPLORACION:
+			_try_interact()
+			get_viewport().set_input_as_handled()
+
+# ---------------------------------------------------------------------------
+# Carga de datos
+# ---------------------------------------------------------------------------
+
+## Carga todas las rondas de la carpeta de datos y las ordena.
+func _load_rooms() -> Array[RoomData]:
+	var rooms: Array[RoomData] = []
+	var dir := DirAccess.open(ROOMS_DIR)
+	if dir == null:
+		push_error("No se pudo abrir la carpeta de rondas: %s" % ROOMS_DIR)
+		return rooms
+	var files := dir.get_files()
+	files.sort()
+	for file_name in files:
+		if not file_name.ends_with(".tres"):
+			continue
+		var res := load(ROOMS_DIR + file_name)
+		if res is RoomData:
+			rooms.append(res as RoomData)
+	rooms.sort_custom(func(a: RoomData, b: RoomData) -> bool: return a.order < b.order)
+	return rooms
+
+# ---------------------------------------------------------------------------
+# Flujo de partida
+# ---------------------------------------------------------------------------
+
+## Reinicia contadores y arranca la partida desde la primera ronda.
+func start_campaign() -> void:
+	state = State.INICIO
+	_index = -1
+	_correct = 0
+	_incorrect = 0
+	_answered = false
+	_busy = true
+	_paused = false
+	_hud.hide_result()
+	_hud.hide_end()
+	_hud.hide_death()
+	_hud.hide_pause()
+	if _rooms.is_empty():
+		push_error("No hay rondas cargadas.")
+		_hud.show_end("SIN CONTENIDO", "No se encontraron rondas para jugar.")
+		await _transition.fade_in()
+		return
+	_load_room(0)
+	await _transition.fade_in()
+	_busy = false
+	_refresh_control()
+
+## Carga una ronda: restablece la habitación, aplica la anomalía y ajusta la UI.
+func _load_room(index: int) -> void:
+	_index = index
+	_answered = false
+	var room: RoomData = _rooms[index]
+	_room.reset()
+	_room.configure_door(room.is_reference)
+	if room.has_anomaly():
+		_room.apply_anomaly(room.anomaly)
+	_player.global_position = PLAYER_SPAWN
+	_player.reset_state()
+	_hud.set_round_text(_round_text(index))
+	_hud.hide_result()
+	_hud.set_prompt("")
+	_hud.set_danger_warning(false)
+	if room.is_reference:
+		state = State.REFERENCIA
+		_hud.set_decision_bar_visible(false)
+	else:
+		state = State.EXPLORACION
+		_hud.set_decision_bar_visible(true)
+	_refresh_control()
+
+## Texto del indicador ("Habitación de referencia" o "Habitación N / M").
+func _round_text(index: int) -> String:
+	var room: RoomData = _rooms[index]
+	if room.is_reference:
+		return "Habitación de referencia"
+	var decision_total := 0
+	for r in _rooms:
+		if not r.is_reference:
+			decision_total += 1
+	var decision_index := 0
+	for i in range(index + 1):
+		if not _rooms[i].is_reference:
+			decision_index += 1
+	return "Habitación %d / %d" % [decision_index, decision_total]
+
+## Habilita o deshabilita el control del jugador según el estado.
+func _refresh_control() -> void:
+	var playable := state == State.REFERENCIA or state == State.EXPLORACION
+	_player.can_move = playable and not _busy and not _paused
+
+# ---------------------------------------------------------------------------
+# Interacción
+# ---------------------------------------------------------------------------
+
+func _on_interactable_changed(interactable: Interactable) -> void:
+	if state != State.EXPLORACION and state != State.REFERENCIA:
+		return
+	if interactable == null or _paused:
+		_hud.set_prompt("")
+	else:
+		_hud.set_prompt("E — %s %s" % [interactable.prompt_verb, interactable.display_name])
+
+func _try_interact() -> void:
+	if _busy or _paused:
+		return
+	var interactable := _player.get_interactable()
+	if interactable == null:
+		return
+	_player.face_towards(interactable.global_position)
+	_show_message(interactable.get_data())
+
+func _show_message(data: Dictionary) -> void:
+	state = State.MENSAJE
+	_hud.set_prompt("")
+	_hud.set_decision_bar_visible(false)
+	_hud.show_message(data)
+	_refresh_control()
+
+func _on_message_closed() -> void:
+	if state == State.MENSAJE:
+		_restore_after_message()
+
+func _on_message_action(action_id: String) -> void:
+	if action_id == "door_continue":
+		_advance_to_next()
+	else:
+		_restore_after_message()
+
+func _restore_after_message() -> void:
+	var room: RoomData = _rooms[_index]
+	if room.is_reference:
+		state = State.REFERENCIA
+	else:
+		state = State.EXPLORACION
+		_hud.set_decision_bar_visible(not room.is_reference)
+	_refresh_control()
+
+# ---------------------------------------------------------------------------
+# Decisión y consecuencias
+# ---------------------------------------------------------------------------
+
+func _on_decision_made(answer: int) -> void:
+	if state != State.EXPLORACION or _answered or _busy or _paused:
+		return
+	_answered = true
+	_busy = true
+	state = State.EVALUACION
+	_hud.set_decision_bar_visible(false)
+	_hud.set_prompt("")
+	_refresh_control()
+
+	var room: RoomData = _rooms[_index]
+	var verdict := AnswerEvaluator.evaluate(room, answer)
+	if verdict == AnswerEvaluator.Verdict.DEATH:
+		_hud.show_result(false, "Había una anomalía peligrosa y la ignoraste.")
+		await get_tree().create_timer(RESULT_DISPLAY_TIME).timeout
+		_hud.hide_result()
+		_die(MISSED_DANGER_REASON)
+		return
+
+	var correct := verdict == AnswerEvaluator.Verdict.CORRECT
+	if correct:
+		_correct += 1
+	else:
+		_incorrect += 1
+	state = State.RESULTADO
+	_hud.show_result(correct, _result_detail(room, correct))
+	await get_tree().create_timer(RESULT_DISPLAY_TIME).timeout
+	_hud.hide_result()
+	await _advance_to_next()
+
+## Texto explicativo de la reacción mostrada tras responder.
+func _result_detail(room: RoomData, correct: bool) -> String:
+	if correct:
+		if room.has_anomaly():
+			return "Detectaste la anomalía: %s." % room.anomaly.display_name
+		return "La habitación estaba en su estado normal. Bien observado."
+	if room.has_anomaly():
+		return "Había una anomalía (%s) y no la detectaste." % room.anomaly.display_name
+	return "La habitación estaba normal, pero indicaste una anomalía."
+
+## Consecuencia letal: pantalla de muerte con explicación y reinicio.
+func _die(reason: String) -> void:
+	state = State.MUERTE
+	_busy = true
+	_hud.set_danger_warning(false)
+	_hud.set_decision_bar_visible(false)
+	_hud.set_prompt("")
+	_hud.hide_result()
+	_hud.show_death(reason)
+	_refresh_control()
+
+## La criatura tocó al jugador.
+func _on_monster_danger() -> void:
+	if _paused:
+		return
+	if state == State.REFERENCIA or state == State.EXPLORACION:
+		_die(MONSTER_DEATH_REASON)
+
+# ---------------------------------------------------------------------------
+# Transiciones
+# ---------------------------------------------------------------------------
+
+func _advance_to_next() -> void:
+	_busy = true
+	_hud.set_decision_bar_visible(false)
+	_hud.set_prompt("")
+	_refresh_control()
+	await _transition.fade_out()
+	if _index + 1 >= _rooms.size():
+		_finish()
+		return
+	_load_room(_index + 1)
+	await _transition.fade_in()
+	_busy = false
+	_refresh_control()
+
+func _finish() -> void:
+	state = State.FINAL
+	_busy = true
+	_room.reset()
+	_hud.set_round_text("")
+	_hud.set_decision_bar_visible(false)
+	_hud.set_prompt("")
+	_hud.set_danger_warning(false)
+	_refresh_control()
+	var total := _correct + _incorrect
+	_hud.show_end(
+		"FIN DE LA PARTIDA",
+		"Has completado las %d rondas.\nAciertos: %d   ·   Fallos: %d" % [total, _correct, _incorrect]
+	)
+	await _transition.fade_in()
+
+# ---------------------------------------------------------------------------
+# Pausa y navegación
+# ---------------------------------------------------------------------------
+
+func _toggle_pause() -> void:
+	if _paused:
+		_paused = false
+		_hud.hide_pause()
+		_refresh_control()
+		return
+	if not (state in [State.REFERENCIA, State.EXPLORACION, State.MENSAJE]):
+		return
+	_paused = true
+	_hud.show_pause()
+	_refresh_control()
+
+func _on_restart_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_l0pwj"]
+
+[resource]
+script = ExtResource("1_l0pwj")
+id = "relaciones"
+display_name = "Recuerdos y relaciones"
+order = 8
+scene_path = "res://scenes/rooms/habitacion_09_relaciones.tscn"
+narrative_clue = "Todo lo que no supiste decirle a tiempo."

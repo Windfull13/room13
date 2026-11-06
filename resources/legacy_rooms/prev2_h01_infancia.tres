@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_lsmv8"]
+
+[resource]
+script = ExtResource("1_lsmv8")
+id = "infancia"
+display_name = "Habitación de la infancia"
+is_reference = true
+scene_path = "res://scenes/rooms/habitacion_01_infancia.tscn"
+narrative_clue = "La primera habitación es la referencia: todo está en su sitio."

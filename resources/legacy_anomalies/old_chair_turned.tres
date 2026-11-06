@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AnomalyData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_a"]
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="2_m"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2_m")
+mode = 0
+target_node = "Chair/Sprite"
+rotation_degrees = 150.0
+
+[resource]
+script = ExtResource("1_a")
+id = "chair_turned"
+display_name = "La silla girada"
+description = "La silla del escritorio está girada y mira hacia la habitación en lugar de hacia la mesa."
+meaning = "Algo te observa desde una silla que no debería estar así."
+is_dangerous = false
+modifications = [SubResource("mod1")]

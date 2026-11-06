@@ -1,0 +1,65 @@
+{
+	"simulated": true,
+	"participant_id": "5eed000b",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:10:00",
+	"finished_at": "2026-01-01T10:30:30",
+	"completed": true,
+	"attempts": 3,
+	"play_seconds": 850.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": -1,
+			"q02_espectadores": 3,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 2,
+			"q08_infancia": 3
+		},
+		"score": 4
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 3,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 0
+		},
+		"score": 7
+	},
+	"gain": 3,
+	"normalized_gain": 0.75,
+	"survey": {
+		"u1": 4,
+		"u2": 5,
+		"u3": 3,
+		"u4": 4,
+		"l1": 5,
+		"l2": 3,
+		"r1": 4,
+		"comment": ""
+	},
+	"memories_found": [
+		"llaves_en_el_suelo",
+		"reloj_detenido",
+		"lampara_apagada",
+		"silla_ausente",
+		"luz_en_la_ventana",
+		"planta_con_flor",
+		"comida_sin_tocar",
+		"espejo_cubierto",
+		"notas_bajo_la_puerta",
+		"golpes_en_la_puerta"
+	],
+	"cinematic_skipped": false,
+	"finish_type": "completo",
+	"max_round_reached": 10,
+	"ended_early": false
+}

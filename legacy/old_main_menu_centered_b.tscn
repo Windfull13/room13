@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://de56cgfivssau"]
+
+[ext_resource type="Script" uid="uid://52o1pgnqbbyg" path="res://scripts/main_menu.gd" id="1_mm"]
+[ext_resource type="PackedScene" path="res://scenes/rooms/room_base.tscn" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/ui/volume_control.tscn" id="3_vol"]
+
+[node name="MainMenu" type="Control" unique_id=1601356828]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mm")
+
+[node name="Background" parent="." unique_id=887054931 instance=ExtResource("2_bg")]
+modulate = Color(0.42, 0.42, 0.52, 1)
+position = Vector2(0, -24)
+
+[node name="Dim" type="ColorRect" parent="." unique_id=150908218]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.01, 0.01, 0.03, 0.62)
+
+[node name="MainScreen" type="CenterContainer" parent="." unique_id=2035411054]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="MainScreen" unique_id=101929214]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="MainScreen/Box" unique_id=2060162890]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.88, 0.84, 1)
+theme_override_colors/font_shadow_color = Color(0.45, 0.06, 0.06, 0.7)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 92
+text = "LA HABITACIÓN 13"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MainScreen/Box" unique_id=1319453612]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.7, 0.75, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 26
+text = "Observa. Recuerda. Decide."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MainScreen/Box" unique_id=137616957]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Buttons" type="VBoxContainer" parent="MainScreen/Box" unique_id=1364083917]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="StartButton" type="Button" parent="MainScreen/Box/Buttons" unique_id=1591637313]
+custom_minimum_size = Vector2(440, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "INICIAR PARTIDA"
+
+[node name="OptionsButton" type="Button" parent="MainScreen/Box/Buttons" unique_id=1376775521]
+custom_minimum_size = Vector2(440, 62)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "OPCIONES"
+
+[node name="CreditsButton" type="Button" parent="MainScreen/Box/Buttons" unique_id=90102366]
+custom_minimum_size = Vector2(440, 62)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "CRÉDITOS"
+
+[node name="QuitButton" type="Button" parent="MainScreen/Box/Buttons" unique_id=332911205]
+custom_minimum_size = Vector2(440, 62)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "SALIR"
+
+[node name="OptionsScreen" type="CenterContainer" parent="." unique_id=586326231]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="OptionsScreen" unique_id=258237975]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="OptionsScreen/Panel" unique_id=1355244445]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Title" type="Label" parent="OptionsScreen/Panel/Box" unique_id=1662775575]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "OPCIONES"
+horizontal_alignment = 1
+
+[node name="VolumeControl" parent="OptionsScreen/Panel/Box" unique_id=1146989564 instance=ExtResource("3_vol")]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="OptionsScreen/Panel/Box" unique_id=422508938]
+custom_minimum_size = Vector2(300, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "VOLVER"
+
+[node name="CreditsScreen" type="CenterContainer" parent="." unique_id=2120214256]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="CreditsScreen" unique_id=3864809]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="CreditsScreen/Panel" unique_id=1423489353]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CreditsScreen/Panel/Box" unique_id=1516582986]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "CRÉDITOS"
+horizontal_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="CreditsScreen/Panel/Box" unique_id=2097058129]
+custom_minimum_size = Vector2(900, 350)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Text" type="RichTextLabel" parent="CreditsScreen/Panel/Box/Scroll" unique_id=183533852]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.85, 0.85, 0.88, 1)
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+bbcode_enabled = true
+fit_content = true
+
+[node name="BackButton" type="Button" parent="CreditsScreen/Panel/Box" unique_id=1832287580]
+custom_minimum_size = Vector2(300, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "VOLVER"
+
+[node name="ContentWarning" type="Label" parent="." unique_id=542640797]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.58, 0.58, 0.62, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 17
+text = "Este juego trata temas de duelo, acoso y salud mental."
+horizontal_alignment = 1

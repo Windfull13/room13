@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_467w0"]
+
+[resource]
+script = ExtResource("1_467w0")
+id = "visita_8"
+display_name = "Poco a poco dejas de distinguir qué es normal y qué no"
+order = 7
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "Poco a poco dejas de distinguir qué es normal y qué no"

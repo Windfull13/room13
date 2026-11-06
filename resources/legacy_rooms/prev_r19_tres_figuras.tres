@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_uvfa8"]
+
+[resource]
+script = ExtResource("2_uvfa8")
+id = "room_tres_figuras"
+display_name = "Tres figuras"
+order = 19
+is_dangerous = true
+narrative_clue = "La habitación está más poblada de lo normal."

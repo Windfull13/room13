@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_lucni"]
+
+[resource]
+script = ExtResource("2_lucni")
+id = "room_muneca_en_la_cama"
+display_name = "Una muñeca sobre la cama"
+order = 9
+narrative_clue = "Sobre la cama hay un objeto pequeño."

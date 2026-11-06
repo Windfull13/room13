@@ -1,0 +1,63 @@
+{
+	"simulated": true,
+	"participant_id": "5eed0004",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:03:00",
+	"finished_at": "2026-01-01T10:23:30",
+	"completed": true,
+	"attempts": 4,
+	"play_seconds": 675.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": -1,
+			"q02_espectadores": 2,
+			"q03_duelo": 3,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 0
+		},
+		"score": 5
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 0,
+			"q03_duelo": 3,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 0,
+			"q08_infancia": 0
+		},
+		"score": 7
+	},
+	"gain": 2,
+	"normalized_gain": 0.6666666666666666,
+	"survey": {
+		"u1": 3,
+		"u2": 3,
+		"u3": 3,
+		"u4": 3,
+		"l1": 3,
+		"l2": 3,
+		"r1": 3,
+		"comment": ""
+	},
+	"memories_found": [
+		"foto_invertida",
+		"retrato_ajeno",
+		"dibujo_en_la_pared",
+		"peluche_girado",
+		"muneca_en_el_suelo",
+		"caja_de_musica",
+		"carta_abierta",
+		"llaves_en_el_suelo"
+	],
+	"cinematic_skipped": false,
+	"finish_type": "completo",
+	"max_round_reached": 10,
+	"ended_early": false
+}

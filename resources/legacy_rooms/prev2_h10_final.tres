@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_dp5vv"]
+
+[resource]
+script = ExtResource("1_dp5vv")
+id = "final"
+display_name = "La última habitación"
+order = 9
+scene_path = "res://scenes/rooms/habitacion_10_final.tscn"
+narrative_clue = "La última puerta antes de decidir."

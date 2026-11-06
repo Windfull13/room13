@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AnomalyData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_a"]
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="2_m"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2_m")
+mode = 2
+target_node = "WindowFigure"
+
+[resource]
+script = ExtResource("1_a")
+id = "window_figure"
+display_name = "El Visitante"
+description = "Una silueta pálida observa desde el otro lado de la ventana."
+meaning = "Conflictos que el protagonista intentó dejar fuera."
+is_dangerous = false
+modifications = [SubResource("mod1")]

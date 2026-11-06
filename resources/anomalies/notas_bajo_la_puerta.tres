@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "DoorNote1"
+
+[sub_resource type="Resource" id="Resource_m1"]
+script = ExtResource("1_mod")
+target_node = "DoorNote2"
+
+[sub_resource type="Resource" id="Resource_m2"]
+script = ExtResource("1_mod")
+target_node = "DoorNote3"
+
+[resource]
+script = ExtResource("2_dat")
+id = "notas_bajo_la_puerta"
+display_name = "Papeles bajo la puerta"
+description = "Tres papeles arrugados han aparecido junto a la puerta. Alguien los ha deslizado por debajo."
+meaning = "Palabras ajenas que aprendiste a creer."
+is_dangerous = false
+modifications = [SubResource("Resource_m0"), SubResource("Resource_m1"), SubResource("Resource_m2")]
+focus_object = "puerta"
+difficulty = 1
+theme = 1
+tell = "tres papeles arrugados junto a la puerta"

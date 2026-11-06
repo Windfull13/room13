@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scripts/jumpscares/jumpscare_figura_cama.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_monster_witness.png" id="3_fig"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_bed.png" id="4_bed"]
+
+[node name="Jumpscare" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+duration = 1.5
+sound_name = "jumpscare_cama"
+flash_color = Color(0.35, 0.28, 0.22, 1)
+
+[node name="Figura" type="Sprite2D" parent="Visual"]
+texture = ExtResource("3_fig")
+
+[node name="Cama" type="Sprite2D" parent="Visual"]
+position = Vector2(640, 760)
+scale = Vector2(5, 5)
+texture = ExtResource("4_bed")

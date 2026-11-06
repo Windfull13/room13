@@ -1,0 +1,154 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gm"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="3_hud"]
+[ext_resource type="Script" path="res://scripts/scene_transition.gd" id="4_tr"]
+[ext_resource type="Texture2D" path="res://assets/generated/room13_base.png" id="5_bg"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gm")
+default_background = ExtResource("5_bg")
+
+[node name="RoomView" type="Node2D" parent="."]
+
+[node name="RoomRoot" type="Node2D" parent="RoomView"]
+scale = Vector2(1.5, 1.5)
+
+[node name="Background" type="Sprite2D" parent="RoomView/RoomRoot"]
+centered = false
+texture = ExtResource("5_bg")
+
+[node name="OverlayLayer" type="Node2D" parent="RoomView/RoomRoot"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_hud")
+
+[node name="Root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="RoundLabel" type="Label" parent="HUD/Root"]
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 1000.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.92, 0.92, 0.94, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = ""
+
+[node name="AnswerContainer" type="CenterContainer" parent="HUD/Root"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -178.0
+offset_bottom = -40.0
+mouse_filter = 2
+
+[node name="AnswerButtons" type="HBoxContainer" parent="HUD/Root/AnswerContainer"]
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="NoAnomalyButton" type="Button" parent="HUD/Root/AnswerContainer/AnswerButtons"]
+custom_minimum_size = Vector2(430, 92)
+theme_override_font_sizes/font_size = 30
+text = "NO HAY ANOMALÍA"
+
+[node name="AnomalyButton" type="Button" parent="HUD/Root/AnswerContainer/AnswerButtons"]
+custom_minimum_size = Vector2(430, 92)
+theme_override_font_sizes/font_size = 30
+text = "HAY UNA ANOMALÍA"
+
+[node name="ContinueContainer" type="CenterContainer" parent="HUD/Root"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -178.0
+offset_bottom = -40.0
+mouse_filter = 2
+
+[node name="ContinueButton" type="Button" parent="HUD/Root/ContinueContainer"]
+custom_minimum_size = Vector2(380, 88)
+theme_override_font_sizes/font_size = 30
+text = "CONTINUAR  >"
+
+[node name="ResultContainer" type="CenterContainer" parent="HUD/Root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD/Root/ResultContainer"]
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/ResultContainer/ResultPanel"]
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 32
+
+[node name="ResultBox" type="VBoxContainer" parent="HUD/Root/ResultContainer/ResultPanel/Margin"]
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ResultTitle" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox"]
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 52
+text = "CORRECTO"
+
+[node name="ResultDetail" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox"]
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+text = ""
+
+[node name="EndPanel" type="Control" parent="HUD/Root"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/EndPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.88)
+
+[node name="EndCenter" type="CenterContainer" parent="HUD/Root/EndPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="EndBox" type="VBoxContainer" parent="HUD/Root/EndPanel/EndCenter"]
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="EndTitle" type="Label" parent="HUD/Root/EndPanel/EndCenter/EndBox"]
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 64
+text = "FIN DE LA PARTIDA"
+
+[node name="EndBody" type="Label" parent="HUD/Root/EndPanel/EndCenter/EndBox"]
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 30
+text = ""
+
+[node name="RestartButton" type="Button" parent="HUD/Root/EndPanel/EndCenter/EndBox"]
+custom_minimum_size = Vector2(440, 88)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "REINICIAR PARTIDA"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/EndPanel/EndCenter/EndBox"]
+custom_minimum_size = Vector2(440, 88)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "MENÚ PRINCIPAL"
+
+[node name="Transition" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource("4_tr")
+
+[node name="FadeRect" type="ColorRect" parent="Transition"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0, 0, 0, 1)

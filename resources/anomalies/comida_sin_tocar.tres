@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "DeskGlass"
+
+[sub_resource type="Resource" id="Resource_m1"]
+script = ExtResource("1_mod")
+target_node = "DeskPlate"
+
+[resource]
+script = ExtResource("2_dat")
+id = "comida_sin_tocar"
+display_name = "La comida sin tocar"
+description = "Un vaso de agua y un plato siguen intactos sobre el escritorio, como si llevaran horas esperando."
+meaning = "Cuidarte también se puede olvidar."
+is_dangerous = false
+modifications = [SubResource("Resource_m0"), SubResource("Resource_m1")]
+focus_object = "escritorio"
+difficulty = 1
+theme = 9
+tell = "vaso de agua y plato intactos sobre el escritorio"

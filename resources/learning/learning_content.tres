@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="LearningContent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/learning/learning_content.gd" id="1_c"]
+
+[resource]
+script = ExtResource("1_c")
+purpose_title = "Antes de entrar"
+purpose_pages = PackedStringArray("La Habitación 13 es un videojuego para generar conciencia sobre el acoso, el duelo y el cuidado de la salud mental. No es terapia ni sustituye la ayuda profesional. Puedes salir en cualquier momento con Esc.")
+consent_text = "Para evaluar el juego, guardaremos de forma anónima tus respuestas y tu valoración, sin nombre ni datos personales, en este equipo. Puedes elegir no guardarlas y jugar igual."
+consent_save_button = "PARTICIPAR Y GUARDAR"
+consent_skip_button = "JUGAR SIN GUARDAR"
+trivia_title_initial = "Trivia inicial"
+trivia_title_final = "Trivia final"
+trivia_intro_initial = "Primero, unas preguntas. No pasa nada si no sabes la respuesta: elige «No lo sé»."
+trivia_intro_final = "Las mismas preguntas del principio. Responde con lo que recuerdas."
+trivia_dont_know = "No lo sé"
+page_hint = "E, Enter o clic para continuar"
+intro_pages = PackedStringArray("De niño aprendiste a hacerte pequeño. Había quienes se reían, quienes empujaban y quienes miraban sin decir nada. Con los años, el silencio se volvió costumbre.", "Después llegaron ella y la niña, y la casa se llenó de risas, dibujos y viajes largos. Fue lo mejor que te pasó.", "Una noche de lluvia, volviendo a casa, hubo un accidente. Ellas no regresaron. Desde entonces la casa sigue igual, pero tú no.", "Esta es la habitación 13. Aquí nada es seguro, pero todo puede observarse. Mira con calma, decide con cuidado.")
+epilogue_pages = PackedStringArray("Saliste de la habitación. La casa sigue igual, pero has mirado lo que evitabas.", "No tienes que cargar solo con lo que duele. Hablarlo, pedir ayuda y recordar con cariño también es avanzar.")
+corridor_cards = PackedStringArray("El acoso no es «cosas de niños»: son agresiones repetidas y sus efectos pueden durar años.", "Quien mira y calla también influye. Apoyar a la víctima y avisar a un adulto de confianza ayuda.", "El duelo no tiene plazo ni camino recto: tristeza, rabia y alivio pueden alternarse.", "Tras una pérdida es común sentir culpa, incluso sin haber hecho nada malo. Hablarlo la alivia.", "Aislarse suele empeorar el dolor. Contarle a alguien de confianza ayuda a sostenerlo.", "Comer, dormir y moverte también es cuidarte. Descuidarte durante semanas es una señal para pedir apoyo.", "Los recuerdos felices no desaparecen con la pérdida: siguen siendo parte de ti.", "Pedir ayuda no es debilidad. Un profesional de la salud mental puede acompañarte.", "Con tiempo y apoyo, mucha gente vuelve a sentir calma. Mejorar es posible.", "Tu vida no se resume en tus peores momentos.")
+closing_card = "Has llegado hasta aquí. Antes de salir, mira lo que recuerdas."
+results_memories_line = "Recuerdos de objeto encontrados: %d de %d."
+fair_pause_hint = "Si ya has jugado un rato, puedes terminar y responder la trivia final."
+fair_finish_button = "TERMINAR Y EVALUAR"
+fair_finish_confirm = "¿Terminar la partida y responder la trivia final? No podrás volver a la habitación."
+fair_menu_confirm = "Si sales ahora, no responderás la trivia final y tu sesión se cerrará."
+fair_menu_accept = "SALIR AL MENÚ"
+fair_keep_playing = "SEGUIR JUGANDO"
+early_finish_page = "Has decidido terminar aquí. Antes de salir, responde las mismas preguntas del principio con lo que recuerdes."
+survey_title = "Tu opinión"
+survey_ids = PackedStringArray("u1", "u2", "u3", "u4", "l1", "l2", "r1")
+survey_texts = PackedStringArray("Entendí fácilmente cómo se juega.", "Los controles respondieron bien.", "El apartado visual y sonoro me pareció coherente y atractivo.", "La dificultad me pareció adecuada.", "Aprendí algo nuevo sobre acoso, duelo o salud mental.", "El juego me hizo reflexionar.", "Recomendaría el juego a otras personas.")
+survey_scale_hint = "1 = totalmente en desacuerdo · 5 = totalmente de acuerdo. Todos los ítems son obligatorios."
+survey_comment_prompt = "¿Quieres añadir algo? (opcional)"
+help_title = "Si necesitas apoyo"
+help_button = "VOLVER AL MENÚ"
+help_text = "Si lo que viste te removió algo, no tienes que cargarlo solo. Habla con una persona de confianza o con un profesional de la salud mental. Si estás en peligro o ante una emergencia, llama de inmediato al número de emergencias de tu país."
+help_lines = PackedStringArray()
+thanks_text = "Gracias por participar."
+howto_title = "Cómo jugar"
+howto_goal = "Observa bien la habitación de referencia. En cada habitación nueva decide si algo ha cambiado o si todo está igual, y cruza la puerta cuando se abra."
+howto_controls = PackedStringArray("Moverte: {mover}.", "Inspeccionar un objeto o la puerta: acércate y pulsa {interactuar}. Vuelve a pulsarlo para cerrar el mensaje.", "Decidir: pulsa {decidir_hay} para HAY ANOMALÍA o {decidir_no_hay} para NO HAY ANOMALÍA (o haz clic en los botones).", "Tras acertar una anomalía, examina el objeto: puede guardar un recuerdo.", "Pantalla completa: {pantalla_completa}.", "Pausa, volumen y salida al menú: {pausa}.")
+howto_rule = "Si fallas, vuelves a empezar desde la habitación de referencia."

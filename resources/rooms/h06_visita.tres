@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_nm3h5"]
+
+[resource]
+script = ExtResource("1_nm3h5")
+id = "visita_6"
+display_name = "Cuanto más la miras, más parece que la habitación te mira a ti"
+order = 5
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "Cuanto más la miras, más parece que la habitación te mira a ti"

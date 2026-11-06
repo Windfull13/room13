@@ -1,0 +1,57 @@
+{
+	"simulated": true,
+	"participant_id": "5eed0008",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:07:00",
+	"finished_at": "2026-01-01T10:27:30",
+	"completed": true,
+	"attempts": 4,
+	"play_seconds": 775.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 3,
+			"q03_duelo": 1,
+			"q04_culpa": 2,
+			"q05_apoyo": -1,
+			"q06_autocuidado": 1,
+			"q07_accidente": 2,
+			"q08_infancia": 0
+		},
+		"score": 2
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 3,
+			"q03_duelo": 1,
+			"q04_culpa": 2,
+			"q05_apoyo": 3,
+			"q06_autocuidado": 1,
+			"q07_accidente": 2,
+			"q08_infancia": 0
+		},
+		"score": 2
+	},
+	"gain": 0,
+	"normalized_gain": 0.0,
+	"survey": {
+		"u1": 4,
+		"u2": 5,
+		"u3": 3,
+		"u4": 4,
+		"l1": 5,
+		"l2": 3,
+		"r1": 4,
+		"comment": ""
+	},
+	"memories_found": [
+		"muneca_en_el_suelo",
+		"caja_de_musica"
+	],
+	"cinematic_skipped": true,
+	"finish_type": "completo",
+	"max_round_reached": 10,
+	"ended_early": false
+}

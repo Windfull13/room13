@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_4llwk"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_7kb47"]
+
+[sub_resource type="Resource" id="Resource_mbywk"]
+script = ExtResource("1_4llwk")
+target_node = "Doll"
+
+[resource]
+script = ExtResource("2_7kb47")
+id = "muneca_en_el_suelo"
+display_name = "Una muñeca en el suelo"
+description = "Una muñeca de trapo descansa tranquilamente en el suelo."
+meaning = "Un objeto que guarda más ternura que dolor."
+modifications = [SubResource("Resource_mbywk")]
+focus_object = "muneca"
+difficulty = 1
+theme = 15
+tell = "muñeca de trapo en el suelo"

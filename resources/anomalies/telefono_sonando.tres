@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[resource]
+script = ExtResource("2_dat")
+id = "telefono_sonando"
+display_name = "El teléfono suena"
+description = "El teléfono de la mesa suena y vibra sobre la madera. Nadie lo ha descolgado."
+meaning = "Alguien aún quiere hablar contigo."
+is_dangerous = false
+focus_object = "telefono"
+difficulty = 0
+theme = 8
+tell = "suena el teléfono, vibra y parpadea una lucecita roja"
+ambience = "telefono_suena"

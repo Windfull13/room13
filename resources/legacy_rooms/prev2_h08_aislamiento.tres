@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_6u3h4"]
+
+[resource]
+script = ExtResource("1_6u3h4")
+id = "aislamiento"
+display_name = "Aislamiento"
+order = 7
+scene_path = "res://scenes/rooms/habitacion_08_aislamiento.tscn"
+narrative_clue = "Demasiado vacío para ser una habitación habitada."

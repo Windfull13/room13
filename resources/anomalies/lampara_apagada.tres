@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_37ock"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_vw0qv"]
+
+[sub_resource type="Resource" id="Resource_i3nrw"]
+script = ExtResource("1_37ock")
+mode = 5
+target_node = "Lamp"
+color = Color(0.3, 0.3, 0.36, 1)
+
+[resource]
+script = ExtResource("2_vw0qv")
+id = "lampara_apagada"
+display_name = "La lámpara está apagada"
+description = "La lámpara que siempre estaba encendida ahora está muerta y fría."
+meaning = "Una luz puesta donde nadie va a usarla."
+modifications = [SubResource("Resource_i3nrw")]
+focus_object = "lampara"
+difficulty = 0
+theme = 10
+tell = "la lámpara está apagada"

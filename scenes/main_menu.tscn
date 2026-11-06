@@ -1,0 +1,281 @@
+[gd_scene format=3 uid="uid://yv160qbo3gnf"]
+
+[ext_resource type="Script" uid="uid://bwh4g10gxa5qq" path="res://scripts/main_menu.gd" id="1_mm"]
+[ext_resource type="PackedScene" path="res://scenes/ui/volume_control.tscn" id="3_vol"]
+[ext_resource type="Script" uid="uid://gcdyl487tedt" path="res://scripts/ui/menu_tableau.gd" id="4_tableau"]
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0.3, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.85)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+width = 256
+height = 144
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.22, 0.17, 0.14, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="MainMenu" type="Control" unique_id=586332638]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mm")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=264525871]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.022, 0.03, 1)
+
+[node name="Vignette" type="TextureRect" parent="." unique_id=903044684]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+
+[node name="MainScreen" type="Control" parent="." unique_id=863098711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="MainScreen" unique_id=1139726688]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 40.0
+offset_right = 640.0
+offset_bottom = 270.0
+theme_type_variation = &"Titulo"
+theme_override_colors/font_shadow_color = Color(0.45, 0.06, 0.06, 0.75)
+theme_override_constants/line_spacing = -14
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 92
+text = "La Habitación
+13"
+
+[node name="Subtitle" type="Label" parent="MainScreen" unique_id=2055600589]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 290.0
+offset_right = 640.0
+offset_bottom = 332.0
+theme_override_colors/font_color = Color(0.62, 0.6, 0.62, 1)
+theme_override_font_sizes/font_size = 30
+text = "Observa. Recuerda. Decide."
+
+[node name="MenuColumn" type="Control" parent="MainScreen" unique_id=460100145]
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 344.0
+offset_right = 500.0
+offset_bottom = 676.0
+mouse_filter = 2
+
+[node name="StartButton" type="Button" parent="MainScreen/MenuColumn" unique_id=1589606987]
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 28
+text = "INICIAR PARTIDA"
+alignment = 0
+
+[node name="HowToButton" type="Button" parent="MainScreen/MenuColumn" unique_id=1388131061]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 380.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 28
+text = "CÓMO JUGAR"
+alignment = 0
+
+[node name="OptionsButton" type="Button" parent="MainScreen/MenuColumn" unique_id=1976849857]
+layout_mode = 0
+offset_top = 132.0
+offset_right = 380.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 28
+text = "OPCIONES"
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="MainScreen/MenuColumn" unique_id=526769923]
+layout_mode = 0
+offset_top = 198.0
+offset_right = 380.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 28
+text = "CRÉDITOS"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="MainScreen/MenuColumn" unique_id=288317762]
+layout_mode = 0
+offset_top = 264.0
+offset_right = 380.0
+offset_bottom = 326.0
+theme_override_font_sizes/font_size = 28
+text = "SALIR"
+alignment = 0
+
+[node name="ContentWarning" type="Label" parent="MainScreen" unique_id=678239380]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 682.0
+offset_right = 640.0
+offset_bottom = 714.0
+theme_override_colors/font_color = Color(0.5, 0.48, 0.5, 1)
+theme_override_font_sizes/font_size = 20
+text = "Este juego trata temas de duelo, acoso y salud mental."
+
+[node name="TableauView" type="SubViewportContainer" parent="MainScreen" unique_id=367801486]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 54.0
+offset_right = 1224.0
+offset_bottom = 654.0
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="MainScreen/TableauView" unique_id=542714324]
+handle_input_locally = false
+size = Vector2i(560, 600)
+render_target_update_mode = 4
+
+[node name="Tableau" type="Node2D" parent="MainScreen/TableauView/Viewport" unique_id=257886027]
+script = ExtResource("4_tableau")
+
+[node name="TableauFrame" type="Panel" parent="MainScreen" unique_id=1931941696]
+layout_mode = 0
+offset_left = 658.0
+offset_top = 48.0
+offset_right = 1230.0
+offset_bottom = 660.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="OptionsScreen" type="CenterContainer" parent="." unique_id=1586910742]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="OptionsScreen" unique_id=1347138457]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="OptionsScreen/Panel" unique_id=479831031]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Title" type="Label" parent="OptionsScreen/Panel/Box" unique_id=429399586]
+layout_mode = 2
+theme_type_variation = &"Titulo"
+theme_override_font_sizes/font_size = 52
+text = "Opciones"
+horizontal_alignment = 1
+
+[node name="VolumeControl" parent="OptionsScreen/Panel/Box" unique_id=309259716 instance=ExtResource("3_vol")]
+layout_mode = 2
+
+[node name="FullscreenCheck" type="CheckBox" parent="OptionsScreen/Panel/Box" unique_id=1607879775]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "PANTALLA COMPLETA (F11)"
+
+[node name="ResultsFolderButton" type="Button" parent="OptionsScreen/Panel/Box" unique_id=98339774]
+custom_minimum_size = Vector2(440, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "ABRIR CARPETA DE RESULTADOS"
+
+[node name="FolderNotice" type="Label" parent="OptionsScreen/Panel/Box" unique_id=1872149146]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 0.66, 0.38, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="OptionsScreen/Panel/Box" unique_id=1566772367]
+custom_minimum_size = Vector2(300, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "VOLVER"
+
+[node name="CreditsScreen" type="CenterContainer" parent="." unique_id=124090871]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="CreditsScreen" unique_id=1017685596]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="CreditsScreen/Panel" unique_id=778921288]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CreditsScreen/Panel/Box" unique_id=183126390]
+layout_mode = 2
+theme_type_variation = &"Titulo"
+theme_override_font_sizes/font_size = 52
+text = "Créditos"
+horizontal_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="CreditsScreen/Panel/Box" unique_id=1025465299]
+custom_minimum_size = Vector2(900, 350)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Text" type="RichTextLabel" parent="CreditsScreen/Panel/Box/Scroll" unique_id=1733391592]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.85, 0.85, 0.88, 1)
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+bbcode_enabled = true
+fit_content = true
+
+[node name="BackButton" type="Button" parent="CreditsScreen/Panel/Box" unique_id=774202935]
+custom_minimum_size = Vector2(300, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "VOLVER"

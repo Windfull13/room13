@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "MusicBox"
+
+[resource]
+script = ExtResource("2_dat")
+id = "caja_de_musica"
+display_name = "Una caja de música"
+description = "Una cajita sobre el escritorio deja oír una melodía tenue, lejana, de otra época de la casa."
+meaning = "Una melodía de cuando la casa estaba llena."
+is_dangerous = false
+modifications = [SubResource("Resource_m0")]
+focus_object = "escritorio"
+difficulty = 1
+theme = 6
+tell = "melodía tenue y una cajita sobre el escritorio"
+ambience = "caja_musica"

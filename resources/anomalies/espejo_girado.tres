@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_04fw7"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_wmca4"]
+
+[sub_resource type="Resource" id="Resource_1qr66"]
+script = ExtResource("1_04fw7")
+mode = 0
+target_node = "Mirror"
+rotation_degrees = 180.0
+
+[resource]
+script = ExtResource("2_wmca4")
+id = "espejo_girado"
+display_name = "El espejo del revés"
+description = "El espejo está girado sobre sí mismo, lo cual es imposible."
+meaning = "Una imagen de ti que no te corresponde."
+modifications = [SubResource("Resource_1qr66")]
+focus_object = "espejo"
+difficulty = 0
+theme = 13
+tell = "el espejo está dado la vuelta"

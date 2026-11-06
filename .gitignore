@@ -1,0 +1,15 @@
+# Godot
+.godot/
+*.translation
+
+# Exportaciones locales (el .exe va en una Release, no en el repositorio)
+build/
+
+# Plugin de editor y temporales
+addons/ziva_agent/
+*.TMP
+*.tmp
+
+# Sistema
+Thumbs.db
+.DS_Store

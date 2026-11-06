@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_x6xf0"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_i2feh"]
+
+[sub_resource type="Resource" id="Resource_g36v3"]
+script = ExtResource("1_x6xf0")
+target_node = "Keys"
+
+[resource]
+script = ExtResource("2_i2feh")
+id = "llaves_en_el_suelo"
+display_name = "Unas llaves en el suelo"
+description = "Un manojo de llaves descansa en el suelo, junto a la puerta que nunca cruzaste."
+meaning = "Una salida que estuvo en tu mano."
+modifications = [SubResource("Resource_g36v3")]
+focus_object = "llaves"
+difficulty = 1
+theme = 2
+tell = "llaves junto a la puerta"

@@ -1,0 +1,43 @@
+extends RefCounted
+
+## Tema común de la interfaz (HUD y menú principal): botones bien
+## distinguibles en sus estados normal, hover, pulsado y deshabilitado.
+
+const BUTTON_MARGIN_X := 28
+const BUTTON_MARGIN_Y := 16
+const BORDER_WIDTH := 2
+const CORNER_RADIUS := 8
+const PANEL_MARGIN := 36
+
+
+static func build() -> Theme:
+	var theme := Theme.new()
+	theme.set_stylebox("normal", "Button", _box(Color(0.09, 0.10, 0.13, 0.92), Color(0.50, 0.53, 0.60), BUTTON_MARGIN_X, BUTTON_MARGIN_Y))
+	theme.set_stylebox("hover", "Button", _box(Color(0.17, 0.19, 0.25, 0.96), Color(0.75, 0.80, 0.90), BUTTON_MARGIN_X, BUTTON_MARGIN_Y))
+	theme.set_stylebox("focus", "Button", _box(Color(0, 0, 0, 0), Color(0.85, 0.75, 0.55), BUTTON_MARGIN_X, BUTTON_MARGIN_Y))
+	theme.set_stylebox("pressed", "Button", _box(Color(0.04, 0.05, 0.07, 0.98), Color(0.60, 0.65, 0.75), BUTTON_MARGIN_X, BUTTON_MARGIN_Y))
+	theme.set_stylebox("disabled", "Button", _box(Color(0.07, 0.07, 0.08, 0.55), Color(0.24, 0.25, 0.29), BUTTON_MARGIN_X, BUTTON_MARGIN_Y))
+	theme.set_color("font_color", "Button", Color(0.90, 0.90, 0.92))
+	theme.set_color("font_hover_color", "Button", Color(1, 1, 1))
+	theme.set_color("font_focus_color", "Button", Color(1, 1, 1))
+	theme.set_color("font_pressed_color", "Button", Color(0.80, 0.80, 0.85))
+	theme.set_color("font_disabled_color", "Button", Color(0.45, 0.46, 0.50))
+	return theme
+
+
+## Panel oscuro de los menús (opciones, créditos).
+static func panel_style() -> StyleBoxFlat:
+	return _box(Color(0.03, 0.03, 0.05, 0.94), Color(0.32, 0.30, 0.36), PANEL_MARGIN, PANEL_MARGIN)
+
+
+static func _box(background: Color, border: Color, margin_x: int, margin_y: int) -> StyleBoxFlat:
+	var box := StyleBoxFlat.new()
+	box.bg_color = background
+	box.border_color = border
+	box.set_border_width_all(BORDER_WIDTH)
+	box.set_corner_radius_all(CORNER_RADIUS)
+	box.content_margin_left = margin_x
+	box.content_margin_right = margin_x
+	box.content_margin_top = margin_y
+	box.content_margin_bottom = margin_y
+	return box

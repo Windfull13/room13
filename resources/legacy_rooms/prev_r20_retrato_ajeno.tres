@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/retrato_ajeno.tres" id="1_58qle"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_ap24i"]
+
+[resource]
+script = ExtResource("2_ap24i")
+id = "room_retrato_ajeno"
+display_name = "Un rostro desconocido"
+order = 20
+anomaly = ExtResource("1_58qle")
+narrative_clue = "En la fotografía familiar hay alguien de más."

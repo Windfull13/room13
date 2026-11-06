@@ -1,0 +1,364 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scripts/room.gd" id="1_6bn4p"]
+[ext_resource type="TileSet" path="res://resources/floor_tileset.tres" id="2_matvf"]
+[ext_resource type="TileSet" path="res://resources/wall_tileset.tres" id="3_k085j"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_door.png" id="4_6h6rg"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="5_xluuw"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_window_c.png" id="6_uyxqq"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_clock_normal.png" id="7_5qebt"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_counter.png" id="8_co68k"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_table_c.png" id="9_i7q1y"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_chair_c.png" id="10_hv4aa"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_shelf_c.png" id="11_x8ipn"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_plant_c.png" id="12_36g0p"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_monster_witness.png" id="13_vtcyb"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_handprint.png" id="14_yoicg"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_keys.png" id="15_mme4b"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_letter_c.png" id="16_py32k"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_pills_c.png" id="17_n4a5n"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_spider.png" id="18_kjcdi"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_doll.png" id="19_2eynb"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_drawing.png" id="20_q2rcn"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_wife_photo.png" id="21_adw8v"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_crow_c.png" id="22_afyjb"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_white.png" id="23_enkqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k24e"]
+size = Vector2(130, 140)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ardvg"]
+radius = 135.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urgis"]
+size = Vector2(230, 110)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_85fr8"]
+radius = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ocx0n"]
+radius = 70.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgpuf"]
+size = Vector2(370, 140)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1kj5v"]
+radius = 130.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x70i1"]
+size = Vector2(370, 140)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhis8"]
+radius = 130.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekfst"]
+size = Vector2(300, 140)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p1pkx"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikkrf"]
+size = Vector2(120, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xr0ik"]
+radius = 80.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f68wy"]
+size = Vector2(170, 210)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xahk1"]
+radius = 95.0
+
+[node name="Habitacion04" type="Node2D" unique_id=345945406]
+script = ExtResource("1_6bn4p")
+
+[node name="World" type="Node2D" parent="." unique_id=1342093699]
+y_sort_enabled = true
+
+[node name="Floor" type="TileMapLayer" parent="World" unique_id=1362754205]
+z_index = -20
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAAPAAIAAAAAAAAAAAAQAAIAAAAAAAAAAAARAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAAQAAMAAAAAAAAAAAARAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAARAAQAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAALAAUAAAAAAAAAAAAMAAUAAAAAAAAAAAANAAUAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAAUAAAAAAAAAAAAQAAUAAAAAAAAAAAARAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAYAAAAAAAAAAAAQAAYAAAAAAAAAAAARAAYAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAOAAcAAAAAAAAAAAAPAAcAAAAAAAAAAAAQAAcAAAAAAAAAAAARAAcAAAAAAAAAAAACAAgAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAANAAgAAAAAAAAAAAAOAAgAAAAAAAAAAAAPAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAARAAgAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAA=")
+tile_set = ExtResource("2_matvf")
+
+[node name="Walls" type="TileMapLayer" parent="World" unique_id=1908516746]
+z_index = -20
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAASAAAAAAAAAAAAAAATAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAALAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAASAAIAAAAAAAAAAAATAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAASAAQAAAAAAAAAAAATAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAASAAUAAAAAAAAAAAATAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAASAAYAAAAAAAAAAAATAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAASAAcAAAAAAAAAAAATAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAABAAgAAAAAAAAAAAASAAgAAAAAAAAAAAATAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAASAAkAAAAAAAAAAAATAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAABAAsAAAAAAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAsAAAAAAAAAAAANAAsAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAsAAAAAAAAAAAASAAsAAAAAAAAAAAATAAsAAAAAAAAAAAA=")
+tile_set = ExtResource("3_k085j")
+
+[node name="Door" type="StaticBody2D" parent="World" unique_id=132666783]
+position = Vector2(640, 210)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Door" unique_id=617743617]
+position = Vector2(0, -80)
+scale = Vector2(2, 2)
+texture = ExtResource("4_6h6rg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Door" unique_id=106082424]
+position = Vector2(0, -70)
+shape = SubResource("RectangleShape2D_5k24e")
+
+[node name="Interactable" type="Area2D" parent="World/Door" unique_id=1454009758]
+position = Vector2(0, 20)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Puerta"
+prompt_verb = "Cruzar"
+message = "La puerta está entreabierta."
+action_id = "door_continue"
+action_button_text = "CRUZAR LA PUERTA"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Door/Interactable" unique_id=24934333]
+shape = SubResource("CircleShape2D_ardvg")
+
+[node name="Window" type="StaticBody2D" parent="World" unique_id=275598721]
+position = Vector2(900, 190)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Window" unique_id=887625670]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("6_uyxqq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Window" unique_id=1216541913]
+position = Vector2(0, -55)
+shape = SubResource("RectangleShape2D_urgis")
+
+[node name="Interactable" type="Area2D" parent="World/Window" unique_id=808075337]
+position = Vector2(0, 40)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Ventana"
+message = "Fuera está oscuro. La luna apenas ilumina el patio. Las cortinas están medio descorridas."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Window/Interactable" unique_id=236911099]
+shape = SubResource("CircleShape2D_85fr8")
+
+[node name="Clock" type="Node2D" parent="World" unique_id=1413217577]
+position = Vector2(1104, 250)
+
+[node name="Sprite" type="Sprite2D" parent="World/Clock" unique_id=1200898220]
+scale = Vector2(2, 2)
+texture = ExtResource("7_5qebt")
+
+[node name="Interactable" type="Area2D" parent="World/Clock" unique_id=855178430]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Reloj"
+message = "El viejo reloj de pared. Sus agujas se mueven con un tic-tac lento y constante."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Clock/Interactable" unique_id=1520138519]
+shape = SubResource("CircleShape2D_ocx0n")
+
+[node name="Counter" type="StaticBody2D" parent="World" unique_id=1770758282]
+position = Vector2(320, 320)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Counter" unique_id=1876703195]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("8_co68k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Counter" unique_id=852245867]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_lgpuf")
+
+[node name="Interactable" type="Area2D" parent="World/Counter" unique_id=414681228]
+position = Vector2(0, -10)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Encimera"
+message = "La encimera de la cocina. Hay un plato sucio esperando a alguien que no va a volver a comer aquí."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Counter/Interactable" unique_id=1273534891]
+shape = SubResource("CircleShape2D_1kj5v")
+
+[node name="@StaticBody2D@2" type="StaticBody2D" parent="World" unique_id=1090428114]
+position = Vector2(900, 320)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/@StaticBody2D@2" unique_id=1842912572]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("8_co68k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/@StaticBody2D@2" unique_id=555693784]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_x70i1")
+
+[node name="Interactable" type="Area2D" parent="World/@StaticBody2D@2" unique_id=1509965932]
+position = Vector2(0, -10)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Encimera"
+message = "La encimera de la cocina. Hay un plato sucio esperando a alguien que no va a volver a comer aquí."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/@StaticBody2D@2/Interactable" unique_id=1896860386]
+shape = SubResource("CircleShape2D_bhis8")
+
+[node name="Table" type="StaticBody2D" parent="World" unique_id=503062886]
+position = Vector2(620, 540)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Table" unique_id=1357031463]
+position = Vector2(0, -56)
+scale = Vector2(2, 2)
+texture = ExtResource("9_i7q1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Table" unique_id=11585404]
+position = Vector2(0, -50)
+shape = SubResource("RectangleShape2D_ekfst")
+
+[node name="Interactable" type="Area2D" parent="World/Table" unique_id=1820707795]
+position = Vector2(0, -10)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Mesa"
+message = "Una mesa de madera gastada. Tiene marcas de tazas que nadie ha limpiado."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Table/Interactable" unique_id=1411688218]
+shape = SubResource("CircleShape2D_p1pkx")
+
+[node name="Chair" type="StaticBody2D" parent="World" unique_id=943990050]
+position = Vector2(780, 590)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Chair" unique_id=1806845480]
+position = Vector2(0, -80)
+scale = Vector2(2, 2)
+texture = ExtResource("10_hv4aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Chair" unique_id=407888525]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_ikkrf")
+
+[node name="Interactable" type="Area2D" parent="World/Chair" unique_id=1287307512]
+position = Vector2(0, -20)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Silla"
+message = "Una silla de madera. Normalmente está junto al escritorio, mirando hacia él."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Chair/Interactable" unique_id=672793037]
+shape = SubResource("CircleShape2D_xr0ik")
+
+[node name="Shelf" type="StaticBody2D" parent="World" unique_id=620496946]
+position = Vector2(224, 500)
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="World/Shelf" unique_id=602924059]
+position = Vector2(0, -112)
+scale = Vector2(2, 2)
+texture = ExtResource("11_x8ipn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Shelf" unique_id=1232157614]
+position = Vector2(0, -105)
+shape = SubResource("RectangleShape2D_f68wy")
+
+[node name="Interactable" type="Area2D" parent="World/Shelf" unique_id=1496318174]
+position = Vector2(0, -20)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_xluuw")
+display_name = "Estantería"
+message = "Una estantería con libros y cajas. Algunos lomos no se han abierto en años."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Shelf/Interactable" unique_id=517330884]
+shape = SubResource("CircleShape2D_xahk1")
+
+[node name="Plant" type="Sprite2D" parent="World" unique_id=1468370242]
+position = Vector2(1090, 576)
+scale = Vector2(2, 2)
+texture = ExtResource("12_36g0p")
+
+[node name="Figure2" type="Sprite2D" parent="World" unique_id=1862866317]
+visible = false
+position = Vector2(640, 340)
+scale = Vector2(2, 2)
+texture = ExtResource("13_vtcyb")
+
+[node name="Handprint" type="Sprite2D" parent="World" unique_id=2037292051]
+visible = false
+position = Vector2(770, 210)
+scale = Vector2(2, 2)
+texture = ExtResource("14_yoicg")
+
+[node name="Keys" type="Sprite2D" parent="World" unique_id=1675661756]
+visible = false
+position = Vector2(680, 600)
+scale = Vector2(2, 2)
+texture = ExtResource("15_mme4b")
+
+[node name="Letter" type="Sprite2D" parent="World" unique_id=106666703]
+visible = false
+position = Vector2(620, 500)
+scale = Vector2(2, 2)
+texture = ExtResource("16_py32k")
+
+[node name="Pills" type="Sprite2D" parent="World" unique_id=1484124359]
+visible = false
+position = Vector2(780, 400)
+scale = Vector2(2, 2)
+texture = ExtResource("17_n4a5n")
+
+[node name="Spider" type="Sprite2D" parent="World" unique_id=1576052104]
+visible = false
+position = Vector2(540, 608)
+scale = Vector2(2, 2)
+texture = ExtResource("18_kjcdi")
+
+[node name="Doll" type="Sprite2D" parent="World" unique_id=93241279]
+visible = false
+position = Vector2(330, 584)
+scale = Vector2(2, 2)
+texture = ExtResource("19_2eynb")
+
+[node name="Drawing" type="Sprite2D" parent="World" unique_id=1838128378]
+visible = false
+position = Vector2(400, 40)
+scale = Vector2(2, 2)
+texture = ExtResource("20_q2rcn")
+
+[node name="WifePhoto" type="Sprite2D" parent="World" unique_id=1021177787]
+visible = false
+position = Vector2(1080, 330)
+scale = Vector2(2, 2)
+texture = ExtResource("21_adw8v")
+
+[node name="WindowFigure" type="Sprite2D" parent="World" unique_id=1448115576]
+visible = false
+position = Vector2(900, 260)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("13_vtcyb")
+
+[node name="Crow" type="Sprite2D" parent="World" unique_id=1255372835]
+visible = false
+position = Vector2(840, 180)
+scale = Vector2(2, 2)
+texture = ExtResource("22_afyjb")
+
+[node name="Darkness" type="Sprite2D" parent="World" unique_id=79265973]
+visible = false
+modulate = Color(0, 0, 0, 0.82)
+z_index = 50
+position = Vector2(640, 384)
+scale = Vector2(160, 96)
+texture = ExtResource("23_enkqp")
+
+[node name="PlayerSpawn" type="Node2D" parent="World" unique_id=1294532544]
+position = Vector2(640, 340)
+
+[node name="MonsterSpawn1" type="Node2D" parent="World" unique_id=960877618]
+position = Vector2(640, 330)
+
+[node name="MonsterSpawn2" type="Node2D" parent="World" unique_id=552825714]
+position = Vector2(500, 600)

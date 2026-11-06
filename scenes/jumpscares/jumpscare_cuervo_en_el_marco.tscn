@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scripts/jumpscares/jumpscare_cuervo_en_el_marco.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_white.png" id="3_white"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_crow_c.png" id="4_crow"]
+
+[node name="Jumpscare" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+duration = 1.4
+flash_color = Color(0.45, 0.45, 0.5, 1)
+sound_name = "jumpscare_cuervo"
+
+[node name="Fondo" type="Sprite2D" parent="Visual"]
+modulate = Color(0.09, 0.09, 0.115, 1)
+position = Vector2(640, 360)
+scale = Vector2(170, 100)
+texture = ExtResource("3_white")
+
+[node name="Marco" type="Sprite2D" parent="Visual"]
+modulate = Color(0.13, 0.09, 0.07, 1)
+position = Vector2(930, 270)
+scale = Vector2(24, 20)
+texture = ExtResource("3_white")
+
+[node name="Cuervo" type="Sprite2D" parent="Visual"]
+position = Vector2(930, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("4_crow")

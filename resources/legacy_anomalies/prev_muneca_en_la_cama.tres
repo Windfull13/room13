@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_gu7ic"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_gd8ah"]
+
+[sub_resource type="Resource" id="Resource_8q0y7"]
+script = ExtResource("1_gu7ic")
+mode = 4
+target_node = "Doll"
+position = Vector2(250, 320)
+
+[sub_resource type="Resource" id="Resource_uerdc"]
+script = ExtResource("1_gu7ic")
+target_node = "Doll"
+
+[resource]
+script = ExtResource("2_gd8ah")
+id = "muneca_en_la_cama"
+display_name = "Una muñeca sobre la cama"
+description = "Una muñeca de trapo descansa tranquilamente sobre la cama."
+meaning = "Un objeto que guarda más ternura que dolor."
+modifications = [SubResource("Resource_8q0y7"), SubResource("Resource_uerdc")]

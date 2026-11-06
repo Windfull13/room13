@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/generated/anomaly_guest.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+id = "guest"
+display_name = "El Huésped"
+description = "Una mano pálida y alargada asoma desde la oscuridad bajo la cama."
+meaning = "Negación y evitación de problemas dolorosos."
+overlay_texture = ExtResource("2_t")
+overlay_position = Vector2(175, 545)
+overlay_scale = Vector2(0.5, 0.5)
+overlay_modulate = Color(1, 1, 1, 1)
+is_dangerous = false

@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scripts/jumpscares/jumpscare_figura_ventana.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_white.png" id="3_white"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_window_c.png" id="4_window"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_face_window.png" id="5_face"]
+
+[node name="Jumpscare" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+duration = 1.3
+flash_color = Color(0.72, 0.82, 1, 1)
+sound_name = "jumpscare_ventana"
+
+[node name="Fondo" type="Sprite2D" parent="Visual"]
+modulate = Color(0.02, 0.03, 0.07, 1)
+position = Vector2(640, 360)
+scale = Vector2(170, 100)
+texture = ExtResource("3_white")
+
+[node name="Ventana" type="Sprite2D" parent="Visual"]
+position = Vector2(640, 360)
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("4_window")
+
+[node name="Rostro" type="Sprite2D" parent="Visual"]
+position = Vector2(640, 345)
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("5_face")
+
+[node name="Cristal" type="Sprite2D" parent="Visual"]
+modulate = Color(0.7, 0.8, 1, 0.12)
+position = Vector2(640, 360)
+scale = Vector2(120, 60)
+texture = ExtResource("3_white")

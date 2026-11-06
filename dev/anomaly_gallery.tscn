@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://dev/anomaly_gallery.gd" id="1_gallery"]
+
+[node name="AnomalyGallery" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_gallery")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.03, 0.03, 0.04, 1)
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="List" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 548.0
+offset_bottom = 712.0
+horizontal_scroll_mode = 0
+
+[node name="Rows" type="VBoxContainer" parent="List"]
+layout_mode = 2
+
+[node name="Info" type="Label" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 420.0
+offset_right = 1270.0
+offset_bottom = 712.0
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3

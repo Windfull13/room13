@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scripts/jumpscares/jumpscare_testigo_esquina.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_white.png" id="3_white"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_watcher_corner.png" id="4_watcher"]
+
+[node name="Jumpscare" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+duration = 1.4
+flash_color = Color(0.45, 0.06, 0.06, 1)
+sound_name = "jumpscare_testigo_esquina"
+
+[node name="Fondo" type="Sprite2D" parent="Visual"]
+modulate = Color(0.02, 0.018, 0.022, 1)
+position = Vector2(640, 360)
+scale = Vector2(170, 100)
+texture = ExtResource("3_white")
+
+[node name="Suelo" type="Sprite2D" parent="Visual"]
+modulate = Color(0.11, 0.1, 0.11, 1)
+position = Vector2(640, 620)
+scale = Vector2(160, 25)
+texture = ExtResource("3_white")
+
+[node name="Pared" type="Sprite2D" parent="Visual"]
+modulate = Color(0.16, 0.15, 0.19, 1)
+position = Vector2(1140, 260)
+scale = Vector2(35, 65)
+texture = ExtResource("3_white")
+
+[node name="Rincon" type="Sprite2D" parent="Visual"]
+modulate = Color(0.0, 0.0, 0.0, 1)
+position = Vector2(1000, 260)
+scale = Vector2(1, 65)
+texture = ExtResource("3_white")
+
+[node name="Figura" type="Sprite2D" parent="Visual"]
+modulate = Color(0.85, 0.85, 0.92, 1)
+position = Vector2(900, 470)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("4_watcher")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Resource" path="res://resources/anomalies/figura_armario.tres" id="1_p2syc"]
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="2_jfrqm"]
+
+[resource]
+script = ExtResource("2_jfrqm")
+id = "room_figura_armario"
+display_name = "Una figura en el armario"
+order = 17
+is_dangerous = true
+anomaly = ExtResource("1_p2syc")
+narrative_clue = "El armario no está del todo cerrado."

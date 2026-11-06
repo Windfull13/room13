@@ -1,0 +1,327 @@
+extends SceneTree
+
+## Aplica la composición de la habitación base sobre scenes/rooms/room_base.tscn.
+##
+##   godot --headless --path . --script res://dev/build_room_layout.gd
+##
+## La habitación es una sola pantalla compacta: pared del fondo alta (3 filas
+## de 64 px), suelo de 14×6 baldosas, paredes laterales y frontal de una fila.
+## Todo lo que cuelga de una pared se coloca sobre ella; los muebles apoyan su
+## base (el origen del nodo) en el suelo. Los números de abajo son la única
+## fuente de verdad de la distribución.
+
+const SCENE_PATH := "res://scenes/rooms/room_base.tscn"
+const WHITE := preload("res://assets/generated/px_white.png")
+const TILE := 64
+const WALL_ORIGIN := Vector2(128, 24)
+const FLOOR_ORIGIN := Vector2(192, 216)
+const FLOOR_CELLS := Vector2i(14, 6)
+const WALL_CELLS := Vector2i(16, 10)
+const BACK_WALL_ROWS := 3
+const FLOOR_RECT := Rect2(192, 216, 896, 384)
+const FURNITURE_SCALE := 1.3
+const SPRITES := "res://assets/generated/"
+
+var _room: Node2D
+var _world: Node2D
+
+
+func _init() -> void:
+	await process_frame
+	_room = (load(SCENE_PATH) as PackedScene).instantiate()
+	root.add_child(_room)
+	_world = _room.get_node("World")
+	_build_shell()
+	_place_furniture()
+	_place_wall_items()
+	_place_small_items()
+	_place_hidden_things()
+	_place_markers()
+	_save()
+	quit()
+
+# ---------------------------------------------------------------------------
+# Estructura: suelo, paredes y sombras
+# ---------------------------------------------------------------------------
+
+func _build_shell() -> void:
+	var floor_layer := _world.get_node("Floor") as TileMapLayer
+	var wall_layer := _world.get_node("Walls") as TileMapLayer
+	floor_layer.position = FLOOR_ORIGIN
+	wall_layer.position = WALL_ORIGIN
+	floor_layer.clear()
+	wall_layer.clear()
+	for x in range(FLOOR_CELLS.x):
+		for y in range(FLOOR_CELLS.y):
+			floor_layer.set_cell(Vector2i(x, y), 0, Vector2i.ZERO)
+	for x in range(WALL_CELLS.x):
+		for y in range(WALL_CELLS.y):
+			var is_back := y < BACK_WALL_ROWS
+			var is_front := y == WALL_CELLS.y - 1
+			var is_side := x == 0 or x == WALL_CELLS.x - 1
+			if is_back or is_front or is_side:
+				wall_layer.set_cell(Vector2i(x, y), 0, Vector2i.ZERO)
+	_remove_old_shading()
+	_strip("WallBase", Rect2(192, 198, 896, 18), Color(0.17, 0.11, 0.09, 1.0), -15)
+	_strip("WallBaseLight", Rect2(192, 198, 896, 3), Color(0.30, 0.21, 0.16, 1.0), -15)
+	_strip("WallShadowNear", Rect2(192, 216, 896, 14), Color(0, 0, 0, 0.34), -14)
+	_strip("WallShadowFar", Rect2(192, 230, 896, 12), Color(0, 0, 0, 0.14), -14)
+	_strip("SideShadowLeft", Rect2(192, 216, 12, 384), Color(0, 0, 0, 0.22), -14)
+	_strip("SideShadowRight", Rect2(1076, 216, 12, 384), Color(0, 0, 0, 0.22), -14)
+	_strip("FrontShadow", Rect2(192, 584, 896, 16), Color(0, 0, 0, 0.26), -14)
+
+
+func _remove_old_shading() -> void:
+	for node_name in ["WallBase", "WallBaseLight", "WallShadowNear", "WallShadowFar", "SideShadowLeft", "SideShadowRight", "FrontShadow"]:
+		var old := _world.get_node_or_null(node_name)
+		if old != null:
+			_world.remove_child(old)
+			old.free()
+
+
+func _strip(node_name: String, rect: Rect2, color: Color, z: int) -> Sprite2D:
+	var strip := Sprite2D.new()
+	strip.name = node_name
+	strip.texture = WHITE
+	strip.centered = true
+	strip.position = rect.get_center()
+	strip.scale = rect.size / Vector2(WHITE.get_size())
+	strip.modulate = color
+	strip.z_index = z
+	_world.add_child(strip)
+	_adopt(strip)
+	return strip
+
+# ---------------------------------------------------------------------------
+# Muebles apoyados en el suelo y contra la pared del fondo
+# ---------------------------------------------------------------------------
+
+func _place_furniture() -> void:
+	_body("Bed", Vector2(300, 322), FURNITURE_SCALE, Vector2(200, 106), "")
+	_body("Wardrobe", Vector2(507, 304), FURNITURE_SCALE, Vector2(104, 92), "")
+	_body("Desk", Vector2(894, 316), FURNITURE_SCALE, Vector2(200, 100), "px_desk_clear.png")
+	_body("Chair", Vector2(894, 392), 1.1, Vector2(46, 30), "px_chair_back.png")
+	_body("Door", Vector2(664, 224), FURNITURE_SCALE, Vector2(96, 16), "px_door_wall.png")
+	_zone("Bed/Interactable", Vector2(300, 309), 62)
+	_zone("Wardrobe/Interactable", Vector2(507, 291), 62)
+	_zone("Desk/Interactable", Vector2(940, 340), 62)
+	_zone("Chair/Interactable", Vector2(894, 379), 52)
+	_zone("Door/Interactable", Vector2(664, 237), 88)
+	_place_door_light()
+	var rug := _world.get_node("Rug") as Node2D
+	rug.position = Vector2(650, 455)
+	rug.z_index = -10
+	(rug.get_node("Sprite") as Sprite2D).scale = Vector2.ONE * 1.6
+	(rug.get_node("Sprite") as Sprite2D).position = Vector2.ZERO
+	_place_plant()
+	_place_mirror()
+	_place_toy()
+
+
+## Un mueble: su origen es el punto de apoyo en el suelo, el sprite crece hacia
+## arriba y la colisión cubre solo la huella (la profundidad contra la pared).
+func _body(node_name: String, origin: Vector2, sprite_scale: float, footprint: Vector2, texture_file: String) -> void:
+	var body := _world.get_node(node_name) as Node2D
+	body.position = origin
+	var sprite := body.get_node("Sprite") as Sprite2D
+	if not texture_file.is_empty():
+		sprite.texture = load(SPRITES + texture_file)
+	sprite.scale = Vector2.ONE * sprite_scale
+	sprite.position = Vector2(0, -sprite.texture.get_height() * sprite_scale / 2.0)
+	var collision := body.get_node("CollisionShape2D") as CollisionShape2D
+	(collision.shape as RectangleShape2D).size = footprint
+	collision.position = Vector2(0, -footprint.y / 2.0)
+
+
+func _place_door_light() -> void:
+	var door := _world.get_node("Door")
+	var slit := door.get_node("LightSlit") as Sprite2D
+	slit.position = Vector2(33, -66)
+	slit.scale = Vector2(0.5, 14.5)
+	var spill := door.get_node("LightSpill") as Sprite2D
+	spill.position = Vector2(0, 12)
+	spill.scale = Vector2(11.5, 2.2)
+
+
+func _place_plant() -> void:
+	var plant := _world.get_node("Plant") as Sprite2D
+	plant.position = Vector2(1048, 552)
+	plant.scale = Vector2.ONE * 1.2
+	_attach_collider(plant, Vector2(0, 26), Vector2(26, 10))
+
+
+func _place_mirror() -> void:
+	var mirror := _world.get_node("Mirror") as Sprite2D
+	mirror.position = Vector2(232, 478)
+	mirror.scale = Vector2.ONE * 1.2
+	_attach_collider(mirror, Vector2(0, 30), Vector2(36, 10))
+	_zone("Mirror/Interactable", Vector2(296, 500), 52)
+
+
+func _place_toy() -> void:
+	var toy := _world.get_node("Toy") as Node2D
+	toy.position = Vector2(262, 396)
+	var sprite := toy.get_node("Sprite") as Sprite2D
+	sprite.scale = Vector2.ONE * 0.75
+	sprite.position = Vector2(0, -24)
+	_zone("Toy/Interactable", Vector2(262, 382), 46)
+
+
+## Colisión de base para un objeto de suelo que no la tenía. Está en el sprite:
+## si una anomalía lo gira, la colisión gira con él.
+func _attach_collider(sprite: Sprite2D, local_position: Vector2, size: Vector2) -> void:
+	var old := sprite.get_node_or_null("Collider")
+	if old != null:
+		sprite.remove_child(old)
+		old.free()
+	var body := StaticBody2D.new()
+	body.name = "Collider"
+	body.collision_mask = 0
+	var shape := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = size / sprite.scale.x
+	shape.shape = rect
+	shape.position = local_position
+	body.add_child(shape)
+	sprite.add_child(body)
+	_adopt(body)
+
+# ---------------------------------------------------------------------------
+# Objetos colgados de la pared
+# ---------------------------------------------------------------------------
+
+func _place_wall_items() -> void:
+	_place_window()
+	var clock := _world.get_node("Clock") as Node2D
+	clock.position = Vector2(753, 138)
+	var clock_sprite := clock.get_node("Sprite") as Sprite2D
+	clock_sprite.scale = Vector2.ONE * 1.1
+	clock_sprite.position = Vector2(0, -26.4)
+	_zone("Clock/Interactable", Vector2(753, 208), 46)
+	var phone := _world.get_node("Phone") as Sprite2D
+	phone.position = Vector2(588, 150)
+	phone.scale = Vector2.ONE * 0.8
+	_zone("Phone/Interactable", Vector2(588, 208), 44)
+	_put("Drawing", Vector2(507, 100), 1.2)
+	_put("WifePhoto", Vector2(300, 112), 1.2)
+	_put("Handprint", Vector2(690, 178), 1.0)
+
+
+func _place_window() -> void:
+	var window := _world.get_node("Window") as Node2D
+	window.position = Vector2(1000, 152)
+	var sprite := window.get_node("Sprite") as Sprite2D
+	sprite.scale = Vector2.ONE * 1.6
+	sprite.position = Vector2(0, -51.2)
+	var collision := window.get_node_or_null("CollisionShape2D")
+	if collision != null:
+		window.remove_child(collision)
+		collision.free()
+	for old_name in ["Frame", "Sill"]:
+		var old := window.get_node_or_null(old_name)
+		if old != null:
+			window.remove_child(old)
+			old.free()
+	var frame := _local_strip(window, "Frame", Rect2(-111, -118, 222, 120), Color(0.10, 0.07, 0.06, 1.0))
+	window.move_child(frame, 0)
+	_local_strip(window, "Sill", Rect2(-118, -2, 236, 10), Color(0.32, 0.25, 0.20, 1.0))
+	_zone("Window/Interactable", Vector2(1043, 176), 60)
+
+
+func _local_strip(parent: Node2D, node_name: String, rect: Rect2, color: Color) -> Sprite2D:
+	var strip := Sprite2D.new()
+	strip.name = node_name
+	strip.texture = WHITE
+	strip.position = rect.get_center()
+	strip.scale = rect.size / Vector2(WHITE.get_size())
+	strip.modulate = color
+	parent.add_child(strip)
+	_adopt(strip)
+	return strip
+
+# ---------------------------------------------------------------------------
+# Objetos pequeños: sobre el escritorio o en el suelo
+# ---------------------------------------------------------------------------
+
+func _place_small_items() -> void:
+	_on_desk("Photograph", Vector2(832, 218), 0.55, -13.2, Vector2(832, 340), 34)
+	_on_desk("Book", Vector2(872, 224), 0.5, -12.0, Vector2(872, 340), 34)
+	var lamp := _world.get_node("Lamp") as Sprite2D
+	lamp.position = Vector2(958, 194)
+	lamp.scale = Vector2.ONE * 0.7
+	lamp.z_index = 1
+	_put("Letter", Vector2(918, 212), 0.7, 1)
+	_put("Keys", Vector2(606, 500), 0.8)
+	_put("Pills", Vector2(340, 368), 0.8)
+	_put("Spider", Vector2(560, 545), 1.0)
+	_put("Doll", Vector2(610, 432), 1.0)
+	_put("Crow", Vector2(1066, 146), 1.0, 1)
+
+
+func _on_desk(node_name: String, origin: Vector2, sprite_scale: float, sprite_y: float, zone_center: Vector2, zone_radius: float) -> void:
+	var item := _world.get_node(node_name) as Node2D
+	item.position = origin
+	item.z_index = 1
+	var sprite := item.get_node("Sprite") as Sprite2D
+	sprite.scale = Vector2.ONE * sprite_scale
+	sprite.position = Vector2(0, sprite_y)
+	_zone("%s/Interactable" % node_name, zone_center, zone_radius)
+
+
+func _put(node_name: String, center: Vector2, sprite_scale: float, z: int = 0) -> void:
+	var item := _world.get_node(node_name) as Node2D
+	item.position = center
+	item.scale = Vector2.ONE * sprite_scale
+	item.z_index = z
+
+# ---------------------------------------------------------------------------
+# Entidades escondidas, puntos de aparición
+# ---------------------------------------------------------------------------
+
+func _place_hidden_things() -> void:
+	var window_figure := _world.get_node("WindowFigure") as Sprite2D
+	window_figure.position = Vector2(1000, 101)
+	window_figure.scale = Vector2.ONE * 0.85
+	window_figure.z_index = 1
+	var wardrobe_figure := _world.get_node("WardrobeFigure") as Sprite2D
+	wardrobe_figure.position = Vector2(575, 296)
+	var under_bed := _world.get_node("UnderBedFigure") as Sprite2D
+	under_bed.position = Vector2(300, 321)
+	under_bed.offset = Vector2(0, 40)
+	var desk_figure := _world.get_node("Figure2") as Sprite2D
+	desk_figure.position = Vector2(1012, 306)
+
+
+func _place_markers() -> void:
+	(_world.get_node("PlayerSpawn") as Node2D).position = Vector2(664, 520)
+	(_world.get_node("MonsterSpawn1") as Node2D).position = Vector2(1010, 306)
+	(_world.get_node("MonsterSpawn2") as Node2D).position = Vector2(427, 300)
+
+# ---------------------------------------------------------------------------
+# Ayudantes
+# ---------------------------------------------------------------------------
+
+## Zona de interacción: centro y radio en coordenadas del mundo, da igual la
+## escala del padre.
+func _zone(path: String, world_center: Vector2, world_radius: float) -> void:
+	var interactable := _world.get_node(path) as Node2D
+	interactable.global_position = world_center
+	var shape := interactable.get_node("CollisionShape2D") as CollisionShape2D
+	shape.position = Vector2.ZERO
+	(shape.shape as CircleShape2D).radius = world_radius / interactable.global_transform.get_scale().x
+
+
+func _adopt(node: Node) -> void:
+	node.owner = _room
+	for child in node.get_children():
+		_adopt(child)
+
+
+func _save() -> void:
+	root.remove_child(_room)
+	var packed := PackedScene.new()
+	var result := packed.pack(_room)
+	assert(result == OK)
+	var saved := ResourceSaver.save(packed, SCENE_PATH)
+	print("room_base.tscn guardada: ", saved == OK)
+	_room.free()

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_uhbwq"]
+[ext_resource type="Texture2D" path="res://assets/generated/px_photo_anomaly_c.png" id="2_2nh8b"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="3_2uvq2"]
+
+[sub_resource type="Resource" id="Resource_ri6vv"]
+script = ExtResource("1_uhbwq")
+mode = 1
+target_node = "Photograph/Sprite"
+texture = ExtResource("2_2nh8b")
+
+[resource]
+script = ExtResource("3_2uvq2")
+id = "foto_cambiada"
+display_name = "La fotografía ha cambiado"
+description = "Dentro del marco, los rostros sonríen de otra manera. Algo no encaja."
+meaning = "El recuerdo que la memoria deforma sin permiso."
+modifications = [SubResource("Resource_ri6vv")]
+focus_object = "foto"
+difficulty = 2
+theme = 7
+tell = "los rostros del retrato sonríen distinto"

@@ -1,0 +1,38 @@
+extends RefCounted
+# Archivado: versión antigua. Sin class_name para no chocar con
+# res://scripts/answer_evaluator.gd
+
+## Sistema de evaluación de respuestas.
+##
+## No analiza píxeles: usa los datos de la ronda (RoomData) para decidir si la
+## respuesta del jugador es correcta. Distingue respuesta correcta, incorrecta
+## y muerte, y deja la puerta abierta a reglas adicionales ampliando el enum.
+
+## Respuesta que puede dar el jugador.
+enum Answer {
+	NO_ANOMALY, ## «NO HAY ANOMALÍA».
+	ANOMALY,    ## «HAY UNA ANOMALÍA».
+}
+
+## Resultado de evaluar una respuesta.
+enum Verdict {
+	CORRECT,   ## La respuesta coincide con el estado real de la habitación.
+	INCORRECT, ## La respuesta no coincide con el estado real de la habitación.
+	DEATH,     ## Se ignoró una anomalía peligrosa: consecuencia letal.
+}
+
+## Evalúa la respuesta del jugador para una habitación concreta.
+static func evaluate(room: RoomData, answer: Answer) -> Verdict:
+	var player_claims_anomaly: bool = answer == Answer.ANOMALY
+	var room_has_anomaly: bool = room.has_anomaly()
+
+	if player_claims_anomaly == room_has_anomaly:
+		return Verdict.CORRECT
+
+	# Respuesta incorrecta. Si había una anomalía peligrosa y el jugador afirmó
+	# que no había nada, la consecuencia es letal. Reconocer la amenaza nunca
+	# es letal por sí mismo: reconocerla y sobrevivir son cosas distintas.
+	if room_has_anomaly and room.is_dangerous and not player_claims_anomaly:
+		return Verdict.DEATH
+
+	return Verdict.INCORRECT

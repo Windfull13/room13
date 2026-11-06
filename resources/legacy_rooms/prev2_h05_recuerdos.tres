@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_orfww"]
+
+[resource]
+script = ExtResource("1_orfww")
+id = "recuerdos"
+display_name = "Cuarto de recuerdos"
+order = 4
+scene_path = "res://scenes/rooms/habitacion_05_recuerdos.tscn"
+narrative_clue = "El cuarto donde se guardaban las cosas de todos."

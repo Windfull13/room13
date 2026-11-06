@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_rtyj6"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_4be61"]
+
+[sub_resource type="Resource" id="Resource_iluu0"]
+script = ExtResource("1_rtyj6")
+mode = 0
+target_node = "Phone"
+rotation_degrees = 180.0
+
+[resource]
+script = ExtResource("2_4be61")
+id = "telefono_descolgado"
+display_name = "El teléfono descolgado"
+description = "El teléfono sigue descolgado, con la línea muerta al otro lado."
+meaning = "Las llamadas que no hiciste a tiempo."
+modifications = [SubResource("Resource_iluu0")]
+focus_object = "telefono"
+difficulty = 1
+theme = 2
+tell = "teléfono descolgado y tono de línea muerta tenue"
+ambience = "linea_muerta"

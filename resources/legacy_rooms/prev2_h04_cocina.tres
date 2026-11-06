@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_n3tsk"]
+
+[resource]
+script = ExtResource("1_n3tsk")
+id = "cocina"
+display_name = "Cocina"
+order = 3
+scene_path = "res://scenes/rooms/habitacion_04_cocina.tscn"
+narrative_clue = "La cocina. Aquí siempre olía a algo."

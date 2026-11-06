@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_7es2h"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_mhrpg"]
+
+[sub_resource type="Resource" id="Resource_lb5r5"]
+script = ExtResource("1_7es2h")
+mode = 4
+target_node = "Letter"
+position = Vector2(250, 300)
+
+[sub_resource type="Resource" id="Resource_ysqek"]
+script = ExtResource("1_7es2h")
+target_node = "Letter"
+
+[resource]
+script = ExtResource("2_mhrpg")
+id = "carta_sobre_la_cama"
+display_name = "Una carta sobre la cama"
+description = "Hay una carta abierta sobre la cama. Nunca llegaste a terminarla."
+meaning = "Lo que dejaste a medias."
+modifications = [SubResource("Resource_lb5r5"), SubResource("Resource_ysqek")]

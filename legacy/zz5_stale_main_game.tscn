@@ -1,0 +1,354 @@
+[gd_scene format=3 uid="uid://cncsy73vtf5ep"]
+
+[ext_resource type="PackedScene" uid="uid://y2gxe4ntvvnc" path="res://scenes/room.tscn" id="2_room"]
+[ext_resource type="Script" uid="uid://de80b4pkqg2yr" path="res://scripts/hud.gd" id="4_hud"]
+[ext_resource type="Script" uid="uid://b3u8s8oh6dtdr" path="res://scripts/scene_transition.gd" id="5_tr"]
+
+[node name="Game" type="Node2D" unique_id=1519781980]
+
+[node name="Room" parent="." unique_id=1235865626 instance=ExtResource("2_room")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=944822015]
+script = ExtResource("4_hud")
+
+[node name="Root" type="Control" parent="HUD" unique_id=675846681]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RoundLabel" type="Label" parent="HUD/Root" unique_id=1630912904]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 18.0
+offset_right = 620.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.9, 0.9, 0.93, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 22
+
+[node name="DangerLabel" type="Label" parent="HUD/Root" unique_id=2054200429]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 18.0
+offset_right = 340.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0.95, 0.28, 0.28, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "¡NO TE ACERQUES!"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="HUD/Root" unique_id=1105790254]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -214.0
+offset_right = 340.0
+offset_bottom = -174.0
+theme_override_colors/font_color = Color(0.93, 0.93, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="MessageAnchor" type="CenterContainer" parent="HUD/Root" unique_id=1483350155]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MessagePanel" type="PanelContainer" parent="HUD/Root/MessageAnchor" unique_id=1612633526]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/MessageAnchor/MessagePanel" unique_id=1229267041]
+layout_mode = 2
+theme_override_constants/margin_left = 44
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 44
+theme_override_constants/margin_bottom = 30
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/MessageAnchor/MessagePanel/Margin" unique_id=2005429119]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MessageName" type="Label" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box" unique_id=872935132]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Objeto"
+horizontal_alignment = 1
+
+[node name="MessageText" type="Label" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box" unique_id=81364204]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MessageButtons" type="HBoxContainer" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box" unique_id=1481314010]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ActionButton" type="Button" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box/MessageButtons" unique_id=119848812]
+custom_minimum_size = Vector2(250, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Continuar"
+
+[node name="CloseButton" type="Button" parent="HUD/Root/MessageAnchor/MessagePanel/Margin/Box/MessageButtons" unique_id=1977416404]
+custom_minimum_size = Vector2(250, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Continuar"
+
+[node name="DecisionAnchor" type="CenterContainer" parent="HUD/Root" unique_id=1912334772]
+visible = false
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -16.0
+mouse_filter = 2
+
+[node name="DecisionBar" type="PanelContainer" parent="HUD/Root/DecisionAnchor" unique_id=1680923514]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/DecisionAnchor/DecisionBar" unique_id=1293264271]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 12
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin" unique_id=192170886]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Hint" type="Label" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box" unique_id=1221526650]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Explora con calma. Decide cuando estés preparado."
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box" unique_id=1476183466]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="AnomalyButton" type="Button" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box/Buttons" unique_id=112379972]
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "HAY ANOMALÍA"
+
+[node name="NoAnomalyButton" type="Button" parent="HUD/Root/DecisionAnchor/DecisionBar/Margin/Box/Buttons" unique_id=1823335231]
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "NO HAY ANOMALÍA"
+
+[node name="ResultContainer" type="CenterContainer" parent="HUD/Root" unique_id=1208616062]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD/Root/ResultContainer" unique_id=453939964]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="HUD/Root/ResultContainer/ResultPanel" unique_id=2093621362]
+layout_mode = 2
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 32
+
+[node name="ResultBox" type="VBoxContainer" parent="HUD/Root/ResultContainer/ResultPanel/Margin" unique_id=1512032914]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="ResultTitle" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox" unique_id=1861316839]
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "CORRECTO"
+horizontal_alignment = 1
+
+[node name="ResultDetail" type="Label" parent="HUD/Root/ResultContainer/ResultPanel/Margin/ResultBox" unique_id=937793771]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="DeathPanel" type="Control" parent="HUD/Root" unique_id=1440200748]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/DeathPanel" unique_id=530539434]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.9)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/DeathPanel" unique_id=1998437611]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/DeathPanel/Center" unique_id=1414418955]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/DeathPanel/Center/Box" unique_id=306334189]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 52
+text = "TE ALCANZÓ"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="HUD/Root/DeathPanel/Center/Box" unique_id=684854463]
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="HUD/Root/DeathPanel/Center/Box" unique_id=878004918]
+custom_minimum_size = Vector2(420, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REINICIAR PARTIDA"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/DeathPanel/Center/Box" unique_id=1490890621]
+custom_minimum_size = Vector2(420, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="EndPanel" type="Control" parent="HUD/Root" unique_id=926551767]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/EndPanel" unique_id=689193765]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.9)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/EndPanel" unique_id=1484568868]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/EndPanel/Center" unique_id=1764986530]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/EndPanel/Center/Box" unique_id=1664926066]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "FIN DE LA PARTIDA"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="HUD/Root/EndPanel/Center/Box" unique_id=812647440]
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="HUD/Root/EndPanel/Center/Box" unique_id=650564053]
+custom_minimum_size = Vector2(420, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REINICIAR PARTIDA"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/EndPanel/Center/Box" unique_id=2040331542]
+custom_minimum_size = Vector2(420, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="PausePanel" type="Control" parent="HUD/Root" unique_id=253709398]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Dim" type="ColorRect" parent="HUD/Root/PausePanel" unique_id=127370508]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.02, 0.03, 0.78)
+
+[node name="Center" type="CenterContainer" parent="HUD/Root/PausePanel" unique_id=1842918692]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="HUD/Root/PausePanel/Center" unique_id=1682747240]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="HUD/Root/PausePanel/Center/Box" unique_id=485942733]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="HUD/Root/PausePanel/Center/Box" unique_id=798302119]
+custom_minimum_size = Vector2(380, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "REANUDAR"
+
+[node name="MenuButton" type="Button" parent="HUD/Root/PausePanel/Center/Box" unique_id=543138453]
+custom_minimum_size = Vector2(380, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "MENÚ PRINCIPAL"
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=1631923426]
+layer = 100
+script = ExtResource("5_tr")
+
+[node name="FadeRect" type="ColorRect" parent="Transition" unique_id=1771695819]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)

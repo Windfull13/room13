@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_player"]
+
+[node name="Preview" type="Node2D"]
+anomaly_ids = "cuervo_en_el_marco,testigo_cuarto"
+
+[node name="Room" parent="." type="Node2D"]
+
+[node name="Player" parent="Room/World" instance=ExtResource("3_player")]
+position = Vector2(820, 600)

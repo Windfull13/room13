@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/generated/anomaly_visitor.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+id = "visitor"
+display_name = "El Visitante"
+description = "Silueta pálida y difusa observando desde el otro lado de la ventana."
+meaning = "Recuerdos y conflictos que el protagonista ha intentado mantener apartados."
+overlay_texture = ExtResource("2_t")
+overlay_position = Vector2(466, 160)
+overlay_scale = Vector2(0.5, 0.5)
+overlay_modulate = Color(1, 1, 1, 1)
+is_dangerous = false

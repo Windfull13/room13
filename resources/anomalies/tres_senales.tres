@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_tres_senales.tscn" id="3_js"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+mode = 0
+target_node = "Phone"
+rotation_degrees = 180.0
+
+[sub_resource type="Resource" id="Resource_m1"]
+script = ExtResource("1_mod")
+target_node = "Handprint"
+
+[sub_resource type="Resource" id="Resource_m2"]
+script = ExtResource("1_mod")
+mode = 0
+target_node = "Chair/Sprite"
+rotation_degrees = 150.0
+
+[resource]
+script = ExtResource("2_dat")
+id = "tres_senales"
+display_name = "Tres señales"
+description = "Una mano marcada en la pared, la silla vuelta hacia ti y el teléfono descolgado, como si alguien llevara tiempo intentando que contestaras."
+meaning = "El acoso; sentir que te siguen, te marcan y no te dejan en paz."
+is_dangerous = true
+modifications = [SubResource("Resource_m0"), SubResource("Resource_m1"), SubResource("Resource_m2")]
+jumpscare_scene = ExtResource("3_js")
+focus_object = "varios"
+difficulty = 2
+theme = 14
+tell = "figura, ventana y huella a la vez"
+ambience = "telefono_vibra"

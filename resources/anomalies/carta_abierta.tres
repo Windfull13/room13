@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_24d4k"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_l2pa0"]
+
+[sub_resource type="Resource" id="Resource_gur53"]
+script = ExtResource("1_24d4k")
+target_node = "Letter"
+
+[resource]
+script = ExtResource("2_l2pa0")
+id = "carta_abierta"
+display_name = "Una carta abierta"
+description = "Hay una carta abierta en el suelo. Nunca llegaste a terminarla."
+meaning = "Lo que dejaste a medias."
+modifications = [SubResource("Resource_gur53")]
+focus_object = "carta"
+difficulty = 1
+theme = 4
+tell = "carta abierta en el suelo"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_f58vb"]
+
+[resource]
+script = ExtResource("1_f58vb")
+id = "accidente"
+display_name = "El accidente"
+order = 6
+scene_path = "res://scenes/rooms/habitacion_07_accidente.tscn"
+narrative_clue = "Aquí empezó todo lo que no volviste a contarle a nadie."

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_jhmgo"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_ev7kn"]
+
+[sub_resource type="Resource" id="Resource_wlgrf"]
+script = ExtResource("1_jhmgo")
+mode = 0
+target_node = "Chair/Sprite"
+rotation_degrees = 150.0
+
+[resource]
+script = ExtResource("2_ev7kn")
+id = "silla_girada"
+display_name = "La silla girada"
+description = "La silla apunta hacia la habitación, no hacia la mesa."
+meaning = "Alguien estuvo sentado aquí, mirándote."
+modifications = [SubResource("Resource_wlgrf")]
+focus_object = "silla"
+difficulty = 0
+theme = 12
+tell = "la silla apunta hacia la habitación"

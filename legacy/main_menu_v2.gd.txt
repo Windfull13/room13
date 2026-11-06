@@ -1,0 +1,86 @@
+extends Control
+
+## Pantalla principal: título, aviso de contenido y cuatro opciones (partida,
+## volumen, créditos y salir). Cada submenú es una «pantalla» y solo hay una
+## visible a la vez; Esc vuelve a la principal.
+
+const UiTheme := preload("res://scripts/ui/ui_theme.gd")
+const CreditsText := preload("res://scripts/ui/credits_text.gd")
+const GAME_SCENE := "res://scenes/partida.tscn"
+const CREDITS_PATH := "res://CREDITS.md"
+const CREDITS_MISSING := "No se encontró CREDITS.md."
+const MENU_MUSIC := "music_menu"
+const CLICK_SOUND := "ui_click"
+const TITLE_BREATH_TIME := 3.5
+const TITLE_DIM_ALPHA := 0.78
+
+@onready var _main_screen: Control = $MainScreen
+@onready var _options_screen: Control = $OptionsScreen
+@onready var _credits_screen: Control = $CreditsScreen
+@onready var _title: Label = $MainScreen/Box/Title
+@onready var _start_button: Button = $MainScreen/Box/Buttons/StartButton
+@onready var _credits_text: RichTextLabel = $CreditsScreen/Panel/Box/Scroll/Text
+
+
+func _ready() -> void:
+	_apply_theme()
+	_fill_credits()
+	_connect_buttons()
+	($Background as Room).unlock_door()
+	AudioManager.play_music(MENU_MUSIC)
+	_breathe_title()
+	_show_screen(_main_screen)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause") and not _main_screen.visible:
+		_on_back_pressed()
+		get_viewport().set_input_as_handled()
+
+
+func _apply_theme() -> void:
+	theme = UiTheme.build()
+	theme.set_stylebox("panel", "PanelContainer", UiTheme.panel_style())
+
+
+func _fill_credits() -> void:
+	var markdown := FileAccess.get_file_as_string(CREDITS_PATH)
+	_credits_text.text = CreditsText.from_markdown(markdown) if not markdown.is_empty() else CREDITS_MISSING
+
+
+func _connect_buttons() -> void:
+	_start_button.pressed.connect(_on_start_pressed)
+	$MainScreen/Box/Buttons/OptionsButton.pressed.connect(_open.bind(_options_screen))
+	$MainScreen/Box/Buttons/CreditsButton.pressed.connect(_open.bind(_credits_screen))
+	$MainScreen/Box/Buttons/QuitButton.pressed.connect(AudioManager.quit_cleanly)
+	$OptionsScreen/Panel/Box/BackButton.pressed.connect(_on_back_pressed)
+	$CreditsScreen/Panel/Box/BackButton.pressed.connect(_on_back_pressed)
+
+
+func _on_start_pressed() -> void:
+	AudioManager.play(CLICK_SOUND)
+	get_tree().change_scene_to_file(GAME_SCENE)
+
+
+func _open(screen: Control) -> void:
+	AudioManager.play(CLICK_SOUND)
+	_show_screen(screen)
+
+
+func _on_back_pressed() -> void:
+	AudioManager.play(CLICK_SOUND)
+	_show_screen(_main_screen)
+
+
+func _show_screen(screen: Control) -> void:
+	for candidate: Control in [_main_screen, _options_screen, _credits_screen]:
+		candidate.visible = candidate == screen
+	var focus := _start_button if screen == _main_screen else screen.find_child("BackButton") as Button
+	focus.grab_focus()
+
+
+## El título respira despacio: sube y baja su opacidad sin parar.
+func _breathe_title() -> void:
+	var tween := create_tween().set_loops()
+	tween.tween_property(_title, "modulate:a", TITLE_DIM_ALPHA, TITLE_BREATH_TIME).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(_title, "modulate:a", 1.0, TITLE_BREATH_TIME).set_trans(Tween.TRANS_SINE)

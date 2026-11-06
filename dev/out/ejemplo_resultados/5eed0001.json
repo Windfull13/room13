@@ -1,0 +1,60 @@
+{
+	"simulated": true,
+	"participant_id": "5eed0001",
+	"version": "1.0.0",
+	"consent": true,
+	"started_at": "2026-01-01T10:00:00",
+	"finished_at": "2026-01-01T10:20:30",
+	"completed": true,
+	"attempts": 1,
+	"play_seconds": 600.0,
+	"pre": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 1,
+			"q05_apoyo": -1,
+			"q06_autocuidado": 3,
+			"q07_accidente": 1,
+			"q08_infancia": 2
+		},
+		"score": 3
+	},
+	"post": {
+		"answers": {
+			"q01_acoso": 0,
+			"q02_espectadores": 0,
+			"q03_duelo": 0,
+			"q04_culpa": 0,
+			"q05_apoyo": 0,
+			"q06_autocuidado": 0,
+			"q07_accidente": 1,
+			"q08_infancia": 2
+		},
+		"score": 6
+	},
+	"gain": 3,
+	"normalized_gain": 0.6,
+	"survey": {
+		"u1": 3,
+		"u2": 3,
+		"u3": 3,
+		"u4": 3,
+		"l1": 3,
+		"l2": 3,
+		"r1": 3,
+		"comment": ""
+	},
+	"memories_found": [
+		"telefono_sonando",
+		"telefono_descolgado",
+		"foto_cambiada",
+		"foto_invertida",
+		"retrato_ajeno"
+	],
+	"cinematic_skipped": null,
+	"finish_type": "anticipado",
+	"max_round_reached": 4,
+	"ended_early": true
+}

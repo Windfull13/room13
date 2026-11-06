@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AnomalyData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="1_a"]
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="2_m"]
+[ext_resource type="Texture2D" path="res://assets/generated/obj_clock_anomaly.png" id="3_t"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2_m")
+mode = 1
+target_node = "Clock/Sprite"
+texture = ExtResource("3_t")
+
+[resource]
+script = ExtResource("1_a")
+id = "clock_wrong"
+display_name = "El reloj detenido"
+description = "El reloj marca una hora imposible, con las agujas trabadas y los números deformados."
+meaning = "El tiempo se quedó detenido en el momento que no quieres recordar."
+is_dangerous = false
+modifications = [SubResource("mod1")]

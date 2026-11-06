@@ -1,0 +1,13 @@
+﻿participant_id,version,completed,attempts,play_seconds,pre_score,post_score,gain,normalized_gain,memories_found,cinematic_skipped,finish_type,max_round_reached,ended_early,pre_q01_acoso,pre_q02_espectadores,pre_q03_duelo,pre_q04_culpa,pre_q05_apoyo,pre_q06_autocuidado,pre_q07_accidente,pre_q08_infancia,post_q01_acoso,post_q02_espectadores,post_q03_duelo,post_q04_culpa,post_q05_apoyo,post_q06_autocuidado,post_q07_accidente,post_q08_infancia,u1,u2,u3,u4,l1,l2,r1,comment
+5eed0001,1.0.0,True,1,600.0,3,6,3,0.6,5,,anticipado,4,True,0,0,0,1,-1,3,1,2,0,0,0,0,0,0,1,2,3,3,3,3,3,3,3,
+5eed0002,1.0.0,True,2,625.0,4,7,3,0.75,9,True,completo,10,False,-1,0,0,0,0,1,2,3,2,0,0,0,0,0,0,0,4,5,3,4,5,3,4,
+5eed0003,1.0.0,True,3,650.0,2,5,3,0.5,4,False,completo,10,False,-1,1,0,0,-1,2,3,1,3,1,0,0,0,0,0,1,5,4,3,5,4,3,5,Las tarjetas del pasillo me hicieron pensar.
+5eed0004,1.0.0,True,4,675.0,5,7,2,0.6666666666666666,8,False,completo,10,False,-1,2,3,0,0,0,0,0,0,0,3,0,0,0,0,0,3,3,3,3,3,3,3,
+5eed0005,1.0.0,True,1,700.0,3,6,3,0.6,6,True,completo,10,False,-1,3,1,2,0,0,0,3,0,0,1,2,0,0,0,0,4,5,3,4,5,3,4,
+5eed0006,1.0.0,True,2,725.0,6,8,2,1.0,12,,anticipado,7,True,0,0,0,3,-1,0,0,0,0,0,0,0,0,0,0,0,5,4,3,5,4,3,5,Me gustó la ambientación.
+5eed0007,1.0.0,True,3,750.0,4,6,2,0.5,7,False,completo,10,False,0,0,3,1,-1,3,0,0,0,0,0,0,2,3,0,0,3,3,3,3,3,3,3,
+5eed0008,1.0.0,True,4,775.0,2,2,0,0.0,2,True,completo,10,False,0,3,1,2,-1,1,2,0,0,3,1,2,3,1,2,0,4,5,3,4,5,3,4,
+5eed0009,1.0.0,True,1,800.0,5,8,3,1.0,11,False,completo,10,False,0,0,0,0,0,2,3,1,0,0,0,0,0,0,0,0,5,4,3,5,4,3,5,
+5eed000a,1.0.0,True,2,825.0,3,5,2,0.4,6,,anticipado,9,True,-1,0,0,0,-1,3,1,2,1,0,0,0,0,0,1,2,3,3,3,3,3,3,3,Un poco difícil al final.
+5eed000b,1.0.0,True,3,850.0,4,7,3,0.75,10,False,completo,10,False,-1,3,0,0,0,0,2,3,0,3,0,0,0,0,0,0,4,5,3,4,5,3,4,
+5eed000c,1.0.0,True,4,875.0,1,1,0,0.0,1,False,completo,10,False,-1,1,2,0,-1,2,3,1,3,1,2,0,1,2,3,1,5,4,3,5,4,3,5,

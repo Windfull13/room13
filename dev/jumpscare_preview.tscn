@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://dev/jumpscare_preview.gd" id="1_prev"]
+[ext_resource type="Script" path="res://scripts/jumpscare_player.gd" id="2_js"]
+
+[node name="JumpscarePreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_prev")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.05, 0.05, 0.07, 1)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 520.0
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Status" type="Label" parent="Panel/Margin/Buttons"]
+layout_mode = 2
+text = "Elige un susto"
+
+[node name="Jumpscares" type="CanvasLayer" parent="."]
+layer = 50
+script = ExtResource("2_js")

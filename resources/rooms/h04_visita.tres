@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomData" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_data.gd" id="1_vya87"]
+
+[resource]
+script = ExtResource("1_vya87")
+id = "visita_4"
+display_name = "Aquí siempre hubo alguien más, aunque no lo vieras"
+order = 3
+scene_path = "res://scenes/rooms/room_base.tscn"
+narrative_clue = "Aquí siempre hubo alguien más, aunque no lo vieras"

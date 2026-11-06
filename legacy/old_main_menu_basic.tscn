@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_mm"]
+[ext_resource type="PackedScene" path="res://scenes/rooms/room_base.tscn" id="2_bg"]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_mm")
+
+[node name="Background" parent="." instance=ExtResource("2_bg")]
+position = Vector2(0, -24)
+
+[node name="Dim" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.01, 0.01, 0.02, 0.5)
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="Center"]
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Title" type="Label" parent="Center/Box"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.93, 0.93, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 96
+text = "LA HABITACIÓN 13"
+
+[node name="Subtitle" type="Label" parent="Center/Box"]
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.75, 0.78, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 34
+text = "Terror psicológico · Observa y decide"
+
+[node name="Spacer" type="Control" parent="Center/Box"]
+custom_minimum_size = Vector2(0, 40)
+mouse_filter = 2
+
+[node name="StartButton" type="Button" parent="Center/Box"]
+custom_minimum_size = Vector2(480, 92)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 34
+text = "INICIAR PARTIDA"
+
+[node name="QuitButton" type="Button" parent="Center/Box"]
+custom_minimum_size = Vector2(480, 92)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 34
+text = "SALIR"

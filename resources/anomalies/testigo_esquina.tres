@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+[ext_resource type="PackedScene" path="res://scenes/monster_corner.tscn" id="4_monster"]
+[ext_resource type="PackedScene" path="res://scenes/jumpscares/jumpscare_testigo_esquina.tscn" id="3_js"]
+
+[resource]
+script = ExtResource("2_dat")
+id = "testigo_esquina"
+display_name = "El Vigilante de la esquina"
+description = "De espaldas, cara a la esquina, alguien espera. Inclina la cabeza como si escuchara."
+meaning = "Los que miran sin intervenir, como cuando eras niño."
+is_dangerous = true
+monster_scene = ExtResource("4_monster")
+jumpscare_scene = ExtResource("3_js")
+monster_spawn_index = 2
+focus_object = "testigo"
+difficulty = 2
+theme = 4
+tell = "El Vigilante, de espaldas junto a la cama"
+ambience = "habitacion_se_apaga"

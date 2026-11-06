@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AnomalyData" format=3]
+
+[ext_resource type="Script" path="res://scripts/anomaly_modification.gd" id="1_mod"]
+[ext_resource type="Script" path="res://scripts/anomaly_data.gd" id="2_dat"]
+
+[sub_resource type="Resource" id="Resource_m0"]
+script = ExtResource("1_mod")
+target_node = "Plant/Flower"
+
+[resource]
+script = ExtResource("2_dat")
+id = "planta_con_flor"
+display_name = "Una flor en la planta"
+description = "Una flor diminuta ha brotado en la planta que nadie cuida."
+meaning = "Algo sigue floreciendo, aunque no lo cuides."
+is_dangerous = false
+modifications = [SubResource("Resource_m0")]
+focus_object = "planta"
+difficulty = 2
+theme = 11
+tell = "una flor diminuta en la planta"
